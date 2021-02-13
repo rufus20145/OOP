@@ -1,0 +1,2 @@
+main-class: src.ru.mai.kaf.Run
+class-path: bin/
