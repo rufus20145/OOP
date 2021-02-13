@@ -1,0 +1,4 @@
+У меня получается такая последовательность:
+1) выполнить javac -d bin ./src/ru/mai/kaf/* это скомпилирует наши java файлы в class в папку bin
+2) выполнить jar -cmf manifest.mf my-first.jar -C bin . это соберет наши скомпилированные файлы в один .jar
+3) запустить .jar файл java -jar .\my-first.jar 

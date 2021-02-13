@@ -5,9 +5,6 @@ public class Base {
     private long height;
     private int numberOfLegs;
 
-    public Base() {
-    }
-
     public Base(int width, long height, int numberOfLegs) {
         this.width = width;
         this.height = height;
@@ -16,6 +13,7 @@ public class Base {
 
     public void print() {
         System.out.println(
+                /*"My width: " + width + " My height: " + height + " My number of legs: " + numberOfLegs);*/
                 String.format("My width is %d\nMy height is %d\nMy numberOfLegs is %d\n", width, height, numberOfLegs));
     }
 }
