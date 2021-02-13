@@ -1,4 +1,4 @@
-package src.ru.mai.kaf;
+package program1.src.ru.mai.kaf;
 
 public class Base {
     private int width;
