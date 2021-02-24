@@ -12,7 +12,6 @@
 //чтобы вам было проще понять, что я поменял, вот ссылка на коммиты данного файла на гитхабе:
 // * https://github.com/rufus20145/OOP/commits/master/Homeworks/1/main.c
 
-#define STRINGSIZE 1024
 #define NUMBER_OF_SYMBOLS 256
 
 #include <stdio.h>
