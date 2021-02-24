@@ -14,6 +14,6 @@ public class Base {
     public void print() {
         System.out.println(
                 // "My width: " + width + " My height: " + height + " My number of legs: " + numberOfLegs);
-                String.format("My width is %d\nMy height is %d\nMy numberOfLegs is %d\n", width, height, numberOfLegs));
+                String.format("Ширина is %d\nMy height is %d\nMy numberOfLegs is %d\n", width, height, numberOfLegs));
     }
 }

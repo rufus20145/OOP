@@ -1,6 +1,11 @@
 {
     "cSpell.words": [
-        "codestyle"
+        "codestyle",
+        "javac"
     ],
-    "cSpell.language": "en, ru"
+    "cSpell.language": "en, ru",
+    "files.associations": {
+        "*.rmd": "markdown",
+        "stdio.h": "c"
+    }
 }
