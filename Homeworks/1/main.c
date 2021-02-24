@@ -65,7 +65,7 @@ int main()
         buffer = getchar();
         if (i == (stringSize - 1) && (buffer != EOF) && (buffer != '\n')) //проверка на наличие в буфере ввода символов  
         {                                                                 // после считывания заявленного количества
-            fputs("You entered too many symbols!\n", stdout);
+            fputs("You entered too many symbols! Only few of them were pushed to the string.\n", stdout);
         }
         ungetc(buffer, stdin);
     }
