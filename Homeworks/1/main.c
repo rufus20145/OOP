@@ -9,6 +9,9 @@
  *
  */
 
+//чтобы вам было проще понять, что я поменял вот ссылка на коммиты данного файла на гитхабе:
+// * https://github.com/rufus20145/OOP/commits/master/Homeworks/1/main.c
+
 #define STRINGSIZE 1024
 #define NUMBER_OF_SYMBOLS 256
 
@@ -20,7 +23,7 @@ int main()
 {
     int inputErrorCode, stringSize, currDigit = 0;
     int foundSymbols[NUMBER_OF_SYMBOLS];
-    char digit;
+    char digit, buffer;
     char *string;
 
     for (int i = 0; i < NUMBER_OF_SYMBOLS; i++)
@@ -32,6 +35,11 @@ int main()
     do
     {
         inputErrorCode = enterNumber(&stringSize);
+        if (stringSize < 1)//проверка размера длины строки
+        {
+            fputs("String size must be greater than zero. Try again.\n", stdout);
+            inputErrorCode = 1;
+        }
 
     } while (1 == inputErrorCode);
     string = (char *)calloc(stringSize, sizeof(char));
@@ -54,6 +62,12 @@ int main()
         {
             break;
         }
+        buffer = getchar();
+        if (i == (stringSize - 1) && (buffer != EOF) && (buffer != '\n')) //проверка на наличие в буфере ввода символов  
+        {                                                                 // после считывания заявленного количества
+            fputs("You entered too many symbols!\n", stdout);
+        }
+        ungetc(buffer, stdin);
     }
 
     for (int i = 0; i < stringSize; i++)
