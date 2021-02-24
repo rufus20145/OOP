@@ -10,57 +10,55 @@
  */
 
 #define STRINGSIZE 1024
+#define NUMBER_OF_SYMBOLS 256
 
 #include <stdio.h>
 #include <string.h>
+#include "input.c"
 
 int main()
 {
-    int symbols[256], probels = 0, probels1 = 0;
-    char string[STRINGSIZE] = "", digit;
-    int currDigit = 0;
+    int inputErrorCode, stringSize, currDigit = 0;
+    int foundSymbols[NUMBER_OF_SYMBOLS];
+    char digit;
+    char *string;
 
-    for (int i = 0; i < 256; i++)
+    for (int i = 0; i < NUMBER_OF_SYMBOLS; i++)
     {
-        symbols[i] = 0;
+        foundSymbols[i] = 0;
     }
 
+    fputs("Enter string size: ", stdout);
     do
+    {
+        inputErrorCode = enterNumber(&stringSize);
+
+    } while (1 == inputErrorCode);
+    string = (char *)calloc(stringSize, sizeof(char));
+
+    fputs("Now enter the line:", stdout);
+
+    for (int i = 0; i < stringSize; i++)
     {
         digit = getchar();
         if (digit != '\n')
         {
-            string[currDigit] = digit;
-            symbols[(int)digit]++;
+            if (!foundSymbols[(int)digit])
+            {
+                string[currDigit] = digit;
+                currDigit++;
+            }
+            foundSymbols[(int)digit]++;
         }
-        if (digit == ' ')
+        else
         {
-            probels1++;
-        }
-        currDigit++;
-    } while (digit != '\n');
-
-    for (int i = 0; i < STRINGSIZE; i++)
-    {
-        if (' ' == string[i])
-        {
-            probels++;
+            break;
         }
     }
 
-    int length = strlen(string);
-    for (int i = 0; i < length; i++)
-    {
-        if (symbols[(int)string[i]] > 1)
-        {
-            string[i] = '\0';
-        }
-    }
-
-    for (int i = 0; i < currDigit; i++)
+    for (int i = 0; i < stringSize; i++)
     {
         putchar(string[i]);
     }
-    printf("\nNumber of probels: %d and %d and %d\n", symbols[32], probels, probels1);
     return 0;
 }
