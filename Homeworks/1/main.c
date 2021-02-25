@@ -73,5 +73,6 @@ int main()
     {
         putchar(string[i]);
     }
+    free(string);
     return 0;
 }
