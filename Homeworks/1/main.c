@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <malloc.h>
 #include "input.c"
 
 int main()
@@ -64,7 +65,9 @@ int main()
         buffer = getchar();
         if (i == (stringSize - 1) && (buffer != EOF) && (buffer != '\n')) //проверка на наличие в буфере ввода символов  
         {                                                                 // после считывания заявленного количества
-            fputs("You entered too many symbols! Only few of them were pushed to the string.\n", stdout);
+            fputs("You entered too many symbols! Expanding stringSize.\n", stdout);
+            stringSize += 4;
+            string = realloc(string, stringSize);
         }
         ungetc(buffer, stdin);
     }
