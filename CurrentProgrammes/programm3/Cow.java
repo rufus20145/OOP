@@ -7,10 +7,10 @@ public class Cow implements Sound {
     }
 
     public void run() {
-        System.out.println("Running.");
+        System.out.println("Not running.");
     }
 
     public void walk() {
-        System.out.println("Walking.");
+        System.out.println("Not walking.");
     }
 }
