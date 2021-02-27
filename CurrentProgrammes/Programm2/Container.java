@@ -1,4 +1,4 @@
-package CurrentProgrammes.Programm2;
+package currentProgrammes.programm2;
 
 public class Container extends Box {
 
@@ -19,5 +19,11 @@ public class Container extends Box {
 
     public double getDensity() {
         return weight / (getVolume());
+    }
+
+    @Override
+    public void printAll(String objectName) {
+        super.printAll(objectName);
+        System.out.println(objectName + "`s weight is " + weight);
     }
 }

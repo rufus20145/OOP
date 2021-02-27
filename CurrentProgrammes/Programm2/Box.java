@@ -1,4 +1,4 @@
-package CurrentProgrammes.Programm2;
+package currentProgrammes.programm2;
 
 public class Box {
     double width;
@@ -29,5 +29,9 @@ public class Box {
 
     public double getVolume() {
         return width * length * height;
+    }
+
+    public void printAll(String objectName) {
+        System.out.println(objectName + "`s sizes are: " + width + " x " + length + " x " + width + " meters.");
     }
 }

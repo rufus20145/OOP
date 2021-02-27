@@ -1,4 +1,4 @@
-package CurrentProgrammes.Programm2;
+package currentProgrammes.programm2;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,5 +23,9 @@ public class Main {
 
         System.out.println("Big container" + " " + bigContainer.getDensity());
 
+        Box castBox = new Container(10, 10, 10, 20);
+        System.out.println("castBox`s weight is " + ((Container) castBox).getWeight());
+
+        bigContainer.printAll("bigContainer");
     }
 }
