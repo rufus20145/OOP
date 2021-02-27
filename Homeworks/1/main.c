@@ -35,7 +35,7 @@ int main()
     do
     {
         inputErrorCode = enterNumber(&stringSize);
-        if (stringSize < 1)//проверка размера длины строки
+        if (stringSize < 1) //проверка размера длины строки
         {
             fputs("String size must be greater than zero. Try again.\n", stdout);
             inputErrorCode = 1;
@@ -63,7 +63,7 @@ int main()
             break;
         }
         buffer = getchar();
-        if (i == (stringSize - 1) && (buffer != EOF) && (buffer != '\n')) //проверка на наличие в буфере ввода символов  
+        if (i == (stringSize - 1) && (buffer != EOF) &&(buffer != '\n' )) //проверка на наличие в буфере ввода символов
         {                                                                 // после считывания заявленного количества
             fputs("You entered too many symbols! Expanding stringSize.\n", stdout);
             stringSize += 4;

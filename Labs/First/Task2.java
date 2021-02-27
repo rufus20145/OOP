@@ -22,7 +22,7 @@ public class Task2 {
         input.close();
 
         // разбиение текста на слова
-        words = text.split("[ ,;.!?]+");
+        words = text.split("\\W");//кажется, так 
         numberOfWords = words.length;
         uniqueWords = new String[numberOfWords];
         amountOfUniqueWords = new int[numberOfWords];
@@ -54,8 +54,8 @@ public class Task2 {
         StringBuilder tempSB = new StringBuilder();
         for (currUniqueWord = 0; currUniqueWord < numberOfUniqueWords; currUniqueWord++) {
             if (uniqueWords[currUniqueWord] != null) {
-                tempSB.append(String.format("%-10s", uniqueWords[currUniqueWord]));
-                tempSB.append(String.format("%-4s", amountOfUniqueWords[currUniqueWord]));
+                tempSB.append(String.format("%-20s", uniqueWords[currUniqueWord]));
+                tempSB.append(String.format("%-6s", amountOfUniqueWords[currUniqueWord]));
                 tempSB.append("\n");
             }
         }
