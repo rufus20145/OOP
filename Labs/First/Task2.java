@@ -1,5 +1,4 @@
-
-package Labs.First;
+package labs.First;
 
 /**
  * Найти и напечатать, сколько раз повторяется в тексте каждое слово.
@@ -22,7 +21,7 @@ public class Task2 {
         input.close();
 
         // разбиение текста на слова
-        words = text.split("\\W");//кажется, так 
+        words = text.split("\\W");// кажется, так
         numberOfWords = words.length;
         uniqueWords = new String[numberOfWords];
         amountOfUniqueWords = new int[numberOfWords];
