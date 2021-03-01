@@ -1,4 +1,4 @@
-package currentProgrammes.programm1.src.ru.mai.kaf;
+package src.curr_programmes.programm1.ru.mai.kaf;
 
 public class Base {
     private int width;

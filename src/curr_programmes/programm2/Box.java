@@ -1,4 +1,4 @@
-package currentProgrammes.programm2;
+package src.curr_programmes.programm2;
 
 public class Box {
     double width;

@@ -1,4 +1,4 @@
-package labs.First;
+package src.labs.first;
 
 /**
  * Найти и напечатать, сколько раз повторяется в тексте каждое слово.
@@ -42,8 +42,7 @@ public class Task2 {
         numberOfUniqueWords = currUniqueWord;// см 38 строку
         for (currUniqueWord = 0; currUniqueWord < numberOfUniqueWords; currUniqueWord++) {
             for (currWord = 0; currWord < numberOfWords; currWord++) {
-                if (uniqueWords[currUniqueWord].equals(words[currWord].toLowerCase())) {// это можно сделать и с помощью
-                                                                                        // .equals()
+                if (uniqueWords[currUniqueWord].equalsIgnoreCase(words[currWord])) {
                     amountOfUniqueWords[currUniqueWord]++;
                 }
             }
