@@ -3,3 +3,6 @@
 *.class
 *.jar
 *.zip
+/out/
+/.idea/
+/OOP.iml

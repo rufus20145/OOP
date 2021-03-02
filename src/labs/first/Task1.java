@@ -1,7 +1,7 @@
 package src.labs.first;
 
-/**
- * Ввести n строк с консоли. Вывести на консоль те строки, длина которых меньше средней, также их длины.
+/*
+  Ввести n строк с консоли. Вывести на консоль те строки, длина которых меньше средней, также их длины.
  */
 
 import java.util.Scanner;
@@ -14,7 +14,8 @@ public class Task1 {
         int[] lengthsOfStrings;
         Scanner input;
 
-        input = new Scanner(System.in);// считываем количество строк
+        // считываем количество строк
+        input = new Scanner(System.in);
         System.out.println("Enter number of strings: ");
         do {
             try {

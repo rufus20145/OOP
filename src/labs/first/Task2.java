@@ -4,7 +4,8 @@ package src.labs.first;
  * Найти и напечатать, сколько раз повторяется в тексте каждое слово.
  */
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Task2 {
     public static void main(String[] args) {
@@ -21,7 +22,8 @@ public class Task2 {
         input.close();
 
         // разбиение текста на слова
-        words = text.split("\\W");// кажется, так
+        words = text.split("\\.\\ |\\.|\\ "); // сначала ищем последовательность ". ", потом ".", а затем " ". Это
+                                              // позволяет правильно разделять слова на границах предложений
         numberOfWords = words.length;
         uniqueWords = new String[numberOfWords];
         amountOfUniqueWords = new int[numberOfWords];
@@ -30,16 +32,14 @@ public class Task2 {
         // их количества. Это также можно сделать, как мой подсчет количества слов чуть
         // ниже - с помощью двух циклов
         for (currWord = 0; currWord < numberOfWords; currWord++) {
-            if (Arrays.asList(uniqueWords).contains((words[currWord].toLowerCase()))) {
-                // System.out.println("Word was found in dictionary");
-            } else {
+            if (!Arrays.asList(uniqueWords).contains((words[currWord].toLowerCase()))) {
                 uniqueWords[currUniqueWord] = words[currWord].toLowerCase();
-                currUniqueWord++;// двигаемся по массиву с уникальными словами, т.е. по сути считаем их
+                currUniqueWord++; // двигаемся по массиву с уникальными словами, т.е. по сути считаем их
             }
         }
 
         // считаем количество вхождений каждого слова в исходный текст
-        numberOfUniqueWords = currUniqueWord;// см 38 строку
+        numberOfUniqueWords = currUniqueWord; // см. 37 строку
         for (currUniqueWord = 0; currUniqueWord < numberOfUniqueWords; currUniqueWord++) {
             for (currWord = 0; currWord < numberOfWords; currWord++) {
                 if (uniqueWords[currUniqueWord].equalsIgnoreCase(words[currWord])) {
