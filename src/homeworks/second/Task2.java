@@ -12,7 +12,6 @@ public class Task2 {
 
     public static void main(String[] args) {
         String originalString = null;
-        String resultString;
         Scanner input = new Scanner(System.in);
         boolean exceptionCaught = false;
         StringBuilder sb = new StringBuilder();
