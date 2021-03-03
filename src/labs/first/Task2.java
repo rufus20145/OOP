@@ -14,6 +14,7 @@ public class Task2 {
         Scanner input;
         int numberOfWords, numberOfUniqueWords = 0, currUniqueWord = 0, currWord;
         int[] amountOfUniqueWords;
+        StringBuilder tempSB = new StringBuilder();
 
         // ввод исходного текста
         System.out.println("Enter your text: ");
@@ -49,7 +50,6 @@ public class Task2 {
         }
 
         // собственно вывод уникальных слов и их количества в тексте
-        StringBuilder tempSB = new StringBuilder();
         for (currUniqueWord = 0; currUniqueWord < numberOfUniqueWords; currUniqueWord++) {
             if (uniqueWords[currUniqueWord] != null) {
                 tempSB.append(String.format("%-20s", uniqueWords[currUniqueWord]));

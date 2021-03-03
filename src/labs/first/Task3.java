@@ -12,7 +12,8 @@ public class Task3 {
         String[] sentences;
         Scanner input = new Scanner(System.in);
         Boolean flag = true;
-        char[] alphabet = "aAeEiIoOuUyY".toCharArray();
+        String vocals = "aeiouy";
+        String consonants = "bcdfghjklmnpqrstvwxz";
 
         System.out.println("Enter your text and then press enter.");
         do {
@@ -20,27 +21,45 @@ public class Task3 {
                 myText = input.nextLine();
                 flag = false;
             } catch (java.util.NoSuchElementException e) {
-                System.out.println("\tYou didn't enter any text. Try again.");
+                System.out.println("You didn't enter any text. Try again.");
                 input.nextLine();
             } catch (java.lang.IllegalStateException e) {
-                System.out.println("\tSomething went wrong. Try again.");
+                System.out.println("Something went wrong. Try again.");
                 input.nextLine();
             }
         } while (flag);
+        input.close();
 
         sentences = myText.split("\\.\\s|\\.");
 
+        int numberOfSentence = 1;
         for (String currSentence : sentences) {
-            String[] words = currSentence.split("\\W");
-            for (String currWord : words) {
-                char[] charWord = currWord.toCharArray();
-                for (char currDigit : charWord) {
 
+            int numberOfVocals = 0;
+            int numberOfConsonants = 0;
+            currSentence = currSentence.replace(" ", "");
+
+            for (char character : currSentence.toLowerCase().toCharArray()) {
+                if (vocals.contains((String.valueOf(character)))) {
+                    ++numberOfVocals;
+                } else if (consonants.contains(String.valueOf(character))) {
+                    ++numberOfConsonants;
                 }
             }
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("In sentence №");
+            sb.append(numberOfSentence);
+            if (numberOfVocals > numberOfConsonants) {
+                sb.append(" number of vocals is greater than number of consonants.");
+            } else if (numberOfVocals < numberOfConsonants) {
+                sb.append(" number of consonants is greater than number of vocals.");
+            } else {
+                sb.append(" number of vocals and consonants are equal.");
+            }
+            System.out.println(sb.toString());
+            
+            numberOfSentence += 1;
         }
-
-        System.out.println("I`m out.");
-
     }
 }
