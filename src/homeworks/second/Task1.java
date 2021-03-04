@@ -15,6 +15,8 @@ public class Task1 {
 
         final int addition = 65;
         final int amountOfNumbers = 10;
+        final int maxNumber = 9;
+        final int minNubmer = 0;
         int[] numbers = new int[amountOfNumbers];
         StringBuilder sb = new StringBuilder();
 
@@ -30,11 +32,11 @@ public class Task1 {
                 try {
                     numbers[i] = input.nextInt();
                     exceptionCaught = false;
-                    if (numbers[i] > 9) {
+                    if (numbers[i] > maxNumber) {
                         System.out.println("Entered value is too big. Try again.");
                         exceptionCaught = true;
                     }
-                    if (numbers[i] < 0) {
+                    if (numbers[i] < minNubmer) {
                         System.out.println("Entered value is too low. Try again.");
                         exceptionCaught = true;
                     }

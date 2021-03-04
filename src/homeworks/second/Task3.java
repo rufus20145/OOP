@@ -1,8 +1,14 @@
 package src.homeworks.second;
 
-public class Task3 {
-    
-    public static void main(String[] args) {
+/**
+ * Вводится строка из произвольных символов. Необходимо вывести на консоль
+ * среднюю кодовых значений всех символов строки (сумма всех кодовых значений
+ * символов / кол-во символов).
+ */
 
+public class Task3 {
+
+    public static void main(String[] args) {
+        
     }
 }

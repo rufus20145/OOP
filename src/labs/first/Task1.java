@@ -1,7 +1,7 @@
 package src.labs.first;
 
 /*
-  Р’РІРµСЃС‚Рё n СЃС‚СЂРѕРє СЃ РєРѕРЅСЃРѕР»Рё. Р’С‹РІРµСЃС‚Рё РЅР° РєРѕРЅСЃРѕР»СЊ С‚Рµ СЃС‚СЂРѕРєРё, РґР»РёРЅР° РєРѕС‚РѕСЂС‹С… РјРµРЅСЊС€Рµ СЃСЂРµРґРЅРµР№, С‚Р°РєР¶Рµ РёС… РґР»РёРЅС‹.
+  Ввести n строк с консоли. Вывести на консоль те строки, длина которых меньше средней, также их длины.
  */
 
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class Task1 {
         int[] lengthsOfStrings;
         Scanner input;
 
-        // СЃС‡РёС‚С‹РІР°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
+        // считываем количество строк
         input = new Scanner(System.in);
         System.out.println("Enter number of strings: ");
         do {
@@ -29,11 +29,11 @@ public class Task1 {
             }
         } while (numberOfStrings < 1);
 
-        // РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СЃС‚СЂРѕРєРё Рё РёС… РґР»РёРЅС‹
+        // выделяем память под строки и их длины
         strings = new String[numberOfStrings];
         lengthsOfStrings = new int[numberOfStrings];
 
-        // С‚РµРїРµСЂСЊ РІРІРѕРґРёРј СЌС‚Рё СЃС‚СЂРѕРєРё
+        // теперь вводим эти строки
         System.out.println("Now enter " + numberOfStrings + " strings");
         input.nextLine();
         for (int currString = 0; currString < numberOfStrings; currString++) {
@@ -42,18 +42,18 @@ public class Task1 {
         input.close();
         System.out.println("");
 
-        // СЃС‡РёС‚Р°РµРј РґР»РёРЅС‹ СЃС‚СЂРѕРє
+        // считаем длины строк
         for (int currString = 0; currString < numberOfStrings; currString++) {
             lengthsOfStrings[currString] = strings[currString].length();
         }
 
-        // СЃС‡РёС‚Р°РµРј СЃСЂРµРґРЅСЋСЋ РґР»РёРЅСѓ СЃС‚СЂРѕРєРё
+        // считаем среднюю длину строки
         for (int currString = 0; currString < numberOfStrings; currString++) {
             averageLength += lengthsOfStrings[currString];
         }
         averageLength /= numberOfStrings;
 
-        // РІС‹РІРѕРґРёРј РЅРµРѕР±С…РѕРґРёРјС‹Рµ СЃС‚СЂРѕРєРё РІ РєРѕРЅСЃРѕР»СЊ
+        // выводим необходимые строки в консоль
         for (int currString = 0; currString < numberOfStrings; currString++) {
             if (lengthsOfStrings[currString] < averageLength) {
                 System.out.println(strings[currString] + " - length is " + lengthsOfStrings[currString]);

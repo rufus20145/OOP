@@ -28,7 +28,7 @@ public class Task2 {
             } catch (java.lang.IllegalStateException e) {
                 System.out.println("Something went wrong. Try again.");
                 input.nextLine();
-                exceptionCaught = true;
+                exceptionCaught = true; // x
             }
         } while (exceptionCaught);
         input.close();
