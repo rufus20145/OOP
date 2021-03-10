@@ -1,4 +1,4 @@
-// package src.homeworks.second;
+package src.homeworks.second;
 
 /**
  * В консоль вводятся три числа с обязательной дробной частью. Необходимо найти
@@ -20,7 +20,6 @@ public class Task4 {
         float digit = 0;
         float firstSum = 0;
         int secondSum = 0;
-        float summDifference;
         boolean exceptionCaught = false;
 
         System.out.println("Enter " + numberOfDigits + " numbers.");
@@ -44,10 +43,10 @@ public class Task4 {
                 }
             } while (exceptionCaught);
             firstSum += digit;
-            secondSum += digit;
+            secondSum += (int) digit;
         }
         System.out.println(firstSum);
-        System.out.println(secondSum);
+        System.out.println((float) secondSum);
         System.out.println(firstSum - secondSum);
     }
 }

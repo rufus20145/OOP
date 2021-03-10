@@ -1,4 +1,4 @@
-// package src.homeworks.second;
+package src.homeworks.second;
 
 /**
  * Вводится строка из произвольных символов. Необходимо вывести на консоль
@@ -13,9 +13,10 @@ public class Task3 {
     public static void main(String[] args) {
         String inputString = null;
         float sumOfDigits = 0;
-        int numberOfDigits;
         Scanner input = new Scanner(System.in);
         boolean exceptionCaught = false;
+
+        input.close();
 
         do {
             try {
@@ -26,11 +27,8 @@ public class Task3 {
                 exceptionCaught = true;
             } catch (java.lang.IllegalStateException e) {
                 System.out.println("Something went wrong. Try again.");
-                input.nextLine();
                 exceptionCaught = true;
-            }
-            {
-
+                break;
             }
         } while (exceptionCaught);
         input.close();

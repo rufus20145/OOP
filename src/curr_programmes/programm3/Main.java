@@ -6,13 +6,13 @@ public class Main {
         Dog dog = new Dog("Мухтар");
         Cow cow = new Cow();
 
-        // System.out.println("First part");
-        // Animals[] animals = new Animals[] { cat, dog };
-        // for (Animals animal : animals) {
-        // animal.voice();
-        // animal.run();
-        // animal.walk();
-        // }
+        System.out.println("First part");
+        Animals[] animals = new Animals[] { cat, dog };
+        for (Animals animal : animals) {
+            animal.voice();
+            animal.run();
+            animal.walk();
+        }
 
         // System.out.println("2nd part");
         // Sound[] sounds = new Sound[] { cat, dog, cow };
