@@ -1,8 +1,10 @@
 /tmp
+/bin
+/out/
+/.idea/
+/.vscode/
 *.exe
 *.class
 *.jar
 *.zip
-/out/
-/.idea/
 /OOP.iml

@@ -1,16 +1,16 @@
-package src.homeworks.third.task_two;
+package src.homeworks.third.task_b;
 
-public class Horse extends Animal {
+public class Dog extends Animal {
 
     String name;
     String breed;
 
-    public Horse() {
+    public Dog() {
         super("nullFood", "nullLocation");
-        name = "nullHorse";
+        name = "nullDog";
     }
 
-    public Horse(String name, String food, String location) {
+    public Dog(String name, String food, String location) {
         super(food, location);
         this.name = name;
     }
@@ -22,10 +22,11 @@ public class Horse extends Animal {
 
     @Override
     public void eat() {
-        System.out.println("Horse " + name + " eats.");
+        System.out.println("Dog " + name + " eats.");
     }
 
     public String getName() {
         return name;
     }
+
 }

@@ -45,6 +45,7 @@ public class Task4 {
             firstSum += digit;
             secondSum += (int) digit;
         }
+        input.close();
         System.out.println(firstSum);
         System.out.println((float) secondSum);
         System.out.println(firstSum - secondSum);

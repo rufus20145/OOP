@@ -1,4 +1,4 @@
-package src.homeworks.third.task_one;
+package src.homeworks.third.task_a;
 
 /**
  *  Создайте класс с именем Student, содержащий поля: фамилия и инициалы, номер группы,

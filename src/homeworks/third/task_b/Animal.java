@@ -1,4 +1,4 @@
-package src.homeworks.third.task_two;
+package src.homeworks.third.task_b;
 
 public class Animal {
 
