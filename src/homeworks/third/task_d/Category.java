@@ -9,7 +9,7 @@ public class Category {
     List<Product> products = new ArrayList<>();
 
     public Category() {
-
+        
     }
 
     public Category(String name) {

@@ -4,11 +4,9 @@ import java.util.Arrays;
 
 public class Student {
 
-    final int NUMBER_OF_MARKS = 5;
-
     String fio;
     String groupNumber;
-    float[] marks = new float[NUMBER_OF_MARKS];
+    float[] marks;
 
     public Student(String fio, String groupNumber, float[] marks) {
         this.fio = fio;

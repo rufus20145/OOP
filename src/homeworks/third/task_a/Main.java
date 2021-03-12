@@ -1,13 +1,17 @@
 package src.homeworks.third.task_a;
 
-/**
- *  Создайте класс с именем Student, содержащий поля: фамилия и инициалы, номер группы,
- *  успеваемость (массив из пяти элементов). Создайте массив из N элементов такого типа
- *  (порядок чтения данных из консоли фамилия и инициалы, номер группы, успеваемость (массив из пяти элементов).
- *  Добавьте возможность вывода фамилии и номеров групп студентов, имеющих оценки, равные только 9 или 10.
- */
-
 import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+
+/**
+ * Создайте класс с именем Student, содержащий поля: фамилия и инициалы, номер
+ * группы, успеваемость (массив из пяти элементов). Создайте массив из N
+ * элементов такого типа (порядок чтения данных из консоли фамилия и инициалы,
+ * номер группы, успеваемость (массив из пяти элементов). Добавьте возможность
+ * вывода фамилии и номеров групп студентов, имеющих оценки, равные только 9 или
+ * 10.
+ */
 
 public class Main {
     public static void main(String[] args) {
@@ -54,6 +58,7 @@ public class Main {
             do {
                 try {
                     fio = input.nextLine();
+                    exceptionCaught = false;
                 } catch (java.util.NoSuchElementException e) {
                     System.out.println("You didn't enter any text. Try again.");
                     input.nextLine();
@@ -68,6 +73,7 @@ public class Main {
             do {
                 try {
                     groupNumber = input.nextLine();
+                    exceptionCaught = false;
                 } catch (java.util.NoSuchElementException e) {
                     System.out.println("You didn't enter any text. Try again.");
                     input.nextLine();

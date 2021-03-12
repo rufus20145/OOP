@@ -15,6 +15,6 @@ public abstract class Shape {
     public abstract void draw();
 
     public boolean equals(Shape other) {
-        return this.color == other.color;
+        return other.color == color;
     }
 }
