@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Basket {
 
-    List<Product> products = new ArrayList<>();
+    List<Product> products = new ArrayList<>();// 123
 
     public Basket() {
 
@@ -14,4 +14,5 @@ public class Basket {
     public void addProduct(Product product) {
         products.add(product);
     }
+    
 }
