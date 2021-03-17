@@ -1,11 +1,11 @@
-package src.homeworks.third.task_c;
+// package src.homeworks.third.task_c;
 
 public class Rectangle extends Shape {
 
-    double aX;
-    double aY;
-    double bX;
-    double bY;
+    private double aX;
+    private double aY;
+    private double bX;
+    private double bY;
 
     public Rectangle() {
     }
@@ -23,6 +23,6 @@ public class Rectangle extends Shape {
     }
 
     public boolean equals(Rectangle other) {
-        return other.aX == aX && other.aY == aY && other.bX == bX && other.bY == bY && other.color == color;
+        return other.aX == aX && other.aY == aY && other.bX == bX && other.bY == bY;
     }
 }

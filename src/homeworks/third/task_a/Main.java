@@ -3,6 +3,7 @@ package src.homeworks.third.task_a;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
+import java.lang.IllegalStateException;
 
 /**
  * Создайте класс с именем Student, содержащий поля: фамилия и инициалы, номер
@@ -28,15 +29,15 @@ public class Main {
             try {
                 numberOfStudents = input.nextInt();
                 exceptionCaught = false;
-            } catch (java.util.InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("You must enter a valid integer value. Try again.");
                 exceptionCaught = true;
                 input.nextLine();
-            } catch (java.util.NoSuchElementException e) {
+            } catch (NoSuchElementException e) {
                 System.out.println("You didn't enter any text. Try again.");
                 exceptionCaught = true;
                 input.nextLine();
-            } catch (java.lang.IllegalStateException e) {
+            } catch (IllegalStateException e) {
                 System.out.println("Scanner was closed before input. Try again.");
                 input.nextLine();
                 exceptionCaught = true;
@@ -59,14 +60,13 @@ public class Main {
                 try {
                     fio = input.nextLine();
                     exceptionCaught = false;
-                } catch (java.util.NoSuchElementException e) {
+                } catch (NoSuchElementException e) {
                     System.out.println("You didn't enter any text. Try again.");
                     input.nextLine();
                     exceptionCaught = true;
-                } catch (java.lang.IllegalStateException e) {
+                } catch (IllegalStateException e) {
                     System.out.println("Something went wrong. Try again.");
                     exceptionCaught = true;
-                    break;
                 }
             } while (exceptionCaught);
             System.out.println("Enter student number of group: ");
@@ -74,14 +74,13 @@ public class Main {
                 try {
                     groupNumber = input.nextLine();
                     exceptionCaught = false;
-                } catch (java.util.NoSuchElementException e) {
+                } catch (NoSuchElementException e) {
                     System.out.println("You didn't enter any text. Try again.");
                     input.nextLine();
                     exceptionCaught = true;
-                } catch (java.lang.IllegalStateException e) {
+                } catch (IllegalStateException e) {
                     System.out.println("Something went wrong. Try again.");
                     exceptionCaught = true;
-                    break;
                 }
             } while (exceptionCaught);
             System.out.println("Enter student marks: ");
@@ -97,15 +96,15 @@ public class Main {
                         if (marks[currMark] > 10) {
                             System.out.println("Entered value is too big. Try again.");
                         }
-                    } catch (java.util.InputMismatchException e) {
+                    } catch (InputMismatchException e) {
                         System.out.println("You must enter a valid float value. Try again.");
                         exceptionCaught = true;
                         input.nextLine();
-                    } catch (java.util.NoSuchElementException e) {
+                    } catch (NoSuchElementException e) {
                         System.out.println("You didn't enter any text. Try again.");
                         exceptionCaught = true;
                         input.nextLine();
-                    } catch (java.lang.IllegalStateException e) {
+                    } catch (IllegalStateException e) {
                         System.out.println("Scanner was closed before input. Try again.");
                         input.nextLine();
                         exceptionCaught = true;

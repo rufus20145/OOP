@@ -1,8 +1,8 @@
-package src.homeworks.third.task_c;
+// package src.homeworks.third.task_c;
 
 public abstract class Shape {
 
-    int color;
+    private int color;
 
     protected Shape() {
 
@@ -16,5 +16,9 @@ public abstract class Shape {
 
     public boolean equals(Shape other) {
         return other.color == color;
+    }
+
+    public int getColor() {
+        return color;
     }
 }

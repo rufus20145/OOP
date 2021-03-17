@@ -2,9 +2,9 @@ package src.homeworks.third.task_d;
 
 public class Product {
 
-    String name;
-    double price;
-    double rating;
+    private String name;
+    private double price;
+    private double rating;
 
     public Product() {
 
