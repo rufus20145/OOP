@@ -1,18 +1,18 @@
-// package src.controls.first;
+package src.controls.first;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * В кириллическом тексте каждую букву заменить ее номером в алфавите (для
- * верхнего регистра смещение +33). Числа выделить в квадратных скобках.
+ * Р’ РєРёСЂРёР»Р»РёС‡РµСЃРєРѕРј С‚РµРєСЃС‚Рµ РєР°Р¶РґСѓСЋ Р±СѓРєРІСѓ Р·Р°РјРµРЅРёС‚СЊ РµРµ РЅРѕРјРµСЂРѕРј РІ Р°Р»С„Р°РІРёС‚Рµ (РґР»СЏ
+ * РІРµСЂС…РЅРµРіРѕ СЂРµРіРёСЃС‚СЂР° СЃРјРµС‰РµРЅРёРµ +33). Р§РёСЃР»Р° РІС‹РґРµР»РёС‚СЊ РІ РєРІР°РґСЂР°С‚РЅС‹С… СЃРєРѕР±РєР°С….
  */
 public class Task_a {
 
     public static void main(String[] args) {
 
-        String smallLetters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-        String bigLetters = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        String smallLetters = "Р°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С…С†С‡С€С‰СЉС‹СЊСЌСЋСЏ";
+        String bigLetters = "РђР‘Р’Р“Р”Р•РЃР–Р—РР™РљР›РњРќРћРџР РЎРўРЈР¤РҐР¦Р§РЁР©РЄР«Р¬Р­Р®РЇ";
         String inputString;
         Scanner input = new Scanner(System.in);
         StringBuilder outputString = new StringBuilder();
