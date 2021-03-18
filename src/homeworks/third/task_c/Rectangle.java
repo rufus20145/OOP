@@ -1,4 +1,4 @@
-// package src.homeworks.third.task_c;
+package src.homeworks.third.task_c;
 
 public class Rectangle extends Shape {
 
@@ -21,8 +21,8 @@ public class Rectangle extends Shape {
     public void draw() {
         System.out.println("Rectangle was created.");
     }
-
+    
     public boolean equals(Rectangle other) {
-        return other.aX == aX && other.aY == aY && other.bX == bX && other.bY == bY;
+        return other.aX == this.aX && other.aY == this.aY && other.bX == this.bX && other.bY == this.bY && other.getColor() == this.getColor();
     }
 }

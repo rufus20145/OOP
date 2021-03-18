@@ -1,4 +1,4 @@
-// package src.homeworks.third.task_c;
+package src.homeworks.third.task_c;
 
 public class Circle extends Shape {
 
@@ -21,6 +21,6 @@ public class Circle extends Shape {
     }
 
     public boolean equals(Circle other) {
-        return other.centerX == centerX && other    enterY == centerY && other.radius == radius;
+        return other.centerX == this.centerX && other.centerY == this.centerY && other.radius == this.radius && other.getColor() == this.getColor();
     }
 }
