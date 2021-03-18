@@ -37,6 +37,8 @@ public class Main {
             input.nextLine();
         }
 
+        
         System.out.println("Все операции выполнены успешно.");
+        input.close();
     }
 }

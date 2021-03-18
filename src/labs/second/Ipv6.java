@@ -3,10 +3,10 @@ package src.labs.second;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Password {
+public class Ipv6 {
     public static void main(String[] args) {
 
-        String regex = new String("(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*\\_).{8,}");
+        String regex = new String("^([0-9a-fA-F]{0,4}:){2,7}([0-9a-fA-F]{0,4})$");
 
         Scanner input = new Scanner(System.in);
 
