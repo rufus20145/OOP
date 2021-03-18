@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 public class UUID {
     public static void main(String[] args) {
 
-        String regex = new String("^[{()]{0,1}([0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})[})]{0,1}$");
+        String regex = new String("^\\(([0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})\\)$|"
+                + "^\\{([0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})\\}$|"
+                + "^([0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})$");
 
         Scanner input = new Scanner(System.in);
 
