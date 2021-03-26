@@ -45,7 +45,6 @@ public class Main {
             }
         } while (exceptionCaught);
         dots = new Dot[numberOfDots];
-        dots[0] = new Dot();
 
         for (int currDot = 0; currDot < numberOfDots; ++currDot) {
             String lineToParse = null;
@@ -82,13 +81,13 @@ public class Main {
                     }
                 }
             } while (exceptionCaught);
-            System.out.println(dots[currDot].getAllInfo());
+            // System.out.println(dots[currDot].getAllInfo());//вывод всех данных точки после парсинга
         }
 
         minDot = dots[0];
         if (numberOfDots > 1) {
             for (int j = 0; j < dots.length; j++) {
-                minSum += Dot.calcTheDistance(dots[0], dots[1]);
+                minSum += Dot.calcTheDistance(dots[0], dots[j]);
             }
         }
         for (int i = 1; i < dots.length; i++) {
