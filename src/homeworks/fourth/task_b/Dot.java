@@ -19,6 +19,9 @@ public class Dot {
         tempStringBuilder.append(String.format(Locale.PRC, "%.4f", x)).append(", ").append(String.format("%.4f", y))
                 .append(".");
         System.out.println(tempStringBuilder.toString());
+        if(makeRandom) {
+            System.out.println("It`s truly random.");
+        }
 
     }
 
