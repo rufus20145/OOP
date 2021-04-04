@@ -1,7 +1,6 @@
-// package src.homeworks.fifth;
+package src.homeworks.fifth;
 
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -93,7 +92,7 @@ public class TaskA {
             totalWeight += weights[currentNumber];
         }
         if (totalWeight != 0) {
-            System.out.println(String.format(Locale.PRC, "%.3f", sum / totalWeight));
+            System.out.println(String.format("%.3f", sum / totalWeight));
         } else {
             System.out.println("Сумма весов чисел равна нулю. Деление невозможно.");
         }

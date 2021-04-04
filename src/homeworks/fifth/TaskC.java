@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class TaskC {
     public static void main(String[] args) {
+
+        final int numberCoefficient = 8;
+
         int number = 0;
         double searchableNumber;
         Scanner input = new Scanner(System.in);
@@ -37,11 +40,11 @@ public class TaskC {
             }
         } while (exceptionCaught);
 
-        searchableNumber = (Math.sqrt((double) 1 + 8 * number) - 1) / 2;
+        searchableNumber = (Math.sqrt((double) 1 + numberCoefficient * number) - 1) / 2;
 
         if (searchableNumber == Math.round(searchableNumber)) {
             System.out.println(true);
-            System.out.println(String.format("%d", (int) searchableNumber));
+            System.out.println((int) searchableNumber);
         } else {
             System.out.println(false);
         }

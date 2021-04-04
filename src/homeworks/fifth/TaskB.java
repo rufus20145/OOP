@@ -1,7 +1,6 @@
 package src.homeworks.fifth;
 
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -75,7 +74,7 @@ public class TaskB {
             sum += Math.pow((number - average), 2);
         }
 
-        System.out.println(String.format(Locale.PRC, "%.3f", Math.sqrt(sum / amountOfNumbers)));
+        System.out.println(String.format("%.3f", Math.sqrt(sum / amountOfNumbers)));
 
         input.close();
     }

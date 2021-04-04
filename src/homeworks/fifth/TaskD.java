@@ -1,7 +1,6 @@
 // package src.homeworks.fifth;
 
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -117,7 +116,7 @@ public class TaskD {
             }
         }
 
-        System.out.println(String.format(Locale.PRC, "%.2f", price));
+        System.out.println(String.format("%.2f", price));
 
         input.close();
     }
