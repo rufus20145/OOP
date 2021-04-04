@@ -1,13 +1,12 @@
 package src.controls.first;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * В кириллическом тексте каждую букву заменить ее номером в алфавите (для
  * верхнего регистра смещение +33). Числа выделить в квадратных скобках.
  */
-public class Task_a {
+public class TaskA {
 
     public static void main(String[] args) {
 
@@ -22,17 +21,15 @@ public class Task_a {
         for (char digit : inputString.toCharArray()) {
 
             if (smallLetters.contains(Character.toString(digit))) {
-                outputString.append('[');
-                outputString.append(smallLetters.indexOf(digit) + 1);
-                outputString.append(']');
+                outputString.append('[').append(smallLetters.indexOf(digit) + 1).append(']');
             } else if (bigLetters.contains(Character.toString(digit))) {
-                outputString.append('[');
-                outputString.append(bigLetters.indexOf(digit) + 34);
-                outputString.append(']');
+                outputString.append('[').append(bigLetters.indexOf(digit) + 34).append(']');
             } else {
                 outputString.append(digit);
             }
         }
+
         System.out.println(outputString.toString());
+        input.close();
     }
 }

@@ -1,5 +1,5 @@
 package src.controls.first;
 
-public class Task_d {
+public class TaskD {
     
 }

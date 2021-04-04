@@ -8,7 +8,7 @@ import java.util.Scanner;
  * сначала количество точке n, далее для каждой точки вводится x, а потом y
  * координата. Площадь округлять до десятых (один разряд после запятой)
  */
-public class Task_b {
+public class TaskB {
 
     public static void main(String[] args) {
         double totalArea = 0;
