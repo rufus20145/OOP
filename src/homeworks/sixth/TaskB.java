@@ -1,4 +1,4 @@
-package src.homeworks.sixth;
+// package src.homeworks.sixth;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -12,8 +12,6 @@ public class TaskB {
         HashMap<Integer, String> stringRestorer = new HashMap<>();
 
         String scannedString = null;
-        String[] splitStrings;
-        StringBuilder output = new StringBuilder();
         Scanner input = new Scanner(System.in);
         boolean exceptionCaught = false;
 
@@ -34,11 +32,10 @@ public class TaskB {
             }
         } while (exceptionCaught);
 
-        splitStrings = scannedString.split(";");
+        String[] splitStrings = scannedString.split(";");
         for (String string : splitStrings) {
-
             String[] smallBuffer = string.split(":");
-            stringRestorer.put(Integer.parseInt(smallBuffer[1]), smallBuffer[0]);
+            stringRestorer.put(Integer.valueOf(smallBuffer[1]), smallBuffer[0]);
             // System.out.println("Value:" + smallBuffer[0] + " Key: " + smallBuffer[1]);
         }
 
@@ -59,14 +56,10 @@ public class TaskB {
             }
         } while (exceptionCaught);
 
+        StringBuilder output = new StringBuilder();
         splitStrings = scannedString.split("-");
         for (String string : splitStrings) {
-            if (stringRestorer.containsKey(Integer.parseInt(string))) {
-                output.append(stringRestorer.get(Integer.parseInt(string)));
-            }
-            else {
-                output.append("_");
-            }
+            output.append(stringRestorer.getOrDefault(Integer.valueOf(string), "_"));
         }
         System.out.println(output.toString());
         input.close();
