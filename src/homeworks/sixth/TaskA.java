@@ -1,7 +1,6 @@
 package src.homeworks.sixth;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -29,7 +28,6 @@ public class TaskA {
         boolean isInLoop = true;
         boolean isFirstIteration = true;
 
-
         do {
             String scannedLine = null;
 
@@ -55,27 +53,28 @@ public class TaskA {
 
                 switch (scannedLine) {
                 case firstCollectionSwitch: {
-                    //System.out.println("Выбран 1 поток.");
+                    // System.out.println("Выбран 1 поток.");
                     currentStream = 1;
                     break;
                 }
                 case secondCollectionSwitch: {
-                    //System.out.println("Выбран 2 поток.");
+                    // System.out.println("Выбран 2 поток.");
                     currentStream = 2;
                     break;
                 }
                 case thirdCollectionSwitch: {
-                    //System.out.println("Выбран 3 поток.");
+                    // System.out.println("Выбран 3 поток.");
                     currentStream = 3;
                     break;
                 }
                 case endSwitch: {
-                    //System.out.println("Выход из программы");
+                    // System.out.println("Выход из программы");
                     isInLoop = false;
                     break;
                 }
                 default: {
-                    //System.out.println("Неправильный номер потока. Их всего 3. Номер не был изменен.");
+                    // System.out.println("Неправильный номер потока. Их всего 3. Номер не был
+                    // изменен.");
                     break;
                 }
                 }
@@ -83,26 +82,26 @@ public class TaskA {
 
                 switch (currentStream) {
                 case 1: {
-                    //System.out.println("Добавлено в 1 поток");
+                    // System.out.println("Добавлено в 1 поток");
 
                     firstList.add(Integer.parseInt(scannedLine));
                     break;
                 }
                 case 2: {
-                    //System.out.println("Добавлено в 2 поток");
+                    // System.out.println("Добавлено в 2 поток");
 
                     secondList.add(Integer.parseInt(scannedLine));
                     break;
                 }
                 case 3: {
-                    //System.out.println("Добавлено в 3 поток");
+                    // System.out.println("Добавлено в 3 поток");
 
                     thirdList.add(Integer.parseInt(scannedLine));
                     break;
                 }
 
                 default: {
-                    //System.out.println("Неизвестный поток");
+                    // System.out.println("Неизвестный поток");
                     break;
                 }
 
@@ -114,25 +113,26 @@ public class TaskA {
         } while (isInLoop);
 
         maxNumberOfElements = Math.max(firstList.size(), Math.max(secondList.size(), thirdList.size()));
-        resultArray = new int[maxNumberOfElements];
 
         if (maxNumberOfElements == 0) {
-            //System.out.println("Коллекции пусты.");
+            System.out.println("Коллекции пусты.");
         } else {
+            resultArray = new int[maxNumberOfElements];
             for (int i = 0; i < maxNumberOfElements; i++) {
 
                 if (i < firstList.size()) {
-                    //System.out.println("Добавили элемент из 1 списка");
+                    // System.out.println("Добавили элемент из 1 списка");
                     resultArray[i] += firstList.get(i);
                 }
                 if (i < secondList.size()) {
-                    //System.out.println("Добавили элемент из 2 списка");
+                    // System.out.println("Добавили элемент из 2 списка");
                     resultArray[i] += secondList.get(i);
                 }
                 if (i < thirdList.size()) {
-                    //System.out.println("Добавили элемент из 3 списка");
+                    // System.out.println("Добавили элемент из 3 списка");
                     resultArray[i] += thirdList.get(i);
                 }
+
                 output.append(resultArray[i]).append(" ");
 
             }
