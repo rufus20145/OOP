@@ -10,9 +10,7 @@ public class TaskC {
     public static void main(String[] args) {
 
         ArrayList<Double> inputArray = new ArrayList<>();
-        TreeSet<Double> result = new TreeSet<>();
         double sum = 0;
-        double avg = 0;
         Scanner input = new Scanner(System.in);
         boolean exceptionCaught = false;
 
@@ -49,21 +47,25 @@ public class TaskC {
         System.out.println("Ввод завершён. Начинаю обработку.\n\nВот результат:");
 
         if (!inputArray.isEmpty()) {
-            avg = sum / inputArray.size();
-        }
+            double avg = sum / inputArray.size();
 
-        for (Double number : inputArray) {
-            if (number > avg) {
-                result.add(number);
+            TreeSet<Double> result = new TreeSet<>();
+            for (Double number : inputArray) {
+                if (number > avg) {
+                    result.add(number);
+                }
+            }
+
+            for (Double number : result) {
+                if (number == Math.round(number)) {
+                    System.out.println(Math.round(number));
+                } else {
+                    System.out.println(number);
+                }
             }
         }
-
-        for (Double number : result) {
-            if (number == Math.round(number)) {
-                System.out.println(Math.round(number));
-            } else {
-                System.out.println(number);
-            }
+        else { // inputArray is empty
+            System.out.println("Введенная коллекция пуста.");
         }
 
         input.close();
