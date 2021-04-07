@@ -44,10 +44,7 @@ public class TaskA {
                 }
             } while (exceptionCaught);
 
-            // данный блок не должен выполняться сразу после запуска, значения идут в
-            // первую коллекцию
             if (scannedLine.matches(streamRegex) || scannedLine.matches(endSwitch)) {
-
                 switch (scannedLine) {
                     case firstCollectionSwitch: {
                         // System.out.println("Выбран 1 поток.");
