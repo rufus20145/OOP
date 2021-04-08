@@ -63,8 +63,7 @@ public class TaskC {
                     System.out.println(number);
                 }
             }
-        }
-        else { // inputArray is empty
+        } else { // inputArray is empty
             System.out.println("Введенная коллекция пуста.");
         }
 

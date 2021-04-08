@@ -1,4 +1,4 @@
-// package src.homeworks.sixth;
+package src.homeworks.sixth;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class TaskB {
     public static void main(String[] args) {
-        final String NoSuchElementExceptionErrorMessage = "Вы ничего не ввели. Выход из программы.";
-        final String IllegalStateExceptionErrorMessage = "Система ввода оказалась в некорректном состоянии. Повторите попытку.";
+        final String noSuchElementExceptionErrorMessage = "Вы ничего не ввели. Выход из программы.";
+        final String illegalStateExceptionErrorMessage = "Система ввода оказалась в некорректном состоянии. Повторите попытку.";
 
         HashMap<Integer, String> stringRestorer = new HashMap<>();
 
@@ -21,11 +21,11 @@ public class TaskB {
             try {
                 scannedString = input.nextLine();
             } catch (NoSuchElementException e) {
-                System.out.println(NoSuchElementExceptionErrorMessage);
+                System.out.println(noSuchElementExceptionErrorMessage);
                 input.nextLine();
                 exceptionCaught = true;
             } catch (IllegalStateException e) {
-                System.out.println(IllegalStateExceptionErrorMessage);
+                System.out.println(illegalStateExceptionErrorMessage);
                 input = new Scanner(System.in);
                 input.nextLine();
                 exceptionCaught = true;
@@ -45,11 +45,11 @@ public class TaskB {
             try {
                 scannedString = input.nextLine();
             } catch (NoSuchElementException e) {
-                System.out.println(NoSuchElementExceptionErrorMessage);
+                System.out.println(noSuchElementExceptionErrorMessage);
                 input.nextLine();
                 exceptionCaught = true;
             } catch (IllegalStateException e) {
-                System.out.println(IllegalStateExceptionErrorMessage);
+                System.out.println(illegalStateExceptionErrorMessage);
                 input = new Scanner(System.in);
                 input.nextLine();
                 exceptionCaught = true;

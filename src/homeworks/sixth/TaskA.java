@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class TaskA {
     public static void main(String[] args) {
-        final String NoSuchElementExceptionErrorMessage = "Вы ничего не ввели. Выход из программы.";
-        final String IllegalStateExceptionErrorMessage = "Система ввода оказалась в некорректном состоянии. Повторите попытку.";
+        final String noSuchElementExceptionErrorMessage = "Вы ничего не ввели. Выход из программы.";
+        final String illegalStateExceptionErrorMessage = "Система ввода оказалась в некорректном состоянии. Повторите попытку.";
 
         final String numberRegex = "^-?\\d+$";
         final String streamRegex = "^STREAM [123]$";
@@ -16,10 +16,14 @@ public class TaskA {
         final String thirdCollectionSwitch = "STREAM 3";
         final String endSwitch = "END";
 
+        final int firstStreamNumber = 1;
+        final int secondStreamNumber = 2;
+        final int thirdStreamNumber = 3;
+
         ArrayList<Integer> firstList = new ArrayList<>();
         ArrayList<Integer> secondList = new ArrayList<>();
         ArrayList<Integer> thirdList = new ArrayList<>();
-        int currentStream = 1;
+        int currentStream = firstStreamNumber;
         Scanner input = new Scanner(System.in);
         StringBuilder output = new StringBuilder();
         boolean exceptionCaught = false;
@@ -33,11 +37,11 @@ public class TaskA {
                 try {
                     scannedLine = input.nextLine();
                 } catch (NoSuchElementException e) {
-                    System.out.println(NoSuchElementExceptionErrorMessage);
+                    System.out.println(noSuchElementExceptionErrorMessage);
                     input.nextLine();
                     exceptionCaught = true;
                 } catch (IllegalStateException e) {
-                    System.out.println(IllegalStateExceptionErrorMessage);
+                    System.out.println(illegalStateExceptionErrorMessage);
                     input = new Scanner(System.in);
                     input.nextLine();
                     exceptionCaught = true;
@@ -46,58 +50,57 @@ public class TaskA {
 
             if (scannedLine.matches(streamRegex) || scannedLine.matches(endSwitch)) {
                 switch (scannedLine) {
-                    case firstCollectionSwitch: {
+                    case firstCollectionSwitch: 
                         // System.out.println("Выбран 1 поток.");
-                        currentStream = 1;
+                        currentStream = firstStreamNumber;
                         break;
-                    }
-                    case secondCollectionSwitch: {
+                    
+                    case secondCollectionSwitch: 
                         // System.out.println("Выбран 2 поток.");
-                        currentStream = 2;
+                        currentStream = secondStreamNumber;
                         break;
-                    }
-                    case thirdCollectionSwitch: {
+                    
+                    case thirdCollectionSwitch: 
                         // System.out.println("Выбран 3 поток.");
-                        currentStream = 3;
+                        currentStream = thirdStreamNumber;
                         break;
-                    }
-                    case endSwitch: {
+                    
+                    case endSwitch: 
                         // System.out.println("Выход из программы");
                         isInLoop = false;
                         break;
-                    }
-                    default: {
+                    
+                    default: 
                         // System.out.println("Неправильный номер потока. Их всего 3. Номер не был
                         // изменен.");
                         break;
-                    }
+                    
                 }
             } else if (scannedLine.matches(numberRegex)) {
 
                 switch (currentStream) {
-                    case 1: {
+                    case firstStreamNumber: 
                         // System.out.println("Добавлено в 1 поток");
 
                         firstList.add(Integer.valueOf(scannedLine));
                         break;
-                    }
-                    case 2: {
+                    
+                    case secondStreamNumber: 
                         // System.out.println("Добавлено в 2 поток");
 
                         secondList.add(Integer.valueOf(scannedLine));
                         break;
-                    }
-                    case 3: {
+                    
+                    case thirdStreamNumber: 
                         // System.out.println("Добавлено в 3 поток");
 
                         thirdList.add(Integer.valueOf(scannedLine));
                         break;
-                    }
-
-                    default: {
+                    
+                    default: 
                         // System.out.println("Неизвестный поток");
                         break;
-                    }
+                    
 
                 }
             } else {
