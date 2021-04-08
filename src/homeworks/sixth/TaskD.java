@@ -1,26 +1,25 @@
 // package src.homeworks.sixth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class TaskD {
     public static void main(String[] args) {
-        final String NoSuchElementExceptionErrorMessage = "Вы ничего не ввели. Выход из программы.";
-        final String IllegalStateExceptionErrorMessage = "Система ввода оказалась в некорректном состоянии. Повторите попытку.";
+        final String noSuchElementExceptionErrorMessage = "Вы ничего не ввели. Выход из программы.";
+        final String illegalStateExceptionErrorMessage = "Система ввода оказалась в некорректном состоянии. Повторите попытку.";
 
         final String emailRegex = "(?=(.{1,64}@))(?=(.{7,255}$))((([a-zA-Z0-9_а-яА-ЯёЁ]+)(\\+[a-zA-Z0-9_а-яА-ЯёЁ\\-_]+)?)@(([a-zA-Z0-9а-яА-ЯёЁ][a-zA-Z0-9_а-яА-ЯёЁ\\-_]*\\.)+([a-zA-Zа-яА-ЯёЁ0-9]{2,})|(((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]))))";
         final String inputStringRegex = "^" + emailRegex + ":" + emailRegex + "$";
         final String endSwitchString = "END";
 
-        ArrayList<String> senders = new ArrayList<>();
-        ArrayList<String> receivers = new ArrayList<>();
+        HashMap<String, String> pairs = new HashMap<>();
 
-        ArrayList<String> firstSenders = new ArrayList<>();
-        ArrayList<String> lastReceivers = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         boolean exceptionCaught = false;
         boolean isInLoop = true;
+
         do {
             String scannedLine = null;
 
@@ -29,11 +28,11 @@ public class TaskD {
                 try {
                     scannedLine = input.nextLine();
                 } catch (NoSuchElementException e) {
-                    System.out.println(NoSuchElementExceptionErrorMessage);
+                    System.out.println(noSuchElementExceptionErrorMessage);
                     input.nextLine();
                     exceptionCaught = true;
                 } catch (IllegalStateException e) {
-                    System.out.println(IllegalStateExceptionErrorMessage);
+                    System.out.println(illegalStateExceptionErrorMessage);
                     input = new Scanner(System.in);
                     input.nextLine();
                     exceptionCaught = true;
@@ -45,59 +44,37 @@ public class TaskD {
                 isInLoop = false;
             } else if (scannedLine.matches(inputStringRegex)) {
                 String[] splitStrings = scannedLine.split(":");
-                if (senders.contains(splitStrings[0])) {
-                    System.out.println(
-                            "В двух разных строках обнаружен одинаковый отправитель. Текущая строка отброшена.");
+                if (pairs.containsKey(splitStrings[0])) {
+                    System.out.println("В двух разных строках обнаружен одинаковый отправитель. "
+                            + "Текущая строка отброшена (да, я знаю, что HashMap и так умеет в дедупликацию). ");
+                } else if (pairs.containsValue(splitStrings[1])) {
+                    System.out.println("В двух разных строках обнаружен одинаковый получатель."
+                            + "Текущая строка отброшена (да, я знаю, что HashMap и так умеет в дедупликацию). ");
                 } else {
-                    senders.add(splitStrings[0]);
-                }
-                if (receivers.contains(splitStrings[1])) {
-                    System.out.println(
-                            "В двух разных строках обнаружен одинаковый получатель. Текущая строка отброшена.");
-                } else {
-                    receivers.add(splitStrings[1]);
+                    pairs.put(splitStrings[0], splitStrings[1]);
                 }
             } else {
                 System.out.println("Неизвестный формат строки. Повторите попытку ввода");
             }
         } while (isInLoop);
 
+        ArrayList<String> firstSenders = new ArrayList<>();
         // ищем всех первых отправителей
-        for (String string : senders) {
-            if (!receivers.contains(string)) {
-                if (firstSenders.contains(string)) {
-                    System.out.println(
-                            "Отправитель, которого нет в числе получателей, встретился в двух строках. Выход из программы.");
-                    System.exit(1);
-                } else {
-                    firstSenders.add(string);
-                }
+        for (String string : pairs.keySet()) {
+            if (!pairs.containsValue(string)) {
+                firstSenders.add(string);
             }
         }
 
-        // ищем всех последних получателей
-        for (String string : receivers) {
-            if (!senders.contains(string)) {
-                if (lastReceivers.contains(string)) {
-                    System.out.println(
-                            "Получатель, которого нет в числе отправителей, встретился в двух строках. Выход из программы.");
-                    System.exit(1);
-                } else {
-                    lastReceivers.add(string);
-                }
-            }
-        }
-
-        // теперь по очереди берем каждого из первых отправителей и просматриваем
-        // цепочку от него до кого-то из списка последних получателей
+        // теперь по очереди берем каждого из списка первых отправителей и просматриваем
+        // цепочку от него пока почта получателя есть в отправителях
         for (String string : firstSenders) {
-            String currMail = string;
-            StringBuilder output = new StringBuilder(currMail);
+            StringBuilder output = new StringBuilder(string);
 
             do {
-                currMail = receivers.get(senders.indexOf(currMail));
-                output.append(" > ").append(currMail);
-            } while (!lastReceivers.contains(currMail));
+                string = pairs.get(string);
+                output.append(" > ").append(string);
+            } while (pairs.containsKey(string));
 
             System.out.println(output.toString());
         }
