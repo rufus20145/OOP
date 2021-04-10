@@ -21,16 +21,24 @@ public class TaskA {
 
     }
 
-    public static String makeFibboString (int first, int second) {
+    public static String makeFibboString(int first, int second) {
 
         StringBuilder output = new StringBuilder();
         int previousFibboNumber = 0;
         int currentFibboNumber = 1;
-        for(int i = 2; i < second; ++i) {
-            int buffer = previousFibboNumber + currentFibboNumber;
-            previousFibboNumber = currentFibboNumber;
-            currentFibboNumber = buffer;
-            if(i >= first) {
+        for (int i = 0; i < second; ++i) {
+            if (0 == i) {
+                previousFibboNumber = -1;
+                currentFibboNumber = 0;
+            } else if (1 == i) {
+                previousFibboNumber = 1;
+                currentFibboNumber = 1;
+            } else if (i > 2) {
+                int buffer = previousFibboNumber + currentFibboNumber;
+                previousFibboNumber = currentFibboNumber;
+                currentFibboNumber = buffer;
+            }
+            if (i >= first) {
                 output.append(currentFibboNumber).append(" ");
             }
         }
