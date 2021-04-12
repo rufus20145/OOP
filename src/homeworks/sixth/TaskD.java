@@ -1,4 +1,4 @@
-// package src.homeworks.sixth;
+package src.homeworks.sixth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
