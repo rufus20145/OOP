@@ -8,6 +8,8 @@ public class Main {
         tempArrayList.add("123");
         tempArrayList.add("321");
         tempArrayList.add(1, "4321");
+        tempArrayList.add(0, null);
+        System.out.println(Arrays.asList(tempArrayList.toArray()).toString());
 
         MyArrayList secondArrayList = new MyArrayList(2);
         secondArrayList.add("1");
@@ -21,5 +23,21 @@ public class Main {
         System.out.println(Arrays.asList(secondArrayList.toArray()).toString());
         System.out.println("12343421u8412e");
         System.out.println(Arrays.asList(secondArrayList.subList(0, 1).toArray()).toString());
+
+        MyArrayList tmp = new MyArrayList();
+        tmp.add("1");
+        tmp.add("4");
+        MyArrayList toRemove = new MyArrayList(3);
+        toRemove.add("1");
+        toRemove.add("2");
+        toRemove.add("3");
+        toRemove.add("4");
+        // toRemove.remove("2");
+        toRemove.removeAll(tmp);
+        System.out.println(Arrays.asList(toRemove.toArray()).toString());
+
+        tmp.clear();
+        System.out.println(Arrays.asList(tmp.toArray()).toString() + " Here is cleared array.");
+
     }
 }

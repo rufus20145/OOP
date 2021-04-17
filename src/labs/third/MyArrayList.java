@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import src.labs.third.interfaces.Array;
 
-public class MyArrayList implements Array { // todo вернуть implements
+public class MyArrayList implements Array {
     private static final int DEFAULT_CAPACITY = 10;
     private static final int SIZE_MULTIPLIER = 2;
 
@@ -21,39 +21,26 @@ public class MyArrayList implements Array { // todo вернуть implements
             this.array = new String[initSize];
             this.size = 0;
         } else {
-            this.array = new String[DEFAULT_CAPACITY];
-            this.size = 0;
+            throw new IllegalArgumentException("Неверный размер массива" + initSize);
         }
     }
 
     public boolean add(String element) {
-        if (this.array[0] == null) {
-            add(0, element);
-        } else {
-            add(size, element);
-        }
+        add(size, element);
         return true;
     }
 
     public void add(int index, String element) { // почему один add бул, а второй войд?
-        if (index < 0 || index > size) {
-            System.out.println("Error in index");
-            // todo добавить обработку неправильных индексов
-        } else if (index > this.array.length) {
-            array = Arrays.copyOf(array, size + 1);
-            System.arraycopy(array, index, array, index + 1, size - index);
-            array[index] = element;
-            ++size;
-        } else {
-            try {
-                System.arraycopy(array, index, array, index + 1, size - index);
-            } catch (IndexOutOfBoundsException e) {
-                array = Arrays.copyOf(array, array.length * SIZE_MULTIPLIER);
-                System.arraycopy(array, index, array, index + 1, size - index);
-            }
-            array[index] = element;
-            ++size;
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException("Индекс добавляемого элемента не может быть больше размера"
+                    + "(только меньше или равен). index = " + index + "size = " + size);
         }
+        if (size == array.length) {
+            array = Arrays.copyOf(array, array.length * SIZE_MULTIPLIER);
+        }
+        System.arraycopy(array, index, array, index + 1, size - index);
+        array[index] = element;
+        ++size;
     }
 
     public boolean addAll(Array c) {
@@ -66,13 +53,10 @@ public class MyArrayList implements Array { // todo вернуть implements
 
     public boolean addAll(int index, Array c) {
         int prevSize = this.size;
-
         String[] temp = c.toArray();
-
         for (int i = 0; i < temp.length; i++) {
             add(index + i, temp[i]);
         }
-
         return this.size != prevSize;
     }
 
@@ -103,13 +87,13 @@ public class MyArrayList implements Array { // todo вернуть implements
 
     public int lastIndexOf(String o) {
         if (o == null) {
-            for (int i = this.size - 1; i > 0; i--) {
+            for (int i = this.size - 1; i >= 0; i--) {
                 if (this.array[i] == null) {
                     return i;
                 }
             }
         } else {
-            for (int i = this.size - 1; i > 0; i--) {
+            for (int i = this.size - 1; i >= 0; i--) {
                 if (array[i].equals(o)) {
                     return i;
                 }
