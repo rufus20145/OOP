@@ -1,6 +1,7 @@
 package src.labs.third;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,5 +40,32 @@ public class Main {
         tmp.clear();
         System.out.println(Arrays.asList(tmp.toArray()).toString() + " Here is cleared array.");
 
+        LinkedList<String> test22 = new LinkedList<>();
+        test22.isEmpty();
+        MyLinkedList test = new MyLinkedList();
+        MyLinkedList testAddAll = new MyLinkedList();
+        testAddAll.add("1");
+        testAddAll.add("2");
+        test.add("123");
+        test.add("1234");
+        test.add("12345");
+        test.add(3, "1234567");
+        test.addAll(testAddAll);
+        test.addAll(0, testAddAll);
+        test.add(5, "777");
+        System.out.println(Arrays.asList(test.toArray()).toString());
+        System.out.println("indexes are " + test.indexOf("123") + " and " + test.indexOf("1234567") + " and "
+                + test.indexOf("9777"));
+        System.out.println(test.set(0, "111"));
+        System.out.println(test.set(0, "1112"));
+        System.out.println(test.get(0));
+        System.out.println(test.remove(8));
+        System.out.println(Arrays.asList(test.toArray()).toString());
+        System.out.println(test.remove("111"));//false
+        System.out.println(test.remove("1112"));//true
+        System.out.println(test.remove(Integer.valueOf(1)));//false
+        System.out.println(test.removeAll(testAddAll));//true
+
+        System.out.println(Arrays.asList(test.subList(0, 5).toArray()).toString());
     }
 }

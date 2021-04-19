@@ -94,7 +94,7 @@ public class MyArrayList implements Array {
             }
         } else {
             for (int i = this.size - 1; i >= 0; i--) {
-                if (array[i].equals(o)) {
+                if (o.equals(array[i])) {
                     return i;
                 }
             }
@@ -137,7 +137,7 @@ public class MyArrayList implements Array {
         return bufString;
     }
 
-    public boolean remove(Object o) { // ? почему не String?
+    public boolean remove(Object o) { //todo переделать как в linkedList
         if (o == null && this.contains(null)) {
             remove(indexOf(null));
             return true;
