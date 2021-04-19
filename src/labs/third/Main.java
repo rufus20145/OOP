@@ -40,8 +40,6 @@ public class Main {
         tmp.clear();
         System.out.println(Arrays.asList(tmp.toArray()).toString() + " Here is cleared array.");
 
-        LinkedList<String> test22 = new LinkedList<>();
-        test22.isEmpty();
         MyLinkedList test = new MyLinkedList();
         MyLinkedList testAddAll = new MyLinkedList();
         testAddAll.add("1");
