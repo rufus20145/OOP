@@ -1,6 +1,6 @@
 package src.labs.third.interfaces;
 
-interface Map {
+public interface Map {
 
     /**
      * Возвращает количество сопоставлений "ключ-значение" на этой карте.

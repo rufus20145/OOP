@@ -29,12 +29,12 @@ public class MyLinkedList implements Linked {
     }
 
     public void add(int index, String o) {
-        if (index == 0) {
+        if (index > size) {
+            throw new IndexOutOfBoundsException("Invalid index " + index);
+        } else if (index == 0) {
             Node currNode = new Node(o, firstElement);
             firstElement = currNode;
             ++size;
-        } else if (index > size) {
-            throw new IndexOutOfBoundsException("Invalid index " + index);
         } else {
             Node prevNode = firstElement;
             for (int i = 0; i < index - 1; i++) {
@@ -73,7 +73,6 @@ public class MyLinkedList implements Linked {
             outBuffer.add(currNode.element);
         }
         return outBuffer.toArray();
-
     }
 
     public int size() {
