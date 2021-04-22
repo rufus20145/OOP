@@ -2,6 +2,7 @@ package src.labs.third;
 
 import java.util.Arrays;
 
+import src.labs.third.interfaces.*;
 import src.labs.third.interfaces.Map;
 
 public class Main {
@@ -92,8 +93,21 @@ public class Main {
         System.out.println(firstMap.containsValue(111)); // false
         System.out.println(firstMap.containsValue(123)); // true
         System.out.println("Is this map empty? - " + firstMap.isEmpty() + ". It`s size is " + firstMap.size());
+
+        for (String string : firstMap.getAllKeys()) {
+            System.out.print(string + " ");
+        } 
+        System.out.println();  
+
+        for (Integer integer : firstMap.getAllValues()) {
+            System.out.print(integer + " ");
+        } 
+        System.out.println();
+
         firstMap.clear();
         System.out.println("Is this map empty? - " + firstMap.isEmpty() + ". It`s size is " + firstMap.size());
+
+        
 
     }
 }
