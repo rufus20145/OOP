@@ -71,13 +71,13 @@ public class Main {
 
         // System.out.println(Arrays.asList(test.subList(0, 5).toArray()).toString());
 
-        Map mapToPut = new MyHashMap();
+        MyHashMap mapToPut = new MyHashMap(2);
         mapToPut.put("test1", 12);
         mapToPut.put("test2", 123);
         mapToPut.put("test3", 1234);
         mapToPut.put("test4", 12345);
 
-        Map firstMap = new MyHashMap();
+        MyHashMap firstMap = new MyHashMap(1);
         System.out.println("Is this map empty? - " + firstMap.isEmpty() + ". It`s size is " + firstMap.size());
         System.out.println(firstMap.put("testString", 111)); // null, т.к. там ничего не было
         System.out.println(firstMap.put("testString", 222)); // 111, т.к. совпадают ключи

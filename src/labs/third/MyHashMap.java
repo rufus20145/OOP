@@ -7,20 +7,29 @@ import src.labs.third.interfaces.Map;
 public class MyHashMap implements Map {
 
     private static final int DEFAULT_CAPACITY = 16;
-    private static final int HASH_CONSTANT = 5124;
+    private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
 
     private Node[] baskets;
     private int size;
-    private final int initCapacity;
+    private int initCapacity;
+    private double maxUsagePercent;
 
     public MyHashMap() {
-        this(DEFAULT_CAPACITY);
+        this(DEFAULT_CAPACITY, DEFAULT_MAX_USAGE_PERCENT);
     }
 
     public MyHashMap(int initCapacity) {
-        baskets = new Node[initCapacity];
-        this.initCapacity = initCapacity;
+        this(initCapacity, DEFAULT_MAX_USAGE_PERCENT);
+    }
 
+    public MyHashMap(int initCapacity, double maxUsagePercent) {
+        if (initCapacity < 1) {
+            throw new IllegalArgumentException("initCapacity must be greater than 0");
+        } else {
+            baskets = new Node[initCapacity];
+            this.initCapacity = initCapacity;
+            this.maxUsagePercent = maxUsagePercent;
+        }
     }
 
     @Override
@@ -46,6 +55,9 @@ public class MyHashMap implements Map {
                 currNode = currNode.next;
             } while (currNode != null);
         }
+        if (size > initCapacity * maxUsagePercent) {
+            baskets = resize();
+        }
         return null;
     }
 
@@ -60,6 +72,23 @@ public class MyHashMap implements Map {
                 } while (node != null);
             }
         }
+    }
+
+    private Node[] resize() {
+        Node[] oldBaskets = baskets;
+        initCapacity *= 2;
+        Node[] newBaskets = new Node[initCapacity];
+
+        for (int i = 0; i < oldBaskets.length; i++) {
+            if (oldBaskets[i] != null) {
+                Node currNode = baskets[i];
+                do {
+                    newBaskets[currNode.getHash() % newBaskets.length] = currNode;
+                    currNode = currNode.next;
+                } while (currNode != null);
+            }
+        }
+        return newBaskets;
     }
 
     @Override
@@ -158,7 +187,6 @@ public class MyHashMap implements Map {
                 hash += (int) digit * keyLength--; // -- здесь специально для уменьшения
                                                    // keyLength после использования
             }
-            hash = hash % HASH_CONSTANT;
         }
         return hash;
     }
@@ -188,6 +216,10 @@ public class MyHashMap implements Map {
 
         public Integer getValue() {
             return value;
+        }
+
+        public int getHash() {
+            return hash;
         }
     }
 }
