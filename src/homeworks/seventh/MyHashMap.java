@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class MyHashMap {
+public class MyHashMap<K, V> {
 
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
 
-    HashSet<Node> allNodes = new HashSet<>();
+    HashSet<Node<K, V>> allNodes = new HashSet<>();
 
-    private Node[] baskets;
+    private Node<K, V>[] baskets;
     private int size;
     private int initCapacity;
     private double maxUsagePercent;
@@ -24,6 +24,7 @@ public class MyHashMap {
         this(initCapacity, DEFAULT_MAX_USAGE_PERCENT);
     }
 
+    @SuppressWarnings("unchecked")
     public MyHashMap(int initCapacity, double maxUsagePercent) {
         if (initCapacity < 1) {
             throw new IllegalArgumentException("initCapacity must be greater than 0");
@@ -34,22 +35,21 @@ public class MyHashMap {
         }
     }
 
-    @Override
-    public Integer put(String key, Integer value) {
+    public V put(K key, V value) {
         int hash = computeHash(key);
 
-        Node newNode = new Node(hash, key, value, null);
+        Node<K, V> newNode = new Node<>(hash, key, value, null);
         allNodes.add(newNode);
 
         if (baskets[hash % baskets.length] == null) {
             baskets[hash % baskets.length] = newNode;
             ++size;
         } else {
-            Node currNode = baskets[hash % baskets.length];
+            Node<K, V> currNode = baskets[hash % baskets.length];
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
-                    Integer prevValue = currNode.setValue(value);
-                    
+                    V prevValue = currNode.setValue(value);
+
                     allNodes.remove(newNode);
 
                     return prevValue;
@@ -68,10 +68,8 @@ public class MyHashMap {
         return null;
     }
 
-    @Override
-    public void putAll(Map map) {
-        MyHashMap map2 = (MyHashMap) map;
-        for (Node node : map2.baskets) {
+    public void putAll(MyHashMap<K, V> map) {
+        for (Node<K, V> node : map.baskets) {
             if (node != null) {
                 do {
                     put(node.getKey(), node.getValue());
@@ -81,19 +79,20 @@ public class MyHashMap {
         }
     }
 
-    private Node[] resize() {
-        Node[] oldBaskets = baskets;
+    @SuppressWarnings("unchecked")
+    private Node<K, V>[] resize() {
+        Node<K, V>[] oldBaskets = baskets;
         initCapacity *= 2;
-        Node[] newBaskets = new Node[initCapacity];
+        Node<K, V>[] newBaskets = new Node[initCapacity];
 
         for (int i = 0; i < oldBaskets.length; i++) {
             if (oldBaskets[i] != null) {
-                Node currNode = oldBaskets[i];
+                Node<K, V> currNode = oldBaskets[i];
                 do {
                     if (newBaskets[currNode.getHash() % newBaskets.length] == null) {
                         newBaskets[currNode.getHash() % newBaskets.length] = currNode;
                     } else {
-                        Node nodeToComplete = newBaskets[currNode.getHash() % newBaskets.length];
+                        Node<K, V> nodeToComplete = newBaskets[currNode.getHash() % newBaskets.length];
                         do {
                             if (nodeToComplete.next == null) {
                                 nodeToComplete.next = currNode;
@@ -109,16 +108,15 @@ public class MyHashMap {
         return newBaskets;
     }
 
-    @Override
-    public Integer remove(String key) {
+    public V remove(K key) {
         int hash = computeHash(key);
 
         if (baskets[hash % baskets.length] != null) {
-            Node currNode = baskets[hash % baskets.length];
-            Node prevNode = null;
+            Node<K, V> currNode = baskets[hash % baskets.length];
+            Node<K, V> prevNode = null;
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
-                    Integer removedValue = currNode.value;
+                    V removedValue = currNode.value;
 
                     allNodes.remove(currNode);
 
@@ -137,22 +135,19 @@ public class MyHashMap {
         return null;
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
-    public boolean containsKey(String key) {
+    public boolean containsKey(K key) {
         int hash = computeHash(key);
 
         if (baskets[hash % baskets.length] != null) {
-            Node currNode = baskets[hash % baskets.length];
+            Node<K, V> currNode = baskets[hash % baskets.length];
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
                     return true;
@@ -163,9 +158,8 @@ public class MyHashMap {
         return false;
     }
 
-    @Override
-    public boolean containsValue(Integer value) {
-        for (Node currNode : baskets) {
+    public boolean containsValue(V value) {
+        for (Node<K, V> currNode : baskets) {
             if (currNode != null) {
                 do {
                     if (Objects.equals(currNode.getValue(), value)) {
@@ -178,12 +172,11 @@ public class MyHashMap {
         return false;
     }
 
-    @Override
-    public Integer get(String key) {
+    public V get(K key) {
         int hash = computeHash(key);
 
         if (baskets[hash % baskets.length] != null) {
-            Node currNode = baskets[hash % baskets.length];
+            Node<K, V> currNode = baskets[hash % baskets.length];
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
                     return currNode.getValue();
@@ -194,64 +187,58 @@ public class MyHashMap {
         return null;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
     public void clear() {
         size = 0;
         baskets = new Node[initCapacity];
     }
 
-    public String[] getAllKeys() {
-        ArrayList<String> tmp = new ArrayList<>();
-        for (Node node : allNodes) {
+    @SuppressWarnings("unchecked")
+    public K[] getAllKeys() {
+        ArrayList<K> tmp = new ArrayList<>();
+        for (Node<K, V> node : allNodes) {
             tmp.add(node.getKey());
         }
-        return tmp.toArray(new String[0]);
+        return (K[]) tmp.toArray();
     }
 
-    public Integer[] getAllValues() {
-        ArrayList<Integer> tmp = new ArrayList<>();
-        for (Node node : allNodes) {
+    @SuppressWarnings("unchecked")
+    public V[] getAllValues() {
+        ArrayList<V> tmp = new ArrayList<>();
+        for (Node<K, V> node : allNodes) {
             tmp.add(node.getValue());
         }
-        return tmp.toArray(new Integer[0]);
+        return (V[]) tmp.toArray();
     }
 
-    private static int computeHash(String key) {
-        int hash = 0;
-        if (key != null) {
-            int keyLength = key.length();
-            for (char digit : key.toCharArray()) {
-                hash += (int) digit * keyLength--; // -- здесь специально для уменьшения
-                                                   // keyLength после использования
-            }
-        }
-        return hash;
+    private int computeHash(K key) {
+        return Objects.hashCode(key);
     }
 
-    public static class Node {
+    public static class Node<K, V> {
         private int hash;
-        private String key;
-        private Integer value;
-        private Node next;
+        private K key;
+        private V value;
+        private Node<K, V> next;
 
-        public Node(int hash, String key, Integer value, Node next) {
+        public Node(int hash, K key, V value, Node<K, V> next) {
             this.hash = hash;
             this.key = key;
             this.value = value;
             this.next = next;
         }
 
-        public Integer setValue(Integer newValue) {
-            Integer prevValue = this.value;
+        public V setValue(V newValue) {
+            V prevValue = this.value;
             this.value = newValue;
             return prevValue;
         }
 
-        public String getKey() {
+        public K getKey() {
             return key;
         }
 
-        public Integer getValue() {
+        public V getValue() {
             return value;
         }
 
