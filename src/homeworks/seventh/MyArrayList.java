@@ -1,24 +1,25 @@
-package src.homeworks.eighth;
+package src.homeworks.seventh;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-import src.homeworks.eighth.interfaces.Array;
+import src.homeworks.seventh.interfaces.Array;
 
-public class MyArrayList<T> implements Array {
+public class MyArrayList<T> implements Array<T> {
     private static final int DEFAULT_CAPACITY = 10;
     private static final int SIZE_MULTIPLIER = 2;
 
-    private T[] array;
+    private Object[] array;
     private int size;
 
     public MyArrayList() {
-        this.array = new T[DEFAULT_CAPACITY]; //todo поправить создание массива
+        this.array = new Object[DEFAULT_CAPACITY];
         this.size = 0;
     }
 
     public MyArrayList(int initSize) {
         if (initSize > 0) {
-            this.array = new T[initSize];
+            this.array = new Object[initSize];
             this.size = 0;
         } else {
             throw new IllegalArgumentException("Неверный размер массива" + initSize);
@@ -30,11 +31,8 @@ public class MyArrayList<T> implements Array {
         return true;
     }
 
-    public void add(int index, T element) { // почему один add бул, а второй войд?
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException("Индекс добавляемого элемента не может быть больше размера"
-                    + "(только меньше или равен). index = " + index + "size = " + size);
-        }
+    public void add(int index, T element) {
+        checkIndex(index);
         if (size == array.length) {
             array = Arrays.copyOf(array, array.length * SIZE_MULTIPLIER);
         }
@@ -43,19 +41,22 @@ public class MyArrayList<T> implements Array {
         ++size;
     }
 
-    public boolean addAll(Array c) {
+    @SuppressWarnings("unchecked")
+    public boolean addAll(Array<T> c) {
         int prevSize = this.size;
-        for (String string : c.toArray()) {
-            add(string);
+        for (Object o : c.toArray()) {
+            add((T) o);
         }
         return this.size != prevSize;
     }
 
-    public boolean addAll(int index, Array c) {
+    @SuppressWarnings("unchecked")
+    public boolean addAll(int index, Array<T> c) {
+        checkIndex(index);
         int prevSize = this.size;
-        String[] temp = c.toArray();
+        Object[] temp = c.toArray();
         for (int i = 0; i < temp.length; i++) {
-            add(index + i, temp[i]);
+            add(index + i, (T) temp[i]);
         }
         return this.size != prevSize;
     }
@@ -68,7 +69,7 @@ public class MyArrayList<T> implements Array {
         return size == 0;
     }
 
-    public int indexOf(String o) {
+    public int indexOf(T o) {
         if (o == null) {
             for (int i = 0; i < this.size; ++i) {
                 if (this.array[i] == null) {
@@ -85,7 +86,7 @@ public class MyArrayList<T> implements Array {
         return -1;
     }
 
-    public int lastIndexOf(String o) {
+    public int lastIndexOf(T o) {
         if (o == null) {
             for (int i = this.size - 1; i >= 0; i--) {
                 if (this.array[i] == null) {
@@ -102,69 +103,73 @@ public class MyArrayList<T> implements Array {
         return -1;
     }
 
-    public boolean contains(String o) {
+    public boolean contains(T o) {
         return indexOf(o) != -1;
     }
 
-    public boolean containsAll(Array c) {
-        for (String string : c.toArray()) {
-            if (!this.contains(string)) {
+    @SuppressWarnings("unchecked")
+    public boolean containsAll(Array<T> c) {
+        for (Object o : c.toArray()) {
+            if (!this.contains((T) o)) {
                 return false;
             }
         }
         return true;
     }
 
-    public String get(int index) {
-        return array[index];
+    @SuppressWarnings("unchecked")
+    public T get(int index) {
+        checkIndex(index);
+        return (T) array[index];
     }
 
-    public String[] toArray() {
-        return Arrays.copyOf(this.array, this.size);
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        return (T[]) Arrays.copyOf(this.array, this.size);
     }
 
-    public String set(int index, String element) {
-        String bufString = this.array[index];
+    @SuppressWarnings("unchecked")
+    public T set(int index, T element) {
+        checkIndex(index);
+        T bufElement = (T) this.array[index];
         this.array[index] = element;
-        return bufString;
+        return bufElement;
     }
 
-    public String remove(int index) {
-        String bufString = this.array[index];
+    @SuppressWarnings("unchecked")
+    public T remove(int index) {
+        checkIndex(index);
+        T bufString = (T) this.array[index];
         --size;
         System.arraycopy(array, index + 1, array, index, size - index);
         array[size] = null;
         return bufString;
     }
 
-    public boolean remove(Object o) { //todo переделать как в linkedList
-        if (o == null && this.contains(null)) {
-            remove(indexOf(null));
-            return true;
-        } else {
-            for (int i = 0; i < this.size; i++) {
-                if (this.array[i].equals(o)) {
-                    remove(i);
-                    return true;
-                }
+    public boolean remove(Object o) {
+        for (int i = 0; i < this.size; i++) {
+            if (Objects.equals(o, get(i))) {
+                remove(i);
+                return true;
             }
         }
         return false;
     }
 
-    public boolean removeAll(Array c) {
+    public boolean removeAll(Array<T> c) {
         int prevSize = this.size;
-        for (String string : c.toArray()) {
-            remove(string);
+        for (Object o : c.toArray()) {
+            remove(o);
         }
         return this.size != prevSize;
     }
 
-    public Array subList(int fromIndex, int toIndex) {
-        Array buffer = new MyArrayList();
+    @SuppressWarnings("unchecked")
+    public Array<T> subList(int fromIndex, int toIndex) {
+        Array<T> buffer = new MyArrayList<>();
         for (int i = 0; i < this.size; i++) {
             if (i >= fromIndex && i < toIndex) {
-                buffer.add(this.array[i]);
+                buffer.add((T) this.array[i]);
             }
         }
         return buffer;
@@ -173,6 +178,12 @@ public class MyArrayList<T> implements Array {
     public void clear() {
         array = new String[DEFAULT_CAPACITY];
         size = 0;
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is bigger than size " + size);
+        }
     }
 
 }

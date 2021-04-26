@@ -1,4 +1,4 @@
-package src.homeworks.eighth.interfaces;
+package src.homeworks.seventh.interfaces;
 
 public interface Array<T> {
 
@@ -28,7 +28,7 @@ public interface Array<T> {
      *          список
      * @return истина, если этот список изменился в результате вызова
      */
-    boolean addAll(T[] c);
+    boolean addAll(Array<T> c);
 
     /**
      * Вставляет все элементы указанной коллекции в этот список в указанную позицию.
@@ -43,7 +43,7 @@ public interface Array<T> {
      *              список
      * @return истина, если этот список изменился в результате вызова
      */
-    boolean addAll(int index, T[] c);
+    boolean addAll(int index, Array<T> c);
 
     /**
      * Возвращает количество элементов в этом списке. Если этот список содержит
@@ -100,7 +100,7 @@ public interface Array<T> {
      * @param c - коллекция, подлежащая проверке на наличие в этом списке
      * @return истина, если этот список содержит все элементы указанной коллекции
      */
-    boolean containsAll(T[] c);
+    boolean containsAll(Array<T> c);
 
     /**
      * Возвращает элемент в указанной позиции в этом списке.
@@ -122,7 +122,7 @@ public interface Array<T> {
      * @return массив, содержащий все элементы в этом списке в правильной
      *         последовательности
      */
-    T[] toArray();
+    Object[] toArray();
 
     /**
      * Удаляет все элементы из этого списка. Список будет пустым после того, как
@@ -171,7 +171,7 @@ public interface Array<T> {
      * @param toIndex   высокая конечная точка (исключая) подсписка
      * @return вид указанного диапазона в этом списке
      */
-    T[] subList(int fromIndex, int toIndex);
+    Array<T> subList(int fromIndex, int toIndex);
 
     /**
      * Удаляет из этого списка все его элементы, содержащиеся в указанной коллекции.
@@ -180,5 +180,5 @@ public interface Array<T> {
      *          списка
      * @return истина, если этот список изменился в результате вызова
      */
-    boolean removeAll(T[] c);
+    boolean removeAll(Array<T> c);
 }
