@@ -1,12 +1,10 @@
-package src.homeworks.eighth;
+package src.homeworks.seventh;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-import src.labs.third.interfaces.Map;
-
-public class MyHashMap implements Map {
+public class MyHashMap {
 
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
