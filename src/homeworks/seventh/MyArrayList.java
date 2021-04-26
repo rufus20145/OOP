@@ -3,9 +3,7 @@ package src.homeworks.seventh;
 import java.util.Arrays;
 import java.util.Objects;
 
-import src.homeworks.seventh.interfaces.Array;
-
-public class MyArrayList<T> implements Array<T> {
+public class MyArrayList<T> {
     private static final int DEFAULT_CAPACITY = 10;
     private static final int SIZE_MULTIPLIER = 2;
 
@@ -42,7 +40,7 @@ public class MyArrayList<T> implements Array<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean addAll(Array<T> c) {
+    public boolean addAll(MyArrayList<T> c) {
         int prevSize = this.size;
         for (Object o : c.toArray()) {
             add((T) o);
@@ -51,7 +49,7 @@ public class MyArrayList<T> implements Array<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean addAll(int index, Array<T> c) {
+    public boolean addAll(int index, MyArrayList<T> c) {
         checkIndex(index);
         int prevSize = this.size;
         Object[] temp = c.toArray();
@@ -108,7 +106,7 @@ public class MyArrayList<T> implements Array<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean containsAll(Array<T> c) {
+    public boolean containsAll(MyArrayList<T> c) {
         for (Object o : c.toArray()) {
             if (!this.contains((T) o)) {
                 return false;
@@ -156,7 +154,7 @@ public class MyArrayList<T> implements Array<T> {
         return false;
     }
 
-    public boolean removeAll(Array<T> c) {
+    public boolean removeAll(MyArrayList<T> c) {
         int prevSize = this.size;
         for (Object o : c.toArray()) {
             remove(o);
@@ -165,8 +163,8 @@ public class MyArrayList<T> implements Array<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public Array<T> subList(int fromIndex, int toIndex) {
-        Array<T> buffer = new MyArrayList<>();
+    public MyArrayList<T> subList(int fromIndex, int toIndex) {
+        MyArrayList<T> buffer = new MyArrayList<>();
         for (int i = 0; i < this.size; i++) {
             if (i >= fromIndex && i < toIndex) {
                 buffer.add((T) this.array[i]);
