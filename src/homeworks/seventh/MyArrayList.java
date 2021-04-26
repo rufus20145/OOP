@@ -176,7 +176,7 @@ public class MyArrayList<T> implements Array<T> {
     }
 
     public void clear() {
-        array = new String[DEFAULT_CAPACITY];
+        array = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
