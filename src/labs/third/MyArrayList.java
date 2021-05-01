@@ -30,11 +30,9 @@ public class MyArrayList implements Array {
         return true;
     }
 
-    public void add(int index, String element) { // почему один add бул, а второй войд?
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException("Индекс добавляемого элемента не может быть больше размера"
-                    + "(только меньше или равен). index = " + index + "size = " + size);
-        }
+    public void add(int index, String element) {
+        checkIndex(index);
+
         if (size == array.length) {
             array = Arrays.copyOf(array, array.length * SIZE_MULTIPLIER);
         }
@@ -52,6 +50,8 @@ public class MyArrayList implements Array {
     }
 
     public boolean addAll(int index, Array c) {
+        checkIndex(index);
+
         int prevSize = this.size;
         String[] temp = c.toArray();
         for (int i = 0; i < temp.length; i++) {
@@ -116,6 +116,8 @@ public class MyArrayList implements Array {
     }
 
     public String get(int index) {
+        checkIndex(index);
+
         return array[index];
     }
 
@@ -124,12 +126,16 @@ public class MyArrayList implements Array {
     }
 
     public String set(int index, String element) {
+        checkIndex(index);
+
         String bufString = this.array[index];
         this.array[index] = element;
         return bufString;
     }
 
     public String remove(int index) {
+        checkIndex(index);
+        
         String bufString = this.array[index];
         --size;
         System.arraycopy(array, index + 1, array, index, size - index);
@@ -137,7 +143,7 @@ public class MyArrayList implements Array {
         return bufString;
     }
 
-    public boolean remove(Object o) { //todo переделать как в linkedList
+    public boolean remove(Object o) { // todo переделать как в linkedList
         if (o == null && this.contains(null)) {
             remove(indexOf(null));
             return true;
@@ -175,4 +181,12 @@ public class MyArrayList implements Array {
         size = 0;
     }
 
+    private void checkIndex(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is bigger than size " + size);
+        }
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Index " + index + " is below zero");
+        }
+    }
 }

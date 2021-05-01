@@ -212,7 +212,7 @@ public class MyHashMap<K, V> {
     }
 
     private int computeHash(K key) {
-        return Objects.hashCode(key);
+        return Math.abs(Objects.hashCode(key));
     }
 
     public static class Node<K, V> {
