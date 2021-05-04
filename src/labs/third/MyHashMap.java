@@ -27,8 +27,8 @@ public class MyHashMap implements Map {
     }
 
     public MyHashMap(int initCapacity, double maxUsagePercent) {
-        if (initCapacity < 1) {
-            throw new IllegalArgumentException("initCapacity must be greater than 0");
+        if (initCapacity < 1 || maxUsagePercent < 0 || maxUsagePercent > 1) {
+            throw new IllegalArgumentException("Check your arguments.");
         } else {
             baskets = new Node[initCapacity];
             this.initCapacity = initCapacity;
@@ -40,7 +40,7 @@ public class MyHashMap implements Map {
     public Integer put(String key, Integer value) {
         int hash = computeHash(key);
 
-        Node newNode = new Node(hash, key, value, null);
+        Node newNode = new Node(hash, key, value);
         allNodes.add(newNode);
 
         if (baskets[hash % baskets.length] == null) {
@@ -236,11 +236,10 @@ public class MyHashMap implements Map {
         private Integer value;
         private Node next;
 
-        public Node(int hash, String key, Integer value, Node next) {
+        public Node(int hash, String key, Integer value) {
             this.hash = hash;
             this.key = key;
             this.value = value;
-            this.next = next;
         }
 
         public Integer setValue(Integer newValue) {
