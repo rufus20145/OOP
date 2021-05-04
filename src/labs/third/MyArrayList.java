@@ -1,6 +1,7 @@
 package src.labs.third;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import src.labs.third.interfaces.Array;
 
@@ -9,17 +10,15 @@ public class MyArrayList implements Array {
     private static final int SIZE_MULTIPLIER = 2;
 
     private String[] array;
-    private int size;
+    private int size = 0;
 
     public MyArrayList() {
-        this.array = new String[DEFAULT_CAPACITY];
-        this.size = 0;
+        this(DEFAULT_CAPACITY);
     }
 
     public MyArrayList(int initSize) {
         if (initSize > 0) {
             this.array = new String[initSize];
-            this.size = 0;
         } else {
             throw new IllegalArgumentException("Неверный размер массива" + initSize);
         }
@@ -31,7 +30,7 @@ public class MyArrayList implements Array {
     }
 
     public void add(int index, String element) {
-        checkIndex(index);
+        checkIndexForAdd(index);
 
         if (size == array.length) {
             array = Arrays.copyOf(array, array.length * SIZE_MULTIPLIER);
@@ -43,19 +42,18 @@ public class MyArrayList implements Array {
 
     public boolean addAll(Array c) {
         int prevSize = this.size;
-        for (String string : c.toArray()) {
-            add(string);
+        for (int i = 0; i < c.size(); i++) {
+            add(c.get(i));
         }
         return this.size != prevSize;
     }
 
     public boolean addAll(int index, Array c) {
-        checkIndex(index);
+        checkIndexForAdd(index);
 
         int prevSize = this.size;
-        String[] temp = c.toArray();
-        for (int i = 0; i < temp.length; i++) {
-            add(index + i, temp[i]);
+        for (int i = 0; i < c.size(); i++) {
+            add(index + i, c.get(i));
         }
         return this.size != prevSize;
     }
@@ -69,36 +67,24 @@ public class MyArrayList implements Array {
     }
 
     public int indexOf(String o) {
-        if (o == null) {
-            for (int i = 0; i < this.size; ++i) {
-                if (this.array[i] == null) {
-                    return i;
-                }
-            }
-        } else {
-            for (int i = 0; i < this.size; i++) {
-                if (array[i].equals(o)) {
-                    return i;
-                }
+
+        for (int i = 0; i < this.size; i++) {
+            if (Objects.equals(array[i], o)) {
+                return i;
             }
         }
+
         return -1;
     }
 
     public int lastIndexOf(String o) {
-        if (o == null) {
-            for (int i = this.size - 1; i >= 0; i--) {
-                if (this.array[i] == null) {
-                    return i;
-                }
-            }
-        } else {
-            for (int i = this.size - 1; i >= 0; i--) {
-                if (o.equals(array[i])) {
-                    return i;
-                }
+
+        for (int i = this.size - 1; i >= 0; i--) {
+            if (Objects.equals(array[i], o)) {
+                return i;
             }
         }
+
         return -1;
     }
 
@@ -107,8 +93,9 @@ public class MyArrayList implements Array {
     }
 
     public boolean containsAll(Array c) {
-        for (String string : c.toArray()) {
-            if (!this.contains(string)) {
+
+        for (int i = 0; i < c.size(); i++) {
+            if(!contains(c.get(i))) {
                 return false;
             }
         }
@@ -135,7 +122,7 @@ public class MyArrayList implements Array {
 
     public String remove(int index) {
         checkIndex(index);
-        
+
         String bufString = this.array[index];
         --size;
         System.arraycopy(array, index + 1, array, index, size - index);
@@ -143,16 +130,11 @@ public class MyArrayList implements Array {
         return bufString;
     }
 
-    public boolean remove(Object o) { // todo переделать как в linkedList
-        if (o == null && this.contains(null)) {
-            remove(indexOf(null));
-            return true;
-        } else {
-            for (int i = 0; i < this.size; i++) {
-                if (this.array[i].equals(o)) {
-                    remove(i);
-                    return true;
-                }
+    public boolean remove(Object o) {
+        for (int i = 0; i < this.size; i++) {
+            if (Objects.equals(array[i], o)) {
+                remove(i);
+                return true;
             }
         }
         return false;
@@ -160,8 +142,8 @@ public class MyArrayList implements Array {
 
     public boolean removeAll(Array c) {
         int prevSize = this.size;
-        for (String string : c.toArray()) {
-            remove(string);
+        for (int i = 0; i < c.size(); i++) {
+            remove(c.get(i));
         }
         return this.size != prevSize;
     }
@@ -183,6 +165,15 @@ public class MyArrayList implements Array {
 
     private void checkIndex(int index) {
         if (index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is bigger than size " + size);
+        }
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Index " + index + " is below zero");
+        }
+    }
+
+    private void checkIndexForAdd(int index) {
+        if (index > size) {
             throw new IndexOutOfBoundsException("Index " + index + " is bigger than size " + size);
         }
         if (index < 0) {
