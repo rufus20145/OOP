@@ -29,9 +29,9 @@ public class MyLinkedList implements Linked {
     }
 
     public void add(int index, String o) {
-        if (index > size) {
-            throw new IndexOutOfBoundsException("Invalid index " + index);
-        } else if (index == 0) {
+        checkIndexForAdd(index);
+
+        if (index == 0) {
             Node currNode = new Node(o, firstElement);
             firstElement = currNode;
             ++size;
@@ -51,28 +51,30 @@ public class MyLinkedList implements Linked {
 
     public boolean addAll(Linked c) {
         int prevSize = this.size;
-        for (String string : c.toArray()) {
-            add(string);
+        for (int i = 0; i < c.size(); i++) {
+            add(c.get(i));
         }
         return this.size == prevSize;
     }
 
     public boolean addAll(int index, Linked c) {
+        checkIndexForAdd(index);
+
         int prevSize = this.size;
-        String[] tmpArray = c.toArray();
-        for (int i = 0; i < tmpArray.length; i++) {
-            add(index + i, tmpArray[i]);
+        for (int i = 0; i < c.size(); i++) {
+            add(index + i, c.get(i));
         }
         return this.size == prevSize;
     }
 
     public String[] toArray() {
-        MyArrayList outBuffer = new MyArrayList();
+        String[] outBuffer = new String[size];
 
-        for (Node currNode = firstElement; currNode != null; currNode = currNode.nextElement) {
-            outBuffer.add(currNode.element);
+        for (int i = 0; i < size; i++) {
+            outBuffer[i] = get(i);
         }
-        return outBuffer.toArray();
+
+        return outBuffer;
     }
 
     public int size() {
@@ -85,53 +87,37 @@ public class MyLinkedList implements Linked {
 
     @Override
     public int indexOf(String o) {
-        int index = 0;
-        if (o == null) {
-            for (Node currNode = firstElement; currNode != null; currNode = currNode.nextElement) {
-                if (currNode.element == null) {
-                    return index;
-                }
-                ++index;
-            }
-        } else {
-            for (Node currNode = firstElement; currNode != null; currNode = currNode.nextElement) {
-                if (o.equals(currNode.element)) {
-                    return index;
-                }
-                ++index;
+        int index = -1;
+
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(get(i), o)) {
+                return i;
             }
         }
-        return -1;
+        return index;
     }
 
     @Override
     public int lastIndexOf(String o) {
-        String[] tmp = this.toArray();
-        if (o == null) {
-            for (int i = tmp.length - 1; i >= 0; i--) {
-                if (tmp[i] == null) {
-                    return i;
-                }
-            }
-        } else {
-            for (int i = tmp.length - 1; i >= 0; i--) {
-                if (o.equals(tmp[i])) {
-                    return i;
-                }
+        int index = -1;
+
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(get(i), o)) {
+                index = i;
             }
         }
-        return -1;
+        return index;
     }
 
     @Override
     public boolean contains(String o) {
-        return indexOf(o) >= 0;
+        return indexOf(o) != -1;
     }
 
     @Override
     public boolean containsAll(Linked c) {
-        for (String string : c.toArray()) {
-            if (!contains(string)) {
+        for (int i = 0; i < c.size(); i++) {
+            if (!contains(c.get(i))) {
                 return false;
             }
         }
@@ -147,41 +133,39 @@ public class MyLinkedList implements Linked {
 
     @Override
     public String get(int index) {
-        if (index > size) {
-            throw new IndexOutOfBoundsException("Too big index" + index);
-        } else {
-            Node currNode = firstElement;
-            for (int i = 0; i < index; i++) {
-                currNode = currNode.nextElement;
-            }
-            return currNode.element;
+        checkIndex(index);
+
+        Node currNode = firstElement;
+        for (int i = 0; i < index; i++) {
+            currNode = currNode.nextElement;
         }
+        return currNode.element;
+
     }
 
     @Override
     public String set(int index, String element) {
-        if (index > size) {
-            throw new IndexOutOfBoundsException("Too big index" + index);
-        } else {
-            Node currNode = firstElement;
-            for (int i = 0; i < index; i++) {
-                currNode = currNode.nextElement;
-            }
-            String buffer = currNode.element;
-            currNode.element = element;
-            return buffer;
+        checkIndex(index);
+
+        Node currNode = firstElement;
+        for (int i = 0; i < index; i++) {
+            currNode = currNode.nextElement;
         }
+        String buffer = currNode.element;
+        currNode.element = element;
+        return buffer;
+
     }
 
     @Override
     public String remove(int index) {
+        checkIndex(index);
+
         if (index == 0) {
             String buffer = firstElement.element;
             firstElement = firstElement.nextElement;
             --size;
             return buffer;
-        } else if (index > size) {
-            throw new IndexOutOfBoundsException("Invalid index " + index);
         } else {
             Node prevNode = firstElement;
             for (int i = 0; i < index - 1; i++) {
@@ -211,8 +195,8 @@ public class MyLinkedList implements Linked {
     @Override
     public boolean removeAll(Linked c) {
         int prevSize = this.size;
-        for (String string : c.toArray()) {
-            remove(string);
+        for (int i = 0; i < c.size(); i++) {
+            remove(c.get(i));
         }
         return this.size != prevSize;
     }
@@ -233,6 +217,24 @@ public class MyLinkedList implements Linked {
             }
 
             return buffer;
+        }
+    }
+
+    private void checkIndex(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is bigger than size " + size);
+        }
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Index " + index + " is below zero");
+        }
+    }
+
+    private void checkIndexForAdd(int index) {
+        if (index > size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is bigger than size " + size);
+        }
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Index " + index + " is below zero");
         }
     }
 
