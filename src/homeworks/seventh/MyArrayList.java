@@ -3,7 +3,8 @@ package src.homeworks.seventh;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MyArrayList<T> {
+import src.homeworks.seventh.interfaces.Array;
+public class MyArrayList<T> implements Array<T>{
     private static final int DEFAULT_CAPACITY = 10;
     private static final int SIZE_MULTIPLIER = 2;
 
@@ -40,7 +41,7 @@ public class MyArrayList<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean addAll(MyArrayList<T> c) {
+    public boolean addAll(Array<T> c) {
         int prevSize = this.size;
         for (Object o : c.toArray()) {
             add((T) o);
@@ -49,7 +50,7 @@ public class MyArrayList<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean addAll(int index, MyArrayList<T> c) {
+    public boolean addAll(int index, Array<T> c) {
         checkIndex(index);
         int prevSize = this.size;
         Object[] temp = c.toArray();
@@ -106,7 +107,7 @@ public class MyArrayList<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean containsAll(MyArrayList<T> c) {
+    public boolean containsAll(Array<T> c) {
         for (Object o : c.toArray()) {
             if (!this.contains((T) o)) {
                 return false;
@@ -154,7 +155,7 @@ public class MyArrayList<T> {
         return false;
     }
 
-    public boolean removeAll(MyArrayList<T> c) {
+    public boolean removeAll(Array<T> c) {
         int prevSize = this.size;
         for (Object o : c.toArray()) {
             remove(o);

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class MyHashMap<K, V> {
+import src.homeworks.seventh.interfaces.Map;
+
+public class MyHashMap<K, V> implements Map<K, V> {
 
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
@@ -68,14 +70,19 @@ public class MyHashMap<K, V> {
         return null;
     }
 
-    public void putAll(MyHashMap<K, V> map) {
-        for (Node<K, V> node : map.baskets) {
-            if (node != null) {
-                do {
-                    put(node.getKey(), node.getValue());
-                    node = node.next;
-                } while (node != null);
+    public void putAll(Map<K, V> map) {
+        if (map instanceof MyHashMap) {
+            MyHashMap<K, V> map2 = (MyHashMap<K, V>) map;
+            for (Node<K, V> node : map2.baskets) {
+                if (node != null) {
+                    do {
+                        put(node.getKey(), node.getValue());
+                        node = node.next;
+                    } while (node != null);
+                }
             }
+        } else {
+            throw new IllegalArgumentException("Argument is not of type MyHashMap");
         }
     }
 

@@ -2,7 +2,9 @@ package src.homeworks.seventh;
 
 import java.util.Objects;
 
-public class MyLinkedList<T> {
+import src.homeworks.seventh.interfaces.Linked;
+
+public class MyLinkedList<T> implements Linked<T>{
 
     private Node<T> firstElement;
     private Node<T> lastElement;
@@ -47,7 +49,7 @@ public class MyLinkedList<T> {
         }
     }
 
-    public boolean addAll(MyLinkedList<T> c) {
+    public boolean addAll(Linked<T> c) {
         int prevSize = this.size;
         for (T t : c.toArray()) {
             add(t);
@@ -55,7 +57,7 @@ public class MyLinkedList<T> {
         return this.size == prevSize;
     }
 
-    public boolean addAll(int index, MyLinkedList<T> c) {
+    public boolean addAll(int index, Linked<T> c) {
         int prevSize = this.size;
         T[] tmpArray = c.toArray();
         for (int i = 0; i < tmpArray.length; i++) {
@@ -106,7 +108,7 @@ public class MyLinkedList<T> {
         return indexOf(o) >= 0;
     }
 
-    public boolean containsAll(MyLinkedList<T> c) {
+    public boolean containsAll(Linked<T> c) {
         for (T t : c.toArray()) {
             if (!contains(t)) {
                 return false;
@@ -180,7 +182,7 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    public boolean removeAll(MyLinkedList<T> c) {
+    public boolean removeAll(Linked<T> c) {
         int prevSize = this.size;
         for (T t : c.toArray()) {
             remove(t);
