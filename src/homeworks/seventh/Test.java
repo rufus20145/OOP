@@ -1,8 +1,6 @@
 package src.homeworks.seventh;
 
-import java.util.Arrays;
-
-public class Main {
+public class Test {
     public static void main(String[] args) {
         // MyArrayList<Integer> tempArrayList = new MyArrayList<>();
         // tempArrayList.add(1);

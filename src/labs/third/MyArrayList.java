@@ -67,7 +67,6 @@ public class MyArrayList implements Array {
     }
 
     public int indexOf(String o) {
-
         for (int i = 0; i < this.size; i++) {
             if (Objects.equals(array[i], o)) {
                 return i;
@@ -78,7 +77,6 @@ public class MyArrayList implements Array {
     }
 
     public int lastIndexOf(String o) {
-
         for (int i = this.size - 1; i >= 0; i--) {
             if (Objects.equals(array[i], o)) {
                 return i;
@@ -93,9 +91,8 @@ public class MyArrayList implements Array {
     }
 
     public boolean containsAll(Array c) {
-
         for (int i = 0; i < c.size(); i++) {
-            if(!contains(c.get(i))) {
+            if (!contains(c.get(i))) {
                 return false;
             }
         }
