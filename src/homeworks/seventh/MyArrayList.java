@@ -107,8 +107,8 @@ public class MyArrayList<T> implements Array<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public T[] toArray() {
-        return (T[]) Arrays.copyOf(this.array, this.size);
+    public Object[] toArray() {
+        return Arrays.copyOf(this.array, this.size);
     }
 
     @SuppressWarnings("unchecked")
