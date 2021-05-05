@@ -28,8 +28,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
     @SuppressWarnings("unchecked")
     public MyHashMap(int initCapacity, double maxUsagePercent) {
-        if (initCapacity < 1) {
-            throw new IllegalArgumentException("initCapacity must be greater than 0");
+        if (initCapacity < 1 || maxUsagePercent < 0 || maxUsagePercent > 1) {
+            throw new IllegalArgumentException("Check your arguments.");
         } else {
             baskets = new Node[initCapacity];
             this.initCapacity = initCapacity;
@@ -37,10 +37,11 @@ public class MyHashMap<K, V> implements Map<K, V> {
         }
     }
 
+    @Override
     public V put(K key, V value) {
         int hash = computeHash(key);
 
-        Node<K, V> newNode = new Node<>(hash, key, value, null);
+        Node<K, V> newNode = new Node<>(hash, key, value);
         allNodes.add(newNode);
 
         if (baskets[hash % baskets.length] == null) {
@@ -70,6 +71,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
+    @Override
     public void putAll(Map<K, V> map) {
         if (map instanceof MyHashMap) {
             MyHashMap<K, V> map2 = (MyHashMap<K, V>) map;
@@ -115,6 +117,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return newBaskets;
     }
 
+    @Override
     public V remove(K key) {
         int hash = computeHash(key);
 
@@ -142,14 +145,17 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public boolean containsKey(K key) {
         int hash = computeHash(key);
 
@@ -165,6 +171,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return false;
     }
 
+    @Override
     public boolean containsValue(V value) {
         for (Node<K, V> currNode : baskets) {
             if (currNode != null) {
@@ -179,6 +186,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return false;
     }
 
+    @Override
     public V get(K key) {
         int hash = computeHash(key);
 
@@ -194,28 +202,27 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return null;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public void clear() {
         size = 0;
         baskets = new Node[initCapacity];
     }
 
-    @SuppressWarnings("unchecked")
-    public K[] getAllKeys() {
+    public Object[] getAllKeys() {
         ArrayList<K> tmp = new ArrayList<>();
         for (Node<K, V> node : allNodes) {
             tmp.add(node.getKey());
         }
-        return (K[]) tmp.toArray();
+        return tmp.toArray();
     }
 
-    @SuppressWarnings("unchecked")
-    public V[] getAllValues() {
+    public Object[] getAllValues() {
         ArrayList<V> tmp = new ArrayList<>();
         for (Node<K, V> node : allNodes) {
             tmp.add(node.getValue());
         }
-        return (V[]) tmp.toArray();
+        return tmp.toArray();
     }
 
     private int computeHash(K key) {
@@ -228,11 +235,10 @@ public class MyHashMap<K, V> implements Map<K, V> {
         private V value;
         private Node<K, V> next;
 
-        public Node(int hash, K key, V value, Node<K, V> next) {
+        public Node(int hash, K key, V value) {
             this.hash = hash;
             this.key = key;
             this.value = value;
-            this.next = next;
         }
 
         public V setValue(V newValue) {
