@@ -15,6 +15,7 @@ public class MyLinkedList implements Linked {
         // конструктор по умолчанию
     }
 
+    @Override
     public boolean add(String o) {
         Node last = lastElement;
         Node newNode = new Node(o, null);
@@ -28,6 +29,7 @@ public class MyLinkedList implements Linked {
         return true;
     }
 
+    @Override
     public void add(int index, String o) {
         checkIndexForAdd(index);
 
@@ -49,6 +51,7 @@ public class MyLinkedList implements Linked {
         }
     }
 
+    @Override
     public boolean addAll(Linked c) {
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
@@ -57,6 +60,7 @@ public class MyLinkedList implements Linked {
         return this.size == prevSize;
     }
 
+    @Override
     public boolean addAll(int index, Linked c) {
         checkIndexForAdd(index);
 
@@ -67,6 +71,7 @@ public class MyLinkedList implements Linked {
         return this.size == prevSize;
     }
 
+    @Override
     public String[] toArray() {
         String[] outBuffer = new String[size];
 
