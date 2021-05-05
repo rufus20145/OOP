@@ -203,21 +203,23 @@ public class MyLinkedList implements Linked {
 
     @Override
     public Linked subList(int fromIndex, int toIndex) {
-        if (fromIndex > toIndex || fromIndex > size || toIndex > size) {
-            throw new IndexOutOfBoundsException("Check your indexes");
-        } else {
-            Linked buffer = new MyLinkedList();
-            Node currNode = firstElement;
-            for (int i = 0; i < fromIndex - 1; i++) {
-                currNode = currNode.nextElement;
-            }
-            for (int i = fromIndex; i < toIndex; i++) {
-                buffer.add(currNode.element);
-                currNode = currNode.nextElement;
-            }
-
-            return buffer;
+        checkIndex(fromIndex);
+        checkIndex(toIndex);
+        if (fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("fromIndex is bigger than toIndex");
         }
+
+        Linked buffer = new MyLinkedList();
+        Node currNode = firstElement;
+        for (int i = 0; i < fromIndex - 1; i++) {
+            currNode = currNode.nextElement;
+        }
+        for (int i = fromIndex; i < toIndex; i++) {
+            buffer.add(currNode.element);
+            currNode = currNode.nextElement;
+        }
+
+        return buffer;
     }
 
     private void checkIndex(int index) {
