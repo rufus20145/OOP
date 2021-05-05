@@ -1,8 +1,8 @@
 package src.controls.second.task_c;
 
-public class FilterForNumbers implements Filter {
+public class FilterForNumbers<T> implements Filter<T> {
 
-    public static boolean apply() {
+    public boolean apply(T o) {
         return true;
     }
 }
