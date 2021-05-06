@@ -35,7 +35,7 @@ public class Main {
         } while (isInProgramm);
     }
 
-    static void enterElementToArray() {
+    static void enterElementToCollection() {
         
     }
 }
