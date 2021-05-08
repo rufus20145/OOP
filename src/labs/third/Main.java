@@ -44,7 +44,7 @@ public class Main {
         do {
             System.out.println("Введите элемент коллекции (для map ключ и значение на двух строках): ");
 
-            element = getString(input);
+            element = getStringValue(input);
 
             if (element.equals("END")) {
                 break;
@@ -58,8 +58,8 @@ public class Main {
                     linkedList.add(element);
                     break;
                 case MAP:
-                    Integer value = getInt(input);
-                    getString(input);
+                    Integer value = getIntValue(input);
+                    getStringValue(input);
                     hashMap.put(element, value);
                     break;
                 default:
@@ -72,7 +72,7 @@ public class Main {
         switch (collection) {
             case ARRAY_LIST:
                 System.out.println(arrayList.size() + "\nВывести все элементы структуры?");
-                if (getString(input).equals("YES")) {
+                if (getStringValue(input).equals("YES")) {
                     for (String string : arrayList.toArray()) {
                         System.out.println(string);
                     }
@@ -80,7 +80,7 @@ public class Main {
                 break;
             case LINKED_LIST:
                 System.out.println(linkedList.size() + "\nВывести все элементы структуры?");
-                if (getString(input).equals("YES")) {
+                if (getStringValue(input).equals("YES")) {
                     for (String string : linkedList.toArray()) {
                         System.out.println(string);
                     }
@@ -88,7 +88,7 @@ public class Main {
                 break;
             case MAP:
                 System.out.println(hashMap.size() + "\nВывести все элементы структуры?");
-                if (getString(input).equals("YES")) {
+                if (getStringValue(input).equals("YES")) {
                     for (Node node : hashMap.allNodes) {
                         System.out.println(node.getKey() + " -> " + node.getValue());
                     }
@@ -100,26 +100,26 @@ public class Main {
         }
 
         System.out.println("Вывести элемент по индексу или ключу?");
-        if (getString(input).equals("YES")) {
+        if (getStringValue(input).equals("YES")) {
             long startTime = 0;
             long finishTime = 0;
             int index;
             String key;
             switch (collection) {
                 case ARRAY_LIST:
-                    index = getInt(input);
+                    index = getIntValue(input);
                     startTime = System.currentTimeMillis();
                     System.out.println(arrayList.get(index));
                     finishTime = System.currentTimeMillis();
                     break;
                 case LINKED_LIST:
-                    index = getInt(input);
+                    index = getIntValue(input);
                     startTime = System.currentTimeMillis();
                     System.out.println(linkedList.get(index));
                     finishTime = System.currentTimeMillis();
                     break;
                 case MAP:
-                    key = getString(input);
+                    key = getStringValue(input);
                     startTime = System.currentTimeMillis();
                     System.out.println(hashMap.get(key));
                     finishTime = System.currentTimeMillis();
@@ -134,7 +134,7 @@ public class Main {
         input.close();
     }
 
-    private static String getString(Scanner input) {
+    private static String getStringValue(Scanner input) {
         boolean exceptionCaught = false;
         String inputString = null;
 
@@ -156,7 +156,7 @@ public class Main {
         return inputString;
     }
 
-    private static int getInt(Scanner input) {
+    private static int getIntValue(Scanner input) {
         int value = 0;
         boolean exceptionCaught = false;
 
