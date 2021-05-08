@@ -18,7 +18,7 @@ public class Main {
         Category laptops = new Category();
         Category computers = new Category();
 
-        User admin = new User("admin", "admin");
+        User admin = new User("admin", "someStrongPassword_123");
 
         System.out.println(
                 "Введите продуктов, которые подходят в категорию ПК (цена и рейтинг будут заданы автоматически):");
@@ -36,6 +36,9 @@ public class Main {
             admin.addProductToUserBasket(productToAdd);
             input.nextLine();
         }
+
+        smartphones.addProduct(null);
+        laptops.getName();
 
         
         System.out.println("Все операции выполнены успешно.");
