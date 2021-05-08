@@ -18,5 +18,6 @@ public class TaskC {
                 break;
             }
         }
+        input.close();
     }
 }

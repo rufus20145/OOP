@@ -38,6 +38,7 @@ public class TaskB {
         }
 
         System.out.println(String.format("%.1f", totalArea));
+        input.close();
     }
 
     static double getDistance(double x1, double y1, double x2, double y2) {

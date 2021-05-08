@@ -3,6 +3,9 @@ package src.controls.second.task_c;
 public class FilterForNumbers<T> implements Filter<T> {
 
     public boolean apply(T o) {
-        return true;
+        if(o instanceof Number) {
+            return this == o;
+        }
+        return false;
     }
 }
