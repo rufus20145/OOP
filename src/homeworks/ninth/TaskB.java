@@ -18,7 +18,7 @@ public class TaskB {
         for (int i = 0; i < massive.length; i++) {
             for (int j = 0; j < massive[i].length; j++) {
                 if (massive[i][j] == 0) {
-                    temp.add(getSize(massive, i, j));
+                    temp.add(getSize(massive, i, j, 0));
                 }
             }
         }
@@ -30,17 +30,26 @@ public class TaskB {
         return result;
     }
 
-    private static int getSize(int[][] massive, int i, int j) {
+    private static int getSize(int[][] massive, int i, int j, int numberOfIteration) {
         int size = 0;
 
         if (i < massive.length && j < massive[i].length) {
+            if (numberOfIteration > Math.max(massive.length, massive[i].length)) {
+                return 0;
+            }
             if (massive[i][j] == 0) {
                 size++;
                 if (i < massive.length) {
-                    size += getSize(massive, i + 1, j);
+                    size += getSize(massive, i + 1, j, numberOfIteration + 1);
                 }
                 if (i < massive.length && j < massive[i].length) {
-                    size += getSize(massive, i, j + 1);
+                    size += getSize(massive, i, j + 1, numberOfIteration + 1);
+                }
+                if (i > 0) {
+                    size += getSize(massive, i - 1, j, numberOfIteration + 1);
+                }
+                if (j > 0) {
+                    size += getSize(massive, i, j - 1, numberOfIteration + 1);
                 }
             }
             massive[i][j] = -1;
