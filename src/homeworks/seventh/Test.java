@@ -109,5 +109,16 @@ public class Test {
         MyHashMap<String, String> map = new MyHashMap<>();
         map.put("О второй живой", "Артём");
 
+        System.out.println("проверка integer");
+        MyLinkedList<Integer> intTest = new MyLinkedList<>();
+        intTest.add(1);
+        intTest.add(2);
+        intTest.add(3);
+        intTest.add(0);
+        System.out.println(intTest.remove(0));
+        System.out.println(intTest.remove((Integer) 3));
+        System.out.println(intTest.remove(1));
+        
+
     }
 }
