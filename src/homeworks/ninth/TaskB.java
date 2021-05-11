@@ -8,7 +8,12 @@ public class TaskB {
         // как-то мы получили этот массив
         int[][] massive = { { 0, 1, 1, 0, 1 }, { 0, 1, 0, 1, 1 }, { 1, 1, 0, 1, 0 }, { 0, 1, 0, 1, 0 },
                 { 0, 1, 0, 0, 1 } };
+        int[][] massive2 = { { 1, 1, 0, 1, 1 }, { 1, 1, 0, 1, 1 }, { 0, 0, 0, 0, 0 }, { 1, 1, 0, 1, 1 },
+                { 1, 1, 0, 1, 1 } };
         int[] result = findCavities(massive);
+        Arrays.sort(result);
+        System.out.println(Arrays.toString(result));
+        result = findCavities(massive2);
         Arrays.sort(result);
         System.out.println(Arrays.toString(result));
     }
@@ -39,6 +44,7 @@ public class TaskB {
             }
             if (massive[i][j] == 0) {
                 size++;
+                massive[i][j] = -1;
                 if (i < massive.length) {
                     size += getSize(massive, i + 1, j, numberOfIteration + 1);
                 }
@@ -52,7 +58,7 @@ public class TaskB {
                     size += getSize(massive, i, j - 1, numberOfIteration + 1);
                 }
             }
-            massive[i][j] = -1;
+
         }
         return size;
     }
