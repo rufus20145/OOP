@@ -9,16 +9,17 @@ public class MyArrayList<T> implements Array<T> {
     private static final int DEFAULT_CAPACITY = 10;
     private static final int SIZE_MULTIPLIER = 2;
 
-    private Object[] array;
+    private T[] array;
     private int size = 0;
 
     public MyArrayList() {
         this(DEFAULT_CAPACITY);
     }
 
+    @SuppressWarnings("unchecked")
     public MyArrayList(int initSize) {
         if (initSize > 0) {
-            this.array = new Object[initSize];
+            this.array = (T[]) new Object[initSize];
         } else {
             throw new IllegalArgumentException("Неверный размер массива" + initSize);
         }
@@ -99,31 +100,28 @@ public class MyArrayList<T> implements Array<T> {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     public T get(int index) {
         checkIndex(index);
 
-        return (T) array[index];
+        return array[index];
     }
 
     public Object[] toArray() {
         return Arrays.copyOf(this.array, this.size);
     }
 
-    @SuppressWarnings("unchecked")
     public T set(int index, T element) {
         checkIndex(index);
 
-        T bufElement = (T) this.array[index];
+        T bufElement = this.array[index];
         this.array[index] = element;
         return bufElement;
     }
 
-    @SuppressWarnings("unchecked")
     public T remove(int index) {
         checkIndex(index);
 
-        T bufString = (T) this.array[index];
+        T bufString = this.array[index];
         --size;
         System.arraycopy(array, index + 1, array, index, size - index);
         array[size] = null;
@@ -148,19 +146,19 @@ public class MyArrayList<T> implements Array<T> {
         return this.size != prevSize;
     }
 
-    @SuppressWarnings("unchecked")
     public Array<T> subList(int fromIndex, int toIndex) {
         Array<T> buffer = new MyArrayList<>();
         for (int i = 0; i < this.size; i++) {
             if (i >= fromIndex && i < toIndex) {
-                buffer.add((T) this.array[i]);
+                buffer.add(this.array[i]);
             }
         }
         return buffer;
     }
 
+    @SuppressWarnings("unchecked")
     public void clear() {
-        array = new Object[DEFAULT_CAPACITY];
+        array = (T[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 

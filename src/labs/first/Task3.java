@@ -11,7 +11,7 @@ public class Task3 {
         String myText = null;
         String[] sentences;
         Scanner input = new Scanner(System.in);
-        Boolean flag = true;
+        boolean flag = true;
         String vocals = "aeiouy";
         String consonants = "bcdfghjklmnpqrstvwxz";
 

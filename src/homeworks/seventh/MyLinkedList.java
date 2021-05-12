@@ -145,7 +145,6 @@ public class MyLinkedList<T> implements Linked<T> {
             currNode = currNode.nextElement;
         }
         return currNode.element;
-
     }
 
     @Override

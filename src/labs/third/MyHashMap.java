@@ -51,7 +51,7 @@ public class MyHashMap implements Map {
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
                     Integer prevValue = currNode.setValue(value);
-                    
+
                     allNodes.remove(newNode);
 
                     return prevValue;
@@ -72,14 +72,18 @@ public class MyHashMap implements Map {
 
     @Override
     public void putAll(Map map) {
-        MyHashMap map2 = (MyHashMap) map;
-        for (Node node : map2.baskets) {
-            if (node != null) {
-                do {
-                    put(node.getKey(), node.getValue());
-                    node = node.next;
-                } while (node != null);
+        if (map instanceof MyHashMap) {
+            MyHashMap map2 = (MyHashMap) map;
+            for (Node node : map2.baskets) {
+                if (node != null) {
+                    do {
+                        put(node.getKey(), node.getValue());
+                        node = node.next;
+                    } while (node != null);
+                }
             }
+        } else {
+            throw new IllegalArgumentException("Argument is not of type MyHashMap");
         }
     }
 

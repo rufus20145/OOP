@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        MyArrayList<Integer> tempArrayList = new MyArrayList<>();
-        tempArrayList.add(1);
-        tempArrayList.add(2);
-        tempArrayList.add(1, 3);
+        MyArrayList<String> tempArrayList = new MyArrayList<>();
+        tempArrayList.add("1");
+        tempArrayList.add("2");
+        tempArrayList.add(1, "3");
         tempArrayList.add(0, null);
         System.out.println(Arrays.asList(tempArrayList.toArray()).toString());
 

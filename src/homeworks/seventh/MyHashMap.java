@@ -219,9 +219,15 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
     public Object[] getAllValues() {
         ArrayList<V> tmp = new ArrayList<>();
-        for (Node<K, V> node : allNodes) {
-            tmp.add(node.getValue());
+        for (Node<K, V> currNode : baskets) {
+            if (currNode != null) {
+                do {
+                    tmp.add(currNode.getValue());
+                    currNode = currNode.next;
+                } while (currNode != null);
+            }
         }
+
         return tmp.toArray();
     }
 
