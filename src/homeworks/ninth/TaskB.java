@@ -5,16 +5,22 @@ import java.util.Arrays;
 
 public class TaskB {
     public static void main(String[] args) {
-        // как-то мы получили этот массив
+        // как-то мы получили эти массив
         int[][] massive = { { 0, 1, 1, 0, 1 }, { 0, 1, 0, 1, 1 }, { 1, 1, 0, 1, 0 }, { 0, 1, 0, 1, 0 },
                 { 0, 1, 0, 0, 1 } };
         int[][] massive2 = { { 1, 1, 0, 1, 1 }, { 1, 1, 0, 1, 1 }, { 0, 0, 0, 0, 0 }, { 1, 1, 0, 1, 1 },
                 { 1, 1, 0, 1, 1 } };
+        int[][] massive3 = { { 0, 0, 0, 0, 0 }, { 1, 1, 0, 1, 1 }, { 0, 0, 0, 0, 0 }, { 1, 1, 0, 1, 1 },
+                { 0, 0, 0, 0, 0 } };
+        int[][] massive4 = { { 0, 1, 0, 0, 0 }, { 1, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0 } };
         int[] result = findCavities(massive);
-        Arrays.sort(result);
         System.out.println(Arrays.toString(result));
         result = findCavities(massive2);
-        Arrays.sort(result);
+        System.out.println(Arrays.toString(result));
+        result = findCavities(massive3);
+        System.out.println(Arrays.toString(result));
+        result = findCavities(massive4);
         System.out.println(Arrays.toString(result));
     }
 
@@ -32,6 +38,7 @@ public class TaskB {
         for (int i = 0; i < temp.size(); i++) {
             result[i] = temp.get(i);
         }
+        Arrays.sort(result);
         return result;
     }
 
@@ -39,7 +46,7 @@ public class TaskB {
         int size = 0;
 
         if (i < massive.length && j < massive[i].length) {
-            if (numberOfIteration > Math.max(massive.length, massive[i].length)) {
+            if (numberOfIteration > Math.max(massive.length * massive.length, massive[i].length * massive[i].length)) {
                 return 0;
             }
             if (massive[i][j] == 0) {
@@ -58,7 +65,6 @@ public class TaskB {
                     size += getSize(massive, i, j - 1, numberOfIteration + 1);
                 }
             }
-
         }
         return size;
     }
