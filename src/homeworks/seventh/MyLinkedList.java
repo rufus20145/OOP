@@ -2,7 +2,7 @@ package src.homeworks.seventh;
 
 import java.util.Objects;
 
-import homeworks.seventh.interfaces.Linked;
+import src.homeworks.seventh.interfaces.Linked;
 
 public class MyLinkedList<T> implements Linked<T> {
 
