@@ -1,15 +1,28 @@
 package src.homeworks.seventh;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
+        ArrayList<String> test321 = new ArrayList<>();
+        test321.add("1");
+        test321.add(1, "3");
+        test321.add("2");
+        test321.add(0, null);
+        String[] test1233 = test321.toArray(new String[0]);
+        System.out.println(Arrays.toString(test1233));
+
+        System.out.println(true);
         MyArrayList<String> tempArrayList = new MyArrayList<>();
         tempArrayList.add("1");
         tempArrayList.add("2");
         tempArrayList.add(1, "3");
         tempArrayList.add(0, null);
         System.out.println(Arrays.asList(tempArrayList.toArray()).toString());
+        String[] test123 = tempArrayList.toArray(new String[0]);
+        System.out.println(Arrays.toString(test123));
 
         MyArrayList<String> secondArrayList = new MyArrayList<>(2);
         MyArrayList<String> arrayListToAddAll = new MyArrayList<>(2);
@@ -118,7 +131,6 @@ public class Test {
         System.out.println(intTest.remove(0));
         System.out.println(intTest.remove((Integer) 3));
         System.out.println(intTest.remove(1));
-        
 
     }
 }

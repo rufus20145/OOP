@@ -110,6 +110,12 @@ public class MyArrayList<T> implements Array<T> {
         return Arrays.copyOf(this.array, this.size);
     }
 
+    @SuppressWarnings("unchecked")
+    public T[] toArray(T[] a) {
+
+        return (T[]) Arrays.copyOf(this.array, this.size, a.getClass());
+    }
+
     public T set(int index, T element) {
         checkIndex(index);
 
