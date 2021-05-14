@@ -1,4 +1,4 @@
-package controls.second.task_c;
+package src.controls.second.task_c;
 
 public class Main {
     public static void main(String[] args) {

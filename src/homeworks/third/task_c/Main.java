@@ -1,4 +1,4 @@
-package homeworks.third.task_c;
+package src.homeworks.third.task_c;
 
 public class Main {
     public static void main(String[] args) {

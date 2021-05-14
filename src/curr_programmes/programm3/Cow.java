@@ -1,4 +1,4 @@
-package curr_programmes.programm3;
+package src.curr_programmes.programm3;
 
 public class Cow implements Sound {
     public void voice() {

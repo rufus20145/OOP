@@ -1,8 +1,8 @@
-package labs.third;
+package src.labs.third;
 
 import java.util.Objects;
 
-import labs.third.interfaces.Linked;
+import src.labs.third.interfaces.Linked;
 
 public class MyLinkedList implements Linked {
 

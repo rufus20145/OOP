@@ -1,4 +1,4 @@
-package curr_programmes.programm3;
+package src.curr_programmes.programm3;
 
 public abstract class Animals implements TypeOfTransport, Sound {
 

@@ -1,4 +1,4 @@
-package homeworks.seventh.interfaces;
+package src.homeworks.seventh.interfaces;
 
 public interface Map<K,V> {
 

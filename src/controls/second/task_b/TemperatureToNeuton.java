@@ -1,4 +1,4 @@
-package controls.second.task_b;
+package src.controls.second.task_b;
 
 public class TemperatureToNeuton implements Converter{
     

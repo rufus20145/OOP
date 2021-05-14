@@ -1,4 +1,4 @@
-package homeworks.sixth;
+package src.homeworks.sixth;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;

@@ -1,4 +1,4 @@
-package controls.first;
+package src.controls.first;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;

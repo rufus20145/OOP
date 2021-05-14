@@ -1,4 +1,4 @@
-package labs.third.interfaces;
+package src.labs.third.interfaces;
 
 public interface Array {
 

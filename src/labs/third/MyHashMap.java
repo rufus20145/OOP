@@ -1,10 +1,10 @@
-package labs.third;
+package src.labs.third;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-import labs.third.interfaces.Map;
+import src.labs.third.interfaces.Map;
 
 public class MyHashMap implements Map {
 

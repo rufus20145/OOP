@@ -1,4 +1,4 @@
-package homeworks.third.task_d;
+package src.homeworks.third.task_d;
 
 import java.util.Objects;
 

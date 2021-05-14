@@ -1,10 +1,10 @@
-package labs.third;
+package src.labs.third;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import labs.third.MyHashMap.Node;
+import src.labs.third.MyHashMap.Node;
 
 public class Main {
     private static final String ARRAY_LIST = "ARRAY";

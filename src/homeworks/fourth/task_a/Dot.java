@@ -1,4 +1,4 @@
-package homeworks.fourth.task_a;
+package src.homeworks.fourth.task_a;
 
 import java.util.Locale;
 

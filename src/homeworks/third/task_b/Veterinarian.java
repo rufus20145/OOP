@@ -1,4 +1,4 @@
-package homeworks.third.task_b;
+package src.homeworks.third.task_b;
 
 public class Veterinarian {
 
