@@ -1,4 +1,4 @@
-package src.homeworks.ninth;
+package homeworks.ninth;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

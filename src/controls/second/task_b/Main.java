@@ -1,4 +1,4 @@
-package src.controls.second.task_b;
+package controls.second.task_b;
 
 import java.util.Scanner;
 

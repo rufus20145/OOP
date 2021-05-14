@@ -1,4 +1,4 @@
-package src.controls.second.task_c;
+package controls.second.task_c;
 
 public class FilterForString<T> implements Filter<T> {
 

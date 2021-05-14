@@ -1,9 +1,9 @@
-package src.labs.third;
+package labs.third;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import src.labs.third.interfaces.Array;
+import labs.third.interfaces.Array;
 
 public class MyArrayList implements Array {
     private static final int DEFAULT_CAPACITY = 10;

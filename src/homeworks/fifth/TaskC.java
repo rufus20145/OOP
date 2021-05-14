@@ -1,4 +1,4 @@
-package src.homeworks.fifth;
+package homeworks.fifth;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;

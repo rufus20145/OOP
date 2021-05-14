@@ -1,4 +1,4 @@
-package src.homeworks.second;
+package homeworks.second;
 
 /**
  * В консоли вводятся десять чисел от 0 до 9 включительно (каждое число вводится на отдельной строке).

@@ -1,4 +1,4 @@
-package src.labs.first;
+package labs.first;
 
 /**
  * Найти и напечатать, сколько раз повторяется в тексте каждое слово.

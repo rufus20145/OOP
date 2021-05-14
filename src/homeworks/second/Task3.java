@@ -1,4 +1,4 @@
-package src.homeworks.second;
+package homeworks.second;
 
 /**
  * Вводится строка из произвольных символов. Необходимо вывести на консоль

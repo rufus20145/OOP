@@ -1,4 +1,4 @@
-package src.controls.second.task_b;
+package controls.second.task_b;
 
 public class TemperatureToFarenheit implements Converter{
     

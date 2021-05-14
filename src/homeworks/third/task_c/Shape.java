@@ -1,4 +1,4 @@
-package src.homeworks.third.task_c;
+package homeworks.third.task_c;
 
 public abstract class Shape {
 

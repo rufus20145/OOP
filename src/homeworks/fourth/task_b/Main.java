@@ -1,4 +1,4 @@
-package src.homeworks.fourth.task_b;
+package homeworks.fourth.task_b;
 
 import java.util.InputMismatchException;
 import java.util.Locale;

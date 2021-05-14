@@ -1,4 +1,4 @@
-package src.homeworks.third.task_b;
+package homeworks.third.task_b;
 
 /**
  * Создать класс Animal и расширяющие его классы Dog, Cat, Horse. Класс Animal

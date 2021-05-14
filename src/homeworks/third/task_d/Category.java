@@ -1,4 +1,4 @@
-package src.homeworks.third.task_d;
+package homeworks.third.task_d;
 
 import java.util.ArrayList;
 import java.util.List;
