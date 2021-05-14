@@ -1,4 +1,4 @@
-package src.homeworks.second;
+package homeworks.second;
 
 /**
  * В консоль вводятся три числа с обязательной дробной частью. Необходимо найти

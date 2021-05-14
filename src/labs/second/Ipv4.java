@@ -1,4 +1,4 @@
-package src.labs.second;
+package labs.second;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;

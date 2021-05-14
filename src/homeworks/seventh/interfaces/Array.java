@@ -1,4 +1,4 @@
-package src.homeworks.seventh.interfaces;
+package homeworks.seventh.interfaces;
 
 public interface Array<T> {
 

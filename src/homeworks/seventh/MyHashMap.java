@@ -1,10 +1,10 @@
-package src.homeworks.seventh;
+package homeworks.seventh;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-import src.homeworks.seventh.interfaces.Map;
+import homeworks.seventh.interfaces.Map;
 
 public class MyHashMap<K, V> implements Map<K, V> {
 

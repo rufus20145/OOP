@@ -1,4 +1,4 @@
-package src.curr_programmes.programm1.ru.mai.kaf;
+package curr_programmes.programm1.ru.mai.kaf;
 
 public class Run {
     String name;

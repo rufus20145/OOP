@@ -1,4 +1,4 @@
-package src.controls.first;
+package controls.first;
 
 import java.util.Scanner;
 

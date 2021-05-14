@@ -1,4 +1,4 @@
-package src.homeworks.seventh;
+package homeworks.seventh;
 
 
 import java.util.ArrayList;

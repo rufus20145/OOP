@@ -1,4 +1,4 @@
-package src.curr_programmes.programm3;
+package curr_programmes.programm3;
 
 public class Dog extends Animals {
 

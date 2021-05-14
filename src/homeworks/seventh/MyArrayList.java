@@ -1,9 +1,9 @@
-package src.homeworks.seventh;
+package homeworks.seventh;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import src.homeworks.seventh.interfaces.Array;
+import homeworks.seventh.interfaces.Array;
 
 public class MyArrayList<T> implements Array<T> {
     private static final int DEFAULT_CAPACITY = 10;

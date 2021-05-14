@@ -1,4 +1,4 @@
-package src.controls.second;
+package controls.second;
 
 import java.util.Scanner;
 
