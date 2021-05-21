@@ -1,7 +1,5 @@
 package src.homeworks.seventh;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 
 import src.homeworks.seventh.interfaces.Map;
@@ -10,6 +8,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
+    private static final int SIZE_MULTIPLIER = 2;
 
     private Node<K, V>[] baskets;
     private int size;
@@ -86,7 +85,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
     @SuppressWarnings("unchecked")
     private Node<K, V>[] resize() {
         Node<K, V>[] oldBaskets = baskets;
-        initCapacity *= 2;
+        initCapacity *= SIZE_MULTIPLIER;
         Node<K, V>[] newBaskets = new Node[initCapacity];
 
         for (int i = 0; i < oldBaskets.length; i++) {
