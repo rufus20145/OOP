@@ -11,8 +11,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
 
-    HashSet<Node<K, V>> allNodes = new HashSet<>();
-
     private Node<K, V>[] baskets;
     private int size;
     private int initCapacity;
@@ -42,7 +40,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
         int hash = computeHash(key);
 
         Node<K, V> newNode = new Node<>(hash, key, value);
-        allNodes.add(newNode);
 
         if (baskets[hash % baskets.length] == null) {
             baskets[hash % baskets.length] = newNode;
@@ -52,8 +49,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
                     V prevValue = currNode.setValue(value);
-
-                    allNodes.remove(newNode);
 
                     return prevValue;
                 }
@@ -127,8 +122,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
                     V removedValue = currNode.value;
-
-                    allNodes.remove(currNode);
 
                     if (prevNode == null) {
                         baskets[hash % baskets.length] = currNode.next;
@@ -209,26 +202,36 @@ public class MyHashMap<K, V> implements Map<K, V> {
         baskets = new Node[initCapacity];
     }
 
-    public Object[] getAllKeys() {
-        ArrayList<K> tmp = new ArrayList<>();
-        for (Node<K, V> node : allNodes) {
-            tmp.add(node.getKey());
-        }
-        return tmp.toArray();
-    }
-
-    public Object[] getAllValues() {
-        ArrayList<V> tmp = new ArrayList<>();
+    @SuppressWarnings("unchecked")
+    public K[] getAllKeys() {
+        K[] tmp = (K[]) new Object[size];
+        int index = 0;
         for (Node<K, V> currNode : baskets) {
             if (currNode != null) {
                 do {
-                    tmp.add(currNode.getValue());
+                    tmp[index++] = currNode.getKey();
+                    currNode = currNode.next;
+                } while (currNode != null);
+            }
+        }
+        return tmp;
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public V[] getAllValues() {
+        V[] tmp = (V[]) new Object[size];
+        int index = 0;
+        for (Node<K, V> currNode : baskets) {
+            if (currNode != null) {
+                do {
+                    tmp[index++] = currNode.getValue();
                     currNode = currNode.next;
                 } while (currNode != null);
             }
         }
 
-        return tmp.toArray();
+        return tmp;
     }
 
     private int computeHash(K key) {
