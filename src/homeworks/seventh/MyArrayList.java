@@ -112,7 +112,6 @@ public class MyArrayList<T> implements Array<T> {
 
     @SuppressWarnings("unchecked")
     public T[] toArray(T[] a) {
-
         return (T[]) Arrays.copyOf(this.array, this.size, a.getClass());
     }
 

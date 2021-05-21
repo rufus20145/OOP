@@ -93,14 +93,18 @@ public class MyHashMap<K, V> implements Map<K, V> {
                 Node<K, V> currNode = oldBaskets[i];
                 do {
                     if (newBaskets[currNode.getHash() % newBaskets.length] == null) {
-                        newBaskets[currNode.getHash() % newBaskets.length] = currNode;
+                        newBaskets[currNode.getHash() % newBaskets.length] = new Node<>(currNode.getHash(),
+                                currNode.getKey(), currNode.getValue());
                     } else {
                         Node<K, V> nodeToComplete = newBaskets[currNode.getHash() % newBaskets.length];
                         do {
                             if (nodeToComplete.next == null) {
-                                nodeToComplete.next = currNode;
+                                nodeToComplete.next = new Node<>(currNode.getHash(), currNode.getKey(),
+                                        currNode.getValue());
+                                break;
                             }
                             nodeToComplete = nodeToComplete.next;
+
                         } while (nodeToComplete != null);
                     }
 
@@ -201,9 +205,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
         baskets = new Node[initCapacity];
     }
 
-    @SuppressWarnings("unchecked")
-    public K[] getAllKeys() {
-        K[] tmp = (K[]) new Object[size];
+    public Object[] getAllKeys() {
+        Object[] tmp = new Object[size];
         int index = 0;
         for (Node<K, V> currNode : baskets) {
             if (currNode != null) {
@@ -214,12 +217,10 @@ public class MyHashMap<K, V> implements Map<K, V> {
             }
         }
         return tmp;
-
     }
 
-    @SuppressWarnings("unchecked")
-    public V[] getAllValues() {
-        V[] tmp = (V[]) new Object[size];
+    public Object[] getAllValues() {
+        Object[] tmp = new Object[size];
         int index = 0;
         for (Node<K, V> currNode : baskets) {
             if (currNode != null) {
@@ -229,7 +230,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
                 } while (currNode != null);
             }
         }
-
         return tmp;
     }
 

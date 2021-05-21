@@ -1,8 +1,9 @@
 package src.homeworks.seventh;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import src.homeworks.seventh.interfaces.Map;
 
 public class Test {
     public static void main(String[] args) {
@@ -132,5 +133,12 @@ public class Test {
         System.out.println(intTest.remove((Integer) 3));
         System.out.println(intTest.remove(1));
 
+        Map<String, String> tettst = new MyHashMap<>(1);
+        tettst.put("String", "string");
+        tettst.put("string", "String");
+        tettst.put("sstring", "String");
+        tettst.put("sString", "string");
+        tettst.put("ssssstring", "String");
+        tettst.put("ssstring", "String");
     }
 }
