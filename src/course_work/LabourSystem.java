@@ -36,9 +36,9 @@ public class LabourSystem {
         int iteration = 0;
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Вы хотите считать последовательность команд из файла?");
-        if (getStringValue(in).equalsIgnoreCase(YES_STRING)) {
-            if (args.length == 2 && (args[0].equalsIgnoreCase("-f") || args[0].equalsIgnoreCase("--file"))) {
+        if (args.length == 2 && (args[0].equalsIgnoreCase("-f") || args[0].equalsIgnoreCase("--file"))) {
+            System.out.println("Вы хотите считать последовательность команд из файла?");
+            if (getStringValue(in).equalsIgnoreCase(YES_STRING)) {
                 try (BufferedReader bufReader = new BufferedReader(new FileReader(args[1]))) {
                     String s;
                     while ((s = bufReader.readLine()) != null) {
@@ -47,9 +47,9 @@ public class LabourSystem {
                 } catch (IOException e) {
                     System.out.println("Файл не найден. Проверьте правильность имени и повторите попытку.");
                 }
+            } else {
+                System.out.println("Считывание команд из файла отменено.");
             }
-        } else {
-            System.out.println("Считывание команд из файла отменено.");
         }
 
         do {
