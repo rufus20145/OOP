@@ -8,23 +8,27 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Task2 {
+    private static final String SPLIT_REGEX = "\\!\\ |\\.\\ |\\.|\\ ";
+
     public static void main(String[] args) {
         String text;
-        String[] words, uniqueWords;
+        String[] words;
+        String[] uniqueWords;
         Scanner input;
-        int numberOfWords, numberOfUniqueWords = 0, currUniqueWord = 0, currWord;
+        int numberOfWords;
+        int numberOfUniqueWords = 0;
         int[] amountOfUniqueWords;
-        StringBuilder tempSB = new StringBuilder();
+        StringBuilder output = new StringBuilder();
 
         // ввод исходного текста
-        System.out.println("Enter your text: ");
+        System.out.println("Enter your sentence: ");
         input = new Scanner(System.in);
         text = input.nextLine();
         input.close();
 
         // разбиение текста на слова
-        words = text.split("\\!\\ |\\.\\ |\\.|\\ "); // сначала ищем последовательность ". ", потом ".", а затем " ". Это
-                                              // позволяет правильно разделять слова на границах предложений
+        words = text.split(SPLIT_REGEX); // сначала ищем последовательность ". ", потом ".", а затем " ". Это
+                                         // позволяет правильно разделять слова на границах предложений
         numberOfWords = words.length;
         uniqueWords = new String[numberOfWords];
         amountOfUniqueWords = new int[numberOfWords];
@@ -32,6 +36,8 @@ public class Task2 {
         // помещение слов, которые не встречались ранее, в словарь для будущего подсчета
         // их количества. Это также можно сделать, как мой подсчет количества слов чуть
         // ниже - с помощью двух циклов
+        int currWord;
+        int currUniqueWord = 0;
         for (currWord = 0; currWord < numberOfWords; currWord++) {
             if (!Arrays.asList(uniqueWords).contains((words[currWord].toLowerCase()))) {
                 uniqueWords[currUniqueWord] = words[currWord].toLowerCase();
@@ -40,7 +46,7 @@ public class Task2 {
         }
 
         // считаем количество вхождений каждого слова в исходный текст
-        numberOfUniqueWords = currUniqueWord; // см. 37 строку
+        numberOfUniqueWords = currUniqueWord; // см. 47 строку
         for (currUniqueWord = 0; currUniqueWord < numberOfUniqueWords; currUniqueWord++) {
             for (currWord = 0; currWord < numberOfWords; currWord++) {
                 if (uniqueWords[currUniqueWord].equalsIgnoreCase(words[currWord])) {
@@ -52,11 +58,11 @@ public class Task2 {
         // собственно вывод уникальных слов и их количества в тексте
         for (currUniqueWord = 0; currUniqueWord < numberOfUniqueWords; currUniqueWord++) {
             if (uniqueWords[currUniqueWord] != null) {
-                tempSB.append(String.format("%-20s", uniqueWords[currUniqueWord]));
-                tempSB.append(String.format("%-6s", amountOfUniqueWords[currUniqueWord]));
-                tempSB.append("\n");
+                output.append(String.format("%-20s", uniqueWords[currUniqueWord]));
+                output.append(String.format("%-6s", amountOfUniqueWords[currUniqueWord]));
+                output.append("\n");
             }
         }
-        System.out.println(tempSB.toString());
+        System.out.println(output.toString());
     }
 }

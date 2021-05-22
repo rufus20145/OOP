@@ -7,13 +7,14 @@ package src.labs.first;
 import java.util.Scanner;
 
 public class Task3 {
+    private static final String CONSONANTS = "bcdfghjklmnpqrstvwxz";
+    private static final String VOCALS = "aeiouy";
+
     public static void main(String[] args) {
         String myText = null;
         String[] sentences;
         Scanner input = new Scanner(System.in);
         boolean flag = true;
-        String vocals = "aeiouy";
-        String consonants = "bcdfghjklmnpqrstvwxz";
 
         System.out.println("Enter your text and then press enter.");
         do {
@@ -40,9 +41,9 @@ public class Task3 {
             currSentence = currSentence.replace(" ", "");
 
             for (char character : currSentence.toLowerCase().toCharArray()) {
-                if (vocals.contains((String.valueOf(character)))) {
+                if (VOCALS.contains((String.valueOf(character)))) {
                     ++numberOfVocals;
-                } else if (consonants.contains(String.valueOf(character))) {
+                } else if (CONSONANTS.contains(String.valueOf(character))) {
                     ++numberOfConsonants;
                 }
             }
@@ -58,7 +59,7 @@ public class Task3 {
                 sb.append(" number of vocals and consonants are equal.");
             }
             System.out.println(sb.toString());
-            
+
             numberOfSentence += 1;
         }
     }
