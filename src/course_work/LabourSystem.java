@@ -92,7 +92,7 @@ public class LabourSystem {
                         }
                     } else {
                         type = getIntValue(in);
-                    }s
+                    }
                     enteredCommands.addAll(internalCommands);
                     break;
                 case RESUME_CREATION:
