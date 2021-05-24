@@ -1,26 +1,22 @@
 package src.course_work;
 
 public class Request {
-    private Client requester;
-    private String job;
+
+    private User author;
     private int payment;
     private int hoursInWeek;
     private int type;
+    private boolean isOpened;
 
-    public Request(Client requester, String job, int payment, int hoursInWeek, int type) {
-        this.requester = requester;
-        this.job = job;
+    public Request(User author, int payment, int hoursInWeek, int type) {
+        this.author = author;
         this.payment = payment;
         this.hoursInWeek = hoursInWeek;
         this.type = type;
     }
 
-    public Client getRequester() {
-        return requester;
-    }
-
-    public String getJob() {
-        return job;
+    public User getAuthor() {
+        return author;
     }
 
     public int getPayment() {
@@ -34,5 +30,4 @@ public class Request {
     public int getType() {
         return type;
     }
-
 }
