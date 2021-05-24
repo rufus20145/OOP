@@ -72,6 +72,8 @@ public class MyHashMap implements Map {
 
     @Override
     public void putAll(Map map) {
+        checkCollection(map);
+
         if (map instanceof MyHashMap) {
             MyHashMap map2 = (MyHashMap) map;
             for (Node node : map2.baskets) {
@@ -232,6 +234,12 @@ public class MyHashMap implements Map {
             }
         }
         return hash;
+    }
+
+    private void checkCollection(Map map) {
+        if (map == null) {
+            throw new IllegalArgumentException("Переданная коллекция равна null");
+        }
     }
 
     public static class Node {

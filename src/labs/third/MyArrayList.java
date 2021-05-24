@@ -41,6 +41,8 @@ public class MyArrayList implements Array {
     }
 
     public boolean addAll(Array c) {
+        checkCollection(c);
+
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
             add(c.get(i));
@@ -49,6 +51,7 @@ public class MyArrayList implements Array {
     }
 
     public boolean addAll(int index, Array c) {
+        checkCollection(c);
         checkIndexForAdd(index);
 
         int prevSize = this.size;
@@ -91,6 +94,8 @@ public class MyArrayList implements Array {
     }
 
     public boolean containsAll(Array c) {
+        checkCollection(c);
+
         for (int i = 0; i < c.size(); i++) {
             if (!contains(c.get(i))) {
                 return false;
@@ -138,6 +143,8 @@ public class MyArrayList implements Array {
     }
 
     public boolean removeAll(Array c) {
+        checkCollection(c);
+
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
             remove(c.get(i));
@@ -175,6 +182,12 @@ public class MyArrayList implements Array {
         }
         if (index < 0) {
             throw new IndexOutOfBoundsException("Index " + index + " is below zero");
+        }
+    }
+
+    private void checkCollection(Array c) {
+        if (c == null) {
+            throw new IllegalArgumentException("Переданная коллекция равна null");
         }
     }
 }

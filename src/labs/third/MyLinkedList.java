@@ -17,14 +17,13 @@ public class MyLinkedList implements Linked {
 
     @Override
     public boolean add(String o) {
-        Node last = lastElement;
         Node newNode = new Node(o, null);
-        lastElement = newNode;
-        if (last == null) {
+        if (lastElement == null) {
             firstElement = newNode;
         } else {
-            last.nextElement = newNode;
+            lastElement.nextElement = newNode;
         }
+        lastElement = newNode;
         ++size;
         return true;
     }
@@ -36,7 +35,6 @@ public class MyLinkedList implements Linked {
         if (index == 0) {
             Node currNode = new Node(o, firstElement);
             firstElement = currNode;
-            ++size;
         } else {
             Node prevNode = firstElement;
             for (int i = 0; i < index - 1; i++) {
@@ -47,12 +45,14 @@ public class MyLinkedList implements Linked {
             if (index == size) {
                 lastElement = currNode;
             }
-            ++size;
         }
+        ++size;
     }
 
     @Override
     public boolean addAll(Linked c) {
+        checkCollection(c);
+
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
             add(c.get(i));
@@ -62,6 +62,7 @@ public class MyLinkedList implements Linked {
 
     @Override
     public boolean addAll(int index, Linked c) {
+        checkCollection(c);
         checkIndexForAdd(index);
 
         int prevSize = this.size;
@@ -92,26 +93,24 @@ public class MyLinkedList implements Linked {
 
     @Override
     public int indexOf(String o) {
-        int index = -1;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; ++i) {
             if (Objects.equals(get(i), o)) {
                 return i;
             }
         }
-        return index;
+        return -1; // element was not found
     }
 
     @Override
     public int lastIndexOf(String o) {
-        int index = -1;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = size - 1; i > 0; --i) {
             if (Objects.equals(get(i), o)) {
-                index = i;
+                return i;
             }
         }
-        return index;
+        return -1; // element was not found
     }
 
     @Override
@@ -121,6 +120,8 @@ public class MyLinkedList implements Linked {
 
     @Override
     public boolean containsAll(Linked c) {
+        checkCollection(c);
+
         for (int i = 0; i < c.size(); i++) {
             if (!contains(c.get(i))) {
                 return false;
@@ -159,7 +160,6 @@ public class MyLinkedList implements Linked {
         String buffer = currNode.element;
         currNode.element = element;
         return buffer;
-
     }
 
     @Override
@@ -187,7 +187,7 @@ public class MyLinkedList implements Linked {
     }
 
     @Override
-    public boolean remove(Object o) { // как должна себя вести программа при передаче сюда не строки?
+    public boolean remove(Object o) {
         for (int i = 0; i < size; i++) {
             if (Objects.equals(o, get(i))) {
                 remove(i);
@@ -199,11 +199,19 @@ public class MyLinkedList implements Linked {
 
     @Override
     public boolean removeAll(Linked c) {
+        checkCollection(c);
+
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
             remove(c.get(i));
         }
         return this.size != prevSize;
+    }
+
+    private void checkCollection(Linked c) {
+        if (c == null) {
+            throw new IllegalArgumentException("Переданная коллекция равна null");
+        }
     }
 
     @Override
