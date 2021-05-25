@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -23,7 +25,6 @@ public class LabourSystem {
     private static final String VACANCY_CREATION = "CREATE-VACANCY";
     private static final String RESUME_CREATION = "CREATE-RESUME";
     private static final String GETTING_PAIRS = "GET";
-    private static List<User> users = new ArrayList<>();
     private static List<Vacancy> workerRequests = new ArrayList<>();
     private static List<Vacancy> employerRequests = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class LabourSystem {
         Deque<String> commandsFromFile = new LinkedList<>();
         Deque<String> enteredCommands = new LinkedList<>();
         Deque<String> internalCommands = new LinkedList<>();
-        User currentUser;
+        Map<String, Company> companies = new HashMap<>();
         String command;
         int iteration = 0;
         Scanner in = new Scanner(System.in);
@@ -68,22 +69,67 @@ public class LabourSystem {
             }
             switch (command.toUpperCase()) {
                 case VACANCY_CREATION:
+                    Company currCompany;
                     System.out.println("У вашей компании уже есть аккаунт?");
                     String currCommand = getStringValue(in);
                     if (currCommand.equalsIgnoreCase(END_STRING)) {
                         break;
                     }
                     internalCommands.add(currCommand);
-                    if (currCommand.equalsIgnoreCase(YES_STRING)) {
-                        currentUser = login();
-                    } else {
-                        currentUser = createCompany();
+                    if (currCommand.equalsIgnoreCase(YES_STRING)) { // входим в существующий аккаунт
+                        System.out.println("Введите ваш логин:");
+                        String login = getStringValue(in);
+                        if (login.equalsIgnoreCase(END_STRING)) {
+                            break;
+                        }
+                        if (companies.containsKey(login)) {
+                            System.out.println("Введите ваш пароль:");
+                            String password = getStringValue(in);
+                            if (password.equalsIgnoreCase(END_STRING)) {
+                                break;
+                            }
+                            if (companies.get(login).enter(login, password)) {
+                                System.out.println("Успешная авторизация. Переход к созданию вакансии.");
+                            } else {
+                                System.out.println("Неправильный пароль. Выход в меню.");
+                            }
+                        } else {
+                            System.out.println("Такой логин не найден в базе. Выход в меню.");
+                        }
+                    } else { // начинаем регистрацию новой компании
+                        System.out.println("Введите название вашей компании:");
+                        String name = getStringValue(in);
+                        if (name.equalsIgnoreCase(END_STRING)) {
+                            break;
+                        }
+                        System.out.println("Введите логин");
+                        String login = getStringValue(in);
+                        if (login.equalsIgnoreCase(END_STRING)) {
+                            break;
+                        }
+                        System.out.println("Введите пароль");
+                        String password = getStringValue(in);
+                        if (password.equalsIgnoreCase(END_STRING)) {
+                            break;
+                        }
+                        System.out.println("Введите номер в единой регистрационной системе:");
+                        int registryNumber = -1;
+                        if (!in.hasNextInt()) {
+                            currCommand = getStringValue(in);
+                            if (currCommand.equalsIgnoreCase(END_STRING)) {
+                                break;
+                            }
+                        } else {
+                            registryNumber = getIntValue(in);
+                            getStringValue(in);
+                        }
+                        currCompany = new Company(login, password, name, registryNumber);
                     }
 
-                    int type;
-                    String title;
-                    int payment;
-                    int hoursInWeek;
+                    int type = -1;
+                    String title = null;
+                    int payment = -1;
+                    int hoursInWeek = -1;
                     System.out.println("Введите числовой код требуемой специальности:");
                     if (!in.hasNextInt()) {
                         currCommand = getStringValue(in);
@@ -92,7 +138,46 @@ public class LabourSystem {
                         }
                     } else {
                         type = getIntValue(in);
+                        getStringValue(in);
                     }
+                    internalCommands.add(String.valueOf(type));
+                    System.out.println("Введите заголовок вакансии");
+                    title = getStringValue(in);
+                    if (title.equalsIgnoreCase(END_STRING)) {
+                        break;
+                    }
+                    internalCommands.add(title);
+                    System.out.println("Введите размер зарплаты");
+                    if (!in.hasNextInt()) {
+                        currCommand = getStringValue(in);
+                        if (currCommand.equalsIgnoreCase(END_STRING)) {
+                            break;
+                        }
+                    } else {
+                        payment = getIntValue(in);
+                    }
+                    internalCommands.add(String.valueOf(payment));
+                    System.out.println("Введите число рабочих часов в неделю");
+                    if (!in.hasNextInt()) {
+                        currCommand = getStringValue(in);
+                        if (currCommand.equalsIgnoreCase(END_STRING)) {
+                            break;
+                        }
+                    } else {
+                        hoursInWeek = getIntValue(in);
+                    }
+                    internalCommands.add(String.valueOf(hoursInWeek));
+                    System.out.println(new StringBuilder("Подтвердите создание вакансии \"").append(title)
+                            .append("\" по специальности ").append(type).append(" с зарплатой ").append(payment)
+                            .append(" и количеством рабочих часов в неделю ").append(hoursInWeek));
+                    String choose = getStringValue(in);
+                    if (choose.equalsIgnoreCase(END_STRING)) {
+                        break;
+                    }
+                    if (choose.equalsIgnoreCase(YES_STRING)) {
+                        currCompany.addVacancy(new Vacancy(currCompany, payment, hoursInWeek, type, title));
+                    }
+                    internalCommands.add(choose);
                     enteredCommands.addAll(internalCommands);
                     break;
                 case RESUME_CREATION:
@@ -113,7 +198,9 @@ public class LabourSystem {
         } while (iteration < MAX_NUMBER_OF_ITERATIONS);
 
         System.out.println("Сохранить все введенные команды в файл?");
-        if (in.nextLine().equalsIgnoreCase(YES_STRING)) {
+        if (in.nextLine().equalsIgnoreCase(YES_STRING))
+
+        {
             DateTimeFormatter timeStampPattern = DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss");
             File myFile = new File("result_" + timeStampPattern.format(java.time.LocalDateTime.now()) + ".txt");
 
@@ -126,8 +213,8 @@ public class LabourSystem {
         return null;
     }
 
-    private static User login() {
-        return null;
+    private static Company login() {
+
     }
 
     private static User findUser(String login, String password) {
