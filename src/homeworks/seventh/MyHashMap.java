@@ -47,9 +47,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
             Node<K, V> currNode = baskets[hash % baskets.length];
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
-                    V prevValue = currNode.setValue(value);
-
-                    return prevValue;
+                    return currNode.setValue(value);
                 }
                 if (currNode.next == null) {
                     currNode.next = newNode;
@@ -67,6 +65,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
     @Override
     public void putAll(Map<K, V> map) {
+        checkCollection(map);
+
         if (map instanceof MyHashMap) {
             MyHashMap<K, V> map2 = (MyHashMap<K, V>) map;
             for (Node<K, V> node : map2.baskets) {
@@ -104,7 +104,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
                                 break;
                             }
                             nodeToComplete = nodeToComplete.next;
-
                         } while (nodeToComplete != null);
                     }
 
@@ -235,6 +234,12 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
     private int computeHash(K key) {
         return Math.abs(Objects.hashCode(key));
+    }
+
+    private void checkCollection(Map<K, V> map) {
+        if (map == null) {
+            throw new IllegalArgumentException("Переданная коллекция равна null");
+        }
     }
 
     public static class Node<K, V> {

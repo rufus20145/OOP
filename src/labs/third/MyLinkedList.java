@@ -93,7 +93,6 @@ public class MyLinkedList implements Linked {
 
     @Override
     public int indexOf(String o) {
-
         for (int i = 0; i < size; ++i) {
             if (Objects.equals(get(i), o)) {
                 return i;
@@ -104,7 +103,6 @@ public class MyLinkedList implements Linked {
 
     @Override
     public int lastIndexOf(String o) {
-
         for (int i = size - 1; i > 0; --i) {
             if (Objects.equals(get(i), o)) {
                 return i;

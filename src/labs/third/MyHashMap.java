@@ -1,7 +1,5 @@
 package src.labs.third;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 
 import src.labs.third.interfaces.Map;
@@ -10,8 +8,7 @@ public class MyHashMap implements Map {
 
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_MAX_USAGE_PERCENT = 0.75;
-
-    HashSet<Node> allNodes = new HashSet<>();
+    private static final int SIZE_MULTIPLIER = 2;
 
     private Node[] baskets;
     private int size;
@@ -41,7 +38,6 @@ public class MyHashMap implements Map {
         int hash = computeHash(key);
 
         Node newNode = new Node(hash, key, value);
-        allNodes.add(newNode);
 
         if (baskets[hash % baskets.length] == null) {
             baskets[hash % baskets.length] = newNode;
@@ -50,11 +46,7 @@ public class MyHashMap implements Map {
             Node currNode = baskets[hash % baskets.length];
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
-                    Integer prevValue = currNode.setValue(value);
-
-                    allNodes.remove(newNode);
-
-                    return prevValue;
+                    return currNode.setValue(value);
                 }
                 if (currNode.next == null) {
                     currNode.next = newNode;
@@ -91,7 +83,7 @@ public class MyHashMap implements Map {
 
     private Node[] resize() {
         Node[] oldBaskets = baskets;
-        initCapacity *= 2;
+        initCapacity *= SIZE_MULTIPLIER;
         Node[] newBaskets = new Node[initCapacity];
 
         for (int i = 0; i < oldBaskets.length; i++) {
@@ -99,12 +91,15 @@ public class MyHashMap implements Map {
                 Node currNode = oldBaskets[i];
                 do {
                     if (newBaskets[currNode.getHash() % newBaskets.length] == null) {
-                        newBaskets[currNode.getHash() % newBaskets.length] = currNode;
+                        newBaskets[currNode.getHash() % newBaskets.length] = new Node(currNode.getHash(),
+                        currNode.getKey(), currNode.getValue());
                     } else {
                         Node nodeToComplete = newBaskets[currNode.getHash() % newBaskets.length];
                         do {
                             if (nodeToComplete.next == null) {
-                                nodeToComplete.next = currNode;
+                                nodeToComplete.next = new Node(currNode.getHash(), currNode.getKey(),
+                                        currNode.getValue());
+                                break;
                             }
                             nodeToComplete = nodeToComplete.next;
                         } while (nodeToComplete != null);
@@ -127,8 +122,6 @@ public class MyHashMap implements Map {
             do {
                 if (Objects.equals(currNode.getKey(), key)) {
                     Integer removedValue = currNode.value;
-
-                    allNodes.remove(currNode);
 
                     if (prevNode == null) {
                         baskets[hash % baskets.length] = currNode.next;
@@ -209,19 +202,31 @@ public class MyHashMap implements Map {
     }
 
     public String[] getAllKeys() {
-        ArrayList<String> tmp = new ArrayList<>();
-        for (Node node : allNodes) {
-            tmp.add(node.getKey());
+        String[] tmp = new String[size];
+        int index = 0;
+        for (Node currNode : baskets) {
+            if (currNode != null) {
+                do {
+                    tmp[index++] = currNode.getKey();
+                    currNode = currNode.next;
+                } while (currNode != null);
+            }
         }
-        return tmp.toArray(new String[0]);
+        return tmp;
     }
 
     public Integer[] getAllValues() {
-        ArrayList<Integer> tmp = new ArrayList<>();
-        for (Node node : allNodes) {
-            tmp.add(node.getValue());
+        Integer[] tmp = new Integer[size];
+        int index = 0;
+        for (Node currNode : baskets) {
+            if (currNode != null) {
+                do {
+                    tmp[index++] = currNode.getValue();
+                    currNode = currNode.next;
+                } while (currNode != null);
+            }
         }
-        return tmp.toArray(new Integer[0]);
+        return tmp;
     }
 
     private static int computeHash(String key) {

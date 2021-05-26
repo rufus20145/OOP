@@ -17,14 +17,13 @@ public class MyLinkedList<T> implements Linked<T> {
 
     @Override
     public boolean add(T o) {
-        Node<T> last = lastElement;
         Node<T> newNode = new Node<>(o, null);
-        lastElement = newNode;
-        if (last == null) {
+        if (lastElement == null) {
             firstElement = newNode;
         } else {
-            last.nextElement = newNode;
+            lastElement.nextElement = newNode;
         }
+        lastElement = newNode;
         ++size;
         return true;
     }
@@ -36,7 +35,6 @@ public class MyLinkedList<T> implements Linked<T> {
         if (index == 0) {
             Node<T> currNode = new Node<>(o, firstElement);
             firstElement = currNode;
-            ++size;
         } else {
             Node<T> prevNode = firstElement;
             for (int i = 0; i < index - 1; i++) {
@@ -47,12 +45,14 @@ public class MyLinkedList<T> implements Linked<T> {
             if (index == size) {
                 lastElement = currNode;
             }
-            ++size;
         }
+        ++size;
     }
 
     @Override
     public boolean addAll(Linked<T> c) {
+        checkCollection(c);
+
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
             add(c.get(i));
@@ -62,6 +62,7 @@ public class MyLinkedList<T> implements Linked<T> {
 
     @Override
     public boolean addAll(int index, Linked<T> c) {
+        checkCollection(c);
         checkIndexForAdd(index);
 
         int prevSize = this.size;
@@ -92,26 +93,22 @@ public class MyLinkedList<T> implements Linked<T> {
 
     @Override
     public int indexOf(T o) {
-        int index = -1;
-
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; ++i) {
             if (Objects.equals(get(i), o)) {
                 return i;
             }
         }
-        return index;
+        return -1; // element was not found
     }
 
     @Override
     public int lastIndexOf(T o) {
-        int index = -1;
-
-        for (int i = 0; i < size; i++) {
+        for (int i = size - 1; i > 0; --i) {
             if (Objects.equals(get(i), o)) {
-                index = i;
+                return i;
             }
         }
-        return index;
+        return -1; // element was not found
     }
 
     @Override
@@ -121,6 +118,8 @@ public class MyLinkedList<T> implements Linked<T> {
 
     @Override
     public boolean containsAll(Linked<T> c) {
+        checkCollection(c);
+
         for (int i = 0; i < c.size(); i++) {
             if (!contains(c.get(i))) {
                 return false;
@@ -198,6 +197,8 @@ public class MyLinkedList<T> implements Linked<T> {
 
     @Override
     public boolean removeAll(Linked<T> c) {
+        checkCollection(c);
+
         int prevSize = this.size;
         for (int i = 0; i < c.size(); i++) {
             remove(c.get(i));
@@ -205,6 +206,12 @@ public class MyLinkedList<T> implements Linked<T> {
         return this.size != prevSize;
     }
 
+    private void checkCollection(Linked c) {
+        if (c == null) {
+            throw new IllegalArgumentException("Переданная коллекция равна null");
+        }
+    }
+    
     @Override
     public MyLinkedList<T> subList(int fromIndex, int toIndex) {
         checkIndex(fromIndex);
