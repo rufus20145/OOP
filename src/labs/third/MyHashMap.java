@@ -92,7 +92,7 @@ public class MyHashMap implements Map {
                 do {
                     if (newBaskets[currNode.getHash() % newBaskets.length] == null) {
                         newBaskets[currNode.getHash() % newBaskets.length] = new Node(currNode.getHash(),
-                        currNode.getKey(), currNode.getValue());
+                                currNode.getKey(), currNode.getValue());
                     } else {
                         Node nodeToComplete = newBaskets[currNode.getHash() % newBaskets.length];
                         do {
@@ -246,7 +246,7 @@ public class MyHashMap implements Map {
         }
     }
 
-    public static class Node {
+    private class Node {
         private int hash;
         private String key;
         private Integer value;

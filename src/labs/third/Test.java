@@ -130,5 +130,32 @@ public class Test {
         System.out.println(test123321.removeAll(remove));
         System.out.println(test123321.get(1));
 
+        MyLinkedList testes = new MyLinkedList();
+        testes.add("a1");
+        testes.add("b2");
+        testes.add("c3");
+        testes.add("d4");
+        testes.add("e5");
+        testes.add("f6");
+        System.out.println(Arrays.toString(testes.toArray()));
+        System.out.println(Arrays.toString(testes.subList(1, 4).toArray()));
+
+        System.out.println("123");
+
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.add("a1");
+        linkedList.add("b2");
+        System.out.println(Arrays.asList(linkedList.toArray()));
+        linkedList.remove(1);
+        linkedList.add("c3");
+        System.out.println(Arrays.asList(linkedList.toArray()));
+
+        MyLinkedList linkedList2 = new MyLinkedList();
+        linkedList2.add("a1");
+        linkedList2.add("b2");
+        System.out.println(Arrays.asList(linkedList2.toArray()));
+        linkedList2.remove(1);
+        linkedList2.add("c3");
+        System.out.println(Arrays.asList(linkedList2.toArray()));
     }
 }

@@ -179,7 +179,7 @@ public class MyLinkedList implements Linked {
             }
             String buffer = prevNode.nextElement.element;
             prevNode.nextElement = prevNode.nextElement.nextElement;
-            if (index == size) {
+            if (index == (size-1)) {
                 lastElement = prevNode;
             }
             --size;
@@ -216,7 +216,7 @@ public class MyLinkedList implements Linked {
     }
 
     @Override
-    public Linked subList(int fromIndex, int toIndex) {
+    public Linked subList(int fromIndex, int toIndex) { //todo неправильно работает при 1-4
         checkIndex(fromIndex);
         checkIndex(toIndex);
         if (fromIndex > toIndex) {

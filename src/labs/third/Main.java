@@ -4,8 +4,6 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import src.labs.third.MyHashMap.Node;
-
 public class Main {
     private static final String ARRAY_LIST = "ARRAY";
     private static final String LINKED_LIST = "LINKED";
