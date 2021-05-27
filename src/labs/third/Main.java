@@ -89,8 +89,9 @@ public class Main {
             case MAP:
                 System.out.println(hashMap.size() + "\nВывести все элементы структуры?");
                 if (getStringValue(input).equals("YES")) {
-                    for (Node node : hashMap.allNodes) {
-                        System.out.println(node.getKey() + " -> " + node.getValue());
+                    String[] temp = hashMap.getAllKeys();
+                    for (String string : temp) {
+                        System.out.println(string + " -> " + hashMap.get(string));
                     }
                 }
                 break;

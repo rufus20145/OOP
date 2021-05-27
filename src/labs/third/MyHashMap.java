@@ -104,7 +104,6 @@ public class MyHashMap implements Map {
                             nodeToComplete = nodeToComplete.next;
                         } while (nodeToComplete != null);
                     }
-
                     currNode = currNode.next;
                 } while (currNode != null);
             }
