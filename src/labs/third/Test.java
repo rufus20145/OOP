@@ -101,5 +101,34 @@ public class Test {
         firstMap.clear();
         System.out.println("Is this map empty? - " + firstMap.isEmpty() + ". It`s size is " + firstMap.size());
 
+        MyLinkedList check = new MyLinkedList();
+        check.add("test1");
+        System.out.println(Arrays.asList(check.toArray()).toString());
+        check.remove(0);
+        check.add("test2");
+        System.out.println(Arrays.asList(check.toArray()).toString());
+
+        MyLinkedList test123321 = new MyLinkedList();
+        test123321.add("01");
+        test123321.add("02");
+        test123321.add("03");
+        test123321.add(null);
+        test123321.add(null);
+        test123321.add("666");
+        System.out.println(Arrays.asList(test.toArray()).toString());
+        System.out.println(test123321.indexOf("666"));
+        System.out.println(test123321.set(0, "sad"));
+        System.out.println(test123321.set(1, "asd"));
+        System.out.println(test123321.get(0));
+        System.out.println(test123321.remove(2));
+        System.out.println(Arrays.asList(test123321.toArray()).toString());
+        System.out.println(test123321.remove("sad"));
+        System.out.println(test123321.remove("asd"));
+        System.out.println(test123321.remove(Integer.valueOf(3)));
+        MyLinkedList remove = new MyLinkedList();
+        remove.add(null);
+        System.out.println(test123321.removeAll(remove));
+        System.out.println(test123321.get(1));
+
     }
 }

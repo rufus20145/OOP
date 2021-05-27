@@ -18,7 +18,7 @@ public class MyLinkedList implements Linked {
     @Override
     public boolean add(String o) {
         Node newNode = new Node(o, null);
-        if (lastElement == null) {
+        if (size == 0) {
             firstElement = newNode;
         } else {
             lastElement.nextElement = newNode;
@@ -168,6 +168,9 @@ public class MyLinkedList implements Linked {
             String buffer = firstElement.element;
             firstElement = firstElement.nextElement;
             --size;
+            if(size == 0) {
+                lastElement = null;
+            }
             return buffer;
         } else {
             Node prevNode = firstElement;
