@@ -25,6 +25,7 @@ public class LabourSystem {
     private static final String VACANCY_CREATION = "CREATE-VACANCY";
     private static final String RESUME_CREATION = "CREATE-RESUME";
     private static final String GETTING_PAIRS = "GET";
+    private static final Company DEFAULT_COMPANY = null;
     private static List<Vacancy> workerRequests = new ArrayList<>();
     private static List<Vacancy> employerRequests = new ArrayList<>();
 
@@ -40,18 +41,13 @@ public class LabourSystem {
 
         if (args.length == NUM_OF_ARGS_FOR_FILE
                 && (args[0].equalsIgnoreCase("-f") || args[0].equalsIgnoreCase("--file"))) {
-            System.out.println("Вы хотите считать последовательность команд из файла?");
-            if (getStringValue(in).equalsIgnoreCase(YES_STRING)) {
-                try (BufferedReader bufReader = new BufferedReader(new FileReader(args[1]))) {
-                    String s;
-                    while ((s = bufReader.readLine()) != null) {
-                        commandsFromFile.add(s);
-                    }
-                } catch (IOException e) {
-                    System.out.println("Файл не найден. Проверьте правильность имени и повторите попытку.");
+            try (BufferedReader bufReader = new BufferedReader(new FileReader(args[1]))) {
+                String s;
+                while ((s = bufReader.readLine()) != null) {
+                    commandsFromFile.add(s);
                 }
-            } else {
-                System.out.println("Считывание команд из файла отменено.");
+            } catch (IOException e) {
+                System.out.println("Файл не найден. Проверьте правильность имени и повторите попытку.");
             }
         }
 
@@ -59,7 +55,7 @@ public class LabourSystem {
             ++iteration;
             if (!commandsFromFile.isEmpty()) {
                 command = commandsFromFile.pollFirst();
-                System.out.println(command); // todo remove before send
+                System.out.println(command);
             } else {
                 System.out.println(MENU_STRING);
                 command = getStringValue(in);
@@ -69,61 +65,106 @@ public class LabourSystem {
             }
             switch (command.toUpperCase()) {
                 case VACANCY_CREATION:
-                    Company currCompany;
+                    Company currCompany = DEFAULT_COMPANY;
                     System.out.println("У вашей компании уже есть аккаунт?");
-                    String currCommand = getStringValue(in);
+                    String currCommand;
+                    if (!commandsFromFile.isEmpty()) {
+                        currCommand = commandsFromFile.pollFirst();
+                        System.out.println(currCommand);
+                    } else {
+                        currCommand = getStringValue(in);
+                        internalCommands.add(currCommand);
+                    }
                     if (currCommand.equalsIgnoreCase(END_STRING)) {
                         break;
                     }
-                    internalCommands.add(currCommand);
                     if (currCommand.equalsIgnoreCase(YES_STRING)) { // входим в существующий аккаунт
                         System.out.println("Введите ваш логин:");
-                        String login = getStringValue(in);
+                        String login;
+                        if (!commandsFromFile.isEmpty()) {
+                            login = commandsFromFile.pollFirst();
+                            System.out.println(login);
+                        } else {
+                            login = getStringValue(in);
+                        }
                         if (login.equalsIgnoreCase(END_STRING)) {
                             break;
                         }
                         if (companies.containsKey(login)) {
                             System.out.println("Введите ваш пароль:");
-                            String password = getStringValue(in);
+                            String password;
+                            if (!commandsFromFile.isEmpty()) {
+                                password = commandsFromFile.pollFirst();
+                                System.out.println(password);
+                            } else {
+                                password = getStringValue(in);
+                            }
                             if (password.equalsIgnoreCase(END_STRING)) {
                                 break;
                             }
                             if (companies.get(login).enter(login, password)) {
                                 System.out.println("Успешная авторизация. Переход к созданию вакансии.");
+                                currCompany = companies.get(login);
                             } else {
                                 System.out.println("Неправильный пароль. Выход в меню.");
                             }
                         } else {
                             System.out.println("Такой логин не найден в базе. Выход в меню.");
                         }
-                    } else { // начинаем регистрацию новой компании
+                    } else if (currCommand.equalsIgnoreCase(NO_STRING)) { // начинаем регистрацию новой компании
                         System.out.println("Введите название вашей компании:");
-                        String name = getStringValue(in);
+                        String name;
+                        if (!commandsFromFile.isEmpty()) {
+                            name = commandsFromFile.pollFirst();
+                            System.out.println(name);
+                        } else {
+                            name = getStringValue(in);
+                        }
                         if (name.equalsIgnoreCase(END_STRING)) {
                             break;
                         }
                         System.out.println("Введите логин");
-                        String login = getStringValue(in);
+                        String login;
+                        if (!commandsFromFile.isEmpty()) {
+                            login = commandsFromFile.pollFirst();
+                            System.out.println(login);
+                        } else {
+                            login = getStringValue(in);
+                        }
                         if (login.equalsIgnoreCase(END_STRING)) {
                             break;
                         }
                         System.out.println("Введите пароль");
-                        String password = getStringValue(in);
+                        String password;
+                        if (!commandsFromFile.isEmpty()) {
+                            password = commandsFromFile.pollFirst();
+                            System.out.println(password);
+                        } else {
+                            password = getStringValue(in);
+                        }
                         if (password.equalsIgnoreCase(END_STRING)) {
                             break;
                         }
                         System.out.println("Введите номер в единой регистрационной системе:");
                         int registryNumber = -1;
-                        if (!in.hasNextInt()) {
-                            currCommand = getStringValue(in);
-                            if (currCommand.equalsIgnoreCase(END_STRING)) {
-                                break;
-                            }
+                        if (!commandsFromFile.isEmpty()) {
+                            registryNumber = Integer.parseInt(commandsFromFile.pollFirst());
+                            System.out.println(registryNumber);
                         } else {
-                            registryNumber = getIntValue(in);
-                            getStringValue(in);
+                            if (!in.hasNextInt()) {
+                                currCommand = getStringValue(in);
+                                if (currCommand.equalsIgnoreCase(END_STRING)) {
+                                    break;
+                                }
+                            } else {
+                                registryNumber = getIntValue(in);
+                                getStringValue(in);
+                            }
                         }
                         currCompany = new Company(login, password, name, registryNumber);
+                    } else {
+                        System.out.println("Неизвестная команда. Выход в меню.");
+                        break;
                     }
 
                     int type = -1;
@@ -210,19 +251,6 @@ public class LabourSystem {
     }
 
     private static Company createCompany() {
-        return null;
-    }
-
-    private static Company login() {
-
-    }
-
-    private static User findUser(String login, String password) {
-        for (User user : users) {
-            if (user.enter(login, password)) {
-                return user;
-            }
-        }
         return null;
     }
 
