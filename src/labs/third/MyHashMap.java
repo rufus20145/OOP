@@ -13,7 +13,7 @@ public class MyHashMap implements Map {
     private Node[] baskets;
     private int size;
     private int initCapacity;
-    private double maxUsagePercent;
+    private final double maxUsagePercent;
 
     public MyHashMap() {
         this(DEFAULT_CAPACITY, DEFAULT_MAX_USAGE_PERCENT);
@@ -23,7 +23,7 @@ public class MyHashMap implements Map {
         this(initCapacity, DEFAULT_MAX_USAGE_PERCENT);
     }
 
-    public MyHashMap(int initCapacity, double maxUsagePercent) {
+    public MyHashMap(int initCapacity, final double maxUsagePercent) {
         if (initCapacity < 1 || maxUsagePercent < 0 || maxUsagePercent > 1) {
             throw new IllegalArgumentException("Check your arguments.");
         } else {

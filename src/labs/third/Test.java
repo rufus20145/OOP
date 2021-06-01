@@ -157,5 +157,44 @@ public class Test {
         linkedList2.remove(1);
         linkedList2.add("c3");
         System.out.println(Arrays.asList(linkedList2.toArray()));
+
+        MyLinkedList checked = new MyLinkedList();
+        checked.add("test1");
+        System.out.println(Arrays.asList(checked.toArray()).toString());
+        checked.remove(0);
+        checked.add(0, "test2");
+        checked.add("test3");
+        System.out.println(Arrays.asList(checked.toArray()).toString());
+
+        MyLinkedList checkedList = new MyLinkedList();
+        checkedList.add("a1");
+        System.out.println(Arrays.asList(checkedList.toArray()));
+        checkedList.remove(0);
+        checkedList.add(0, "b2");
+        checkedList.add("c3");
+        System.out.println(Arrays.asList(checkedList.toArray()));
+
+        MyLinkedList linkedList123 = new MyLinkedList();
+        linkedList123.add("a1");
+        linkedList123.add(1, "b2");
+        System.out.println(Arrays.asList(linkedList123.toArray()));
+        linkedList123.add("c3");
+        System.out.println(Arrays.asList(linkedList123.toArray()));
+
+        System.out.println();
+        MyLinkedList testZeroIndex = new MyLinkedList();
+        testZeroIndex.add("123");
+        testZeroIndex.add("1234");
+        testZeroIndex.add("12345");
+        System.out.println(testZeroIndex.lastIndexOf("123"));
+
+        System.out.println();
+        MyLinkedList linkedList1 = new MyLinkedList();
+        linkedList1.add("a1");
+        System.out.println(Arrays.asList(linkedList1.toArray()));
+        linkedList1.remove(0);
+        linkedList1.add(0, "b2");
+        linkedList1.add("c3");
+        System.out.println(Arrays.asList(linkedList1.toArray()));
     }
 }

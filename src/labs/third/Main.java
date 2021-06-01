@@ -48,7 +48,7 @@ public class Main {
                 break;
             }
 
-            switch (collection) {
+            switch (collection.toUpperCase()) {
                 case ARRAY_LIST:
                     arrayList.add(element);
                     break;
@@ -120,8 +120,9 @@ public class Main {
                 case MAP:
                     key = getStringValue(input);
                     startTime = System.currentTimeMillis();
-                    System.out.println(hashMap.get(key));
+                    int a = hashMap.get(key);
                     finishTime = System.currentTimeMillis();
+                    System.out.println(a);
                     break;
                 default:
                     System.out.println("Сюда попасть было нельзя, но ты смог.");

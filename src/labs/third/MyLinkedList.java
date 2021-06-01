@@ -35,6 +35,9 @@ public class MyLinkedList implements Linked {
         if (index == 0) {
             Node currNode = new Node(o, firstElement);
             firstElement = currNode;
+            if (index == size) {
+                lastElement = currNode;
+            }
         } else {
             Node prevNode = firstElement;
             for (int i = 0; i < index - 1; i++) {
@@ -103,7 +106,7 @@ public class MyLinkedList implements Linked {
 
     @Override
     public int lastIndexOf(String o) {
-        for (int i = size - 1; i > 0; --i) {
+        for (int i = size - 1; i >= 0; --i) {
             if (Objects.equals(get(i), o)) {
                 return i;
             }
@@ -168,7 +171,7 @@ public class MyLinkedList implements Linked {
             String buffer = firstElement.element;
             firstElement = firstElement.nextElement;
             --size;
-            if(size == 0) {
+            if (size == 0) {
                 lastElement = null;
             }
             return buffer;
@@ -179,7 +182,7 @@ public class MyLinkedList implements Linked {
             }
             String buffer = prevNode.nextElement.element;
             prevNode.nextElement = prevNode.nextElement.nextElement;
-            if (index == (size-1)) {
+            if (index == (size - 1)) {
                 lastElement = prevNode;
             }
             --size;
@@ -216,9 +219,9 @@ public class MyLinkedList implements Linked {
     }
 
     @Override
-    public Linked subList(int fromIndex, int toIndex) { //todo неправильно работает при 1-4
+    public Linked subList(int fromIndex, int toIndex) { // todo неправильно работает при 1-4
         checkIndex(fromIndex);
-        checkIndex(toIndex);
+        checkIndexForAdd(toIndex);
         if (fromIndex > toIndex) {
             throw new IndexOutOfBoundsException("fromIndex is bigger than toIndex");
         }
