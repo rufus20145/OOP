@@ -95,6 +95,7 @@ public class MyArrayList<T> implements Array<T> {
 
     public boolean containsAll(Array<T> c) {
         checkCollection(c);
+        
         for (int i = 0; i < c.size(); i++) {
             if (!contains(c.get(i))) {
                 return false;

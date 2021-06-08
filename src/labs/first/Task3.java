@@ -60,7 +60,7 @@ public class Task3 {
             }
             System.out.println(sb.toString());
 
-            numberOfSentence += 1;
+            numberOfSentence++;
         }
     }
 }
