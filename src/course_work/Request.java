@@ -6,13 +6,22 @@ public class Request {
     private int payment;
     private int hoursInWeek;
     private int type;
-    private boolean isOpened;
+    private boolean isActual;
 
     public Request(User author, int payment, int hoursInWeek, int type) {
         this.author = author;
         this.payment = payment;
         this.hoursInWeek = hoursInWeek;
         this.type = type;
+        this.isActual = true;
+    }
+
+    public void makeInactive() {
+        isActual = false;
+    }
+
+    public boolean isActual() {
+        return isActual;
     }
 
     public User getAuthor() {

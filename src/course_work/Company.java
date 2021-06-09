@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Company extends User {
+
     private String name;
     private int registryNumber;
     private List<Vacancy> vacancies;
+
+    public Company() {
+        super("admin", "admin");
+    }
 
     public Company(String login, String password, String name, int registryNumber) {
         super(login, password);
@@ -26,5 +31,9 @@ public class Company extends User {
     public String getCompanyInfo() {
         return new StringBuilder().append("Копания \"").append(this.name).append("\" с регистрационным номером ")
                 .append(this.registryNumber).toString();
+    }
+
+    public String getName() {
+        return name;
     }
 }

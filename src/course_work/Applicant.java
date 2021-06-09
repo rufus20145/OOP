@@ -1,17 +1,26 @@
 package src.course_work;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Applicant extends User {
     private String fio;
-    private int idNumber;
+    private List<Resume> resumes;
 
-    public Applicant(String fio, String login, String password, int idNumber) {
+    public Applicant(String fio, String login, String password) {
         super(login, password);
         this.fio = fio;
-        this.idNumber = idNumber;
+        resumes = new ArrayList<>();
     }
 
-    public void takeResult(Vacancy request) {
-        // todo
+    public void addResume(Resume resume) {
+        resumes.add(resume);
+    }
+
+    public void clearRequests() {
+        for (Resume resume : resumes) {
+            resume.makeInactive();
+        }
     }
 
     public String getFio() {
