@@ -17,7 +17,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class LabourSystem {
-    private static final int TIME_TO_SLEEP = 10;
+    private static final int TIME_TO_SLEEP = 50;
     private static final int NUM_OF_ARGS_FOR_FILE = 2;
     private static final String YES_STRING = "YES";
     private static final String NO_STRING = "NO";
@@ -56,7 +56,7 @@ public class LabourSystem {
                 break;
             }
             switch (command.toUpperCase()) {
-                case VACANCY_CREATION: // режим создания вакансии
+                case VACANCY_CREATION: // * режим создания вакансии
                     Company currCompany;
                     System.out.println("У вашей компании уже есть аккаунт?");
                     command = getStringValue();
@@ -82,7 +82,7 @@ public class LabourSystem {
                         enteredCommands.addAll(internalCommands);
                     }
                     break;
-                case RESUME_CREATION: // режим создания резюме
+                case RESUME_CREATION: // * режим создания резюме
                     Applicant currApplicant;
                     System.out.println("Добавление резюме");
                     System.out.println("У вас уже есть аккаунт соискателя?");
@@ -144,7 +144,9 @@ public class LabourSystem {
     private static void printResult() {
         for (Vacancy vacancy : resultPairs.keySet()) {
             System.out.println(new StringBuilder().append(resultPairs.get(vacancy).getAuthor().getFio())
-                    .append(", вы получили предложение работать в компании ").append(vacancy.getAuthor().getName()));
+                    .append(", вы получили предложение работать в компании ").append(vacancy.getAuthor().getName())
+                    .append(" на вакансии ").append(vacancy.getTitle()).append(". Ваша зарплата: ")
+                    .append(Math.max(vacancy.getPayment(), resultPairs.get(vacancy).getPayment())));
         }
     }
 
@@ -211,7 +213,7 @@ public class LabourSystem {
     }
 
     private static Applicant registerApplicant() {
-        System.out.println("Введите ФИО одной строкой");
+        System.out.println("Регистрируем новый аккаунт.\nВведите ФИО одной строкой");
         String fio = getStringValue();
         if (fio.equalsIgnoreCase(END_STRING)) {
             exitFromBranch = true;
@@ -338,7 +340,7 @@ public class LabourSystem {
     }
 
     private static Company registerCompany() {
-        System.out.println("Введите название вашей компании:");
+        System.out.println("Регистрируем новый аккаунт.\nВведите название вашей компании:");
         String name = getStringValue();
         if (name.equalsIgnoreCase(END_STRING)) {
             exitFromBranch = true;
@@ -435,7 +437,6 @@ public class LabourSystem {
                 Thread.currentThread().interrupt();
                 System.out.println("Поймано исключение. Продолжаем работу");
             }
-
         } else {
             boolean exceptionCaught;
             do {
