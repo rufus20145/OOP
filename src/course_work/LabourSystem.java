@@ -130,7 +130,7 @@ public class LabourSystem {
         command = getStringValue();
         if (command.equalsIgnoreCase(YES_STRING) || command.equalsIgnoreCase(Y_STRING)) {
             DateTimeFormatter timeStampPattern = DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss");
-            String fileName = new String("result_" + timeStampPattern.format(java.time.LocalDateTime.now()) + ".txt");
+            String fileName = "result_" + timeStampPattern.format(java.time.LocalDateTime.now()) + ".txt";
             File myFile = new File(fileName);
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(myFile));) {
                 for (String string : enteredCommands) {
@@ -438,7 +438,7 @@ public class LabourSystem {
         if (!commandsFromFile.isEmpty()) {
             command = commandsFromFile.poll();
             System.out.println(command);
-            
+
             try {
                 Thread.sleep(TIME_TO_SLEEP);
             } catch (InterruptedException e) {
