@@ -20,7 +20,9 @@ public class LabourSystem {
     private static final int TIME_TO_SLEEP = 50;
     private static final int NUM_OF_ARGS_FOR_FILE = 2;
     private static final String YES_STRING = "YES";
+    private static final String Y_STRING = "Y";
     private static final String NO_STRING = "NO";
+    private static final String N_STRING = "N";
     private static final String MENU_STRING = "Доступные команды:\ncreate-vacancy - создать вакансию\ncreate-resume - создать резюме\nget - получение пар работник-работодатель";
     private static final int MAX_NUMBER_OF_ITERATIONS = 4096;
     private static final String END_STRING = "END";
@@ -64,9 +66,9 @@ public class LabourSystem {
                         break;
                     }
 
-                    if (command.equalsIgnoreCase(YES_STRING)) { // входим в существующий аккаунт
+                    if (command.equalsIgnoreCase(YES_STRING) || command.equalsIgnoreCase(Y_STRING)) {
                         currCompany = loginCompany();
-                    } else if (command.equalsIgnoreCase(NO_STRING)) { // начинаем регистрацию новой компании
+                    } else if (command.equalsIgnoreCase(NO_STRING) || command.equalsIgnoreCase(N_STRING)) {
                         currCompany = registerCompany();
                     } else {
                         System.out.println("Неизвестная команда. Выход в меню.");
@@ -84,16 +86,15 @@ public class LabourSystem {
                     break;
                 case RESUME_CREATION: // * режим создания резюме
                     Applicant currApplicant;
-                    System.out.println("Добавление резюме");
                     System.out.println("У вас уже есть аккаунт соискателя?");
                     command = getStringValue();
                     if (command.equalsIgnoreCase(END_STRING)) {
                         break;
                     }
 
-                    if (command.equalsIgnoreCase(YES_STRING)) { // входим в существующий аккаунт
+                    if (command.equalsIgnoreCase(YES_STRING) || command.equalsIgnoreCase(Y_STRING)) {
                         currApplicant = loginApplicant();
-                    } else if (command.equalsIgnoreCase(NO_STRING)) { // начинаем регистрацию нового соискателя
+                    } else if (command.equalsIgnoreCase(NO_STRING) || command.equalsIgnoreCase(N_STRING)) {
                         currApplicant = registerApplicant();
                     } else {
                         System.out.println("Неизвестная команда. Выход в меню.");
@@ -126,9 +127,11 @@ public class LabourSystem {
         } while (iteration < MAX_NUMBER_OF_ITERATIONS);
 
         System.out.println("Сохранить все введенные команды в файл?");
-        if (getStringValue().equalsIgnoreCase(YES_STRING)) {
+        command = getStringValue();
+        if (command.equalsIgnoreCase(YES_STRING) || command.equalsIgnoreCase(Y_STRING)) {
             DateTimeFormatter timeStampPattern = DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss");
-            File myFile = new File("result_" + timeStampPattern.format(java.time.LocalDateTime.now()) + ".txt");
+            String fileName = new String("result_" + timeStampPattern.format(java.time.LocalDateTime.now()) + ".txt");
+            File myFile = new File(fileName);
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(myFile));) {
                 for (String string : enteredCommands) {
                     writer.write(string + "\n");
@@ -137,6 +140,10 @@ public class LabourSystem {
                 System.out.println("Произошла какая-то ошибка. Вот информация о ней:");
                 e.printStackTrace();
             }
+            System.out.printf("%s", 0);
+            System.out.println("Команды успешно сохранены в файл с названием " + fileName);
+        } else {
+            System.out.println("Команда не распознана. Команды не были сохранены");
         }
         in.close();
     }
@@ -431,6 +438,7 @@ public class LabourSystem {
         if (!commandsFromFile.isEmpty()) {
             command = commandsFromFile.poll();
             System.out.println(command);
+            
             try {
                 Thread.sleep(TIME_TO_SLEEP);
             } catch (InterruptedException e) {
@@ -454,9 +462,8 @@ public class LabourSystem {
                     in.nextLine();
                 }
             } while (exceptionCaught);
-            // internalCommands.add(command);//todo раскомментировать перед отправкой
+            internalCommands.add(command);
         }
-        internalCommands.add(command);// todo удалить перед отправкой
         return command;
     }
 
