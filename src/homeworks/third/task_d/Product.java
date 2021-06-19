@@ -7,7 +7,7 @@ public class Product {
     private double rating;
 
     public Product() {
-
+        this("Default", 0, 0);
     }
 
     public Product(String name, double price, double rating) {

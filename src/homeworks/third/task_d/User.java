@@ -11,7 +11,7 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        userBasket = new Basket();
+        this.userBasket = new Basket();
     }
 
     public void addProductToUserBasket(Product product) {

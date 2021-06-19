@@ -21,6 +21,7 @@ public class Circle extends Shape {
     }
 
     public boolean equals(Circle other) {
-        return other.centerX == this.centerX && other.centerY == this.centerY && other.radius == this.radius && other.getColor() == this.getColor();
+        return other.centerX == this.centerX && other.centerY == this.centerY && other.radius == this.radius
+                && other.getColor() == this.getColor();
     }
 }
