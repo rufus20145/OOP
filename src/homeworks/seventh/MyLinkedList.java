@@ -206,12 +206,12 @@ public class MyLinkedList<T> implements Linked<T> {
         return this.size != prevSize;
     }
 
-    private void checkCollection(Linked c) {
+    private void checkCollection(Linked<T> c) {
         if (c == null) {
             throw new IllegalArgumentException("Переданная коллекция равна null");
         }
     }
-    
+
     @Override
     public MyLinkedList<T> subList(int fromIndex, int toIndex) {
         checkIndex(fromIndex);

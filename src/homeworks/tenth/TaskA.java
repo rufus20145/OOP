@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 
 public class TaskA {
     private static final int RESULT_ARRAY_NUMBER = 2;

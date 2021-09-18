@@ -34,7 +34,7 @@ public class TaskA {
     }
 
     public static int getMaxProfit(int[] prices, int maxNumberOfSales) {
-        int numberOfDays = prices.length;
+        
         
         return calcTheProfit(prices, 0, 1);
     }
