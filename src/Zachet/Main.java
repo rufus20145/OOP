@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    private static final double FIRST_CONSTANT = 200; // верхнее ограничение для генерируемых чисел
-    private static final double SECOND_CONSTANT = -100; // смещение, чтобы числа были в том числе и отрицательными
+    private static final double FIRST_CONSTANT = 1000; // верхнее ограничение для генерируемых чисел
+    private static final double SECOND_CONSTANT = -1000; // смещение, чтобы числа были в том числе и отрицательными
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class Main {
         fillMatrix(matrix, matrixSize);
 
         int minDiagElement = findMinDiagElement(matrix);
-        System.out.println(minDiagElement);
+        System.out.println("Минимальный элемент = " + minDiagElement);
 
         int[][] newMatrix = removeRowsWithElement(matrix, minDiagElement);
 
